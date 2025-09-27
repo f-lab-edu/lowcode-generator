@@ -1,0 +1,33 @@
+{
+  "name": "lowcode-generator",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "build:tokens": "pnpm --filter @packages/tokens build",
+    "storybook": "pnpm --filter @packages/ui storybook"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.8",
+    "@turbo/gen": "^1.10.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.44.1",
+    "@eslint/js": "^9.36.0",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "eslint": "^9.36.0",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.22"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "tools/*"
+  ],
+  "packageManager": "pnpm@8.6.0"
+}

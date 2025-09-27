@@ -1,0 +1,9 @@
+{
+  "extends": "@tools/typescript-config/base.json",
+  "compilerOptions": {
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "moduleResolution": "nodenext"
+  },
+  "include": ["vite.config.ts"]
+}

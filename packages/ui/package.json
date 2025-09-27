@@ -1,0 +1,39 @@
+{
+  "name": "@packages/ui",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js",
+      "types": "./dist.index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "react": "^19.1.1",
+    "storybook": "^9.1.8"
+  },
+  "devDependencies": {
+    "@packages/tailwind-config": "workspace:*",
+    "@tools/eslint-config": "workspace:*",
+    "@storybook/react": "^9.1.8",
+    "@tools/typescript-config": "workspace:*",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "tailwindcss": "^3.3.0",
+    "tsup": "^7.0.0",
+    "typescript": "~5.8.3",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6"
+  }
+}
