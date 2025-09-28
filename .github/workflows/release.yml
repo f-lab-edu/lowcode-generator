@@ -37,13 +37,17 @@ jobs:
             git push origin ${{ steps.week.outputs.tag }}
           fi
 
-      - name: Generate Changelog
-        uses: heinrichreimer/action-github-changelog-generator@v2.3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          output: CHANGELOG.md
-          tag: ${{ steps.week.outputs.tag }}
-          append: true
+          node-version: 20
+
+      - name: Install conventional-changelog
+        run: npm install -g conventional-changelog-cli
+
+      - name: Generate Changelog
+        run: |
+          npx conventional-changelog -p angular -i CHANGELOG.md -s -r 0
 
       - name: Commit Changelog
         run: |
