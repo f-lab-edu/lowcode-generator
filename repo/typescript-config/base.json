@@ -19,8 +19,12 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "erasableSyntaxOnly": true,
-    "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "paths": {
+      "@apps/code-generator": ["../../apps/code-generator/src/*"],
+      "@packages/ui": ["../../packages/ui/src/index.ts"],
+      "@packages/vanilla-extract-config": [
+        "../../packages/vanilla-extract-config/src/index.ts"
+      ]
+    }
   }
 }
