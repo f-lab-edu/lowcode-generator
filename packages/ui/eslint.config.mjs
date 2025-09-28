@@ -1,4 +1,4 @@
-import baseConfig from "@tools/eslint-config";
+import baseConfig from "";
 
 export default [
   ...baseConfig,

@@ -1,8 +1,14 @@
 {
-  "extends": "@tools/typescript-config/base.json",
+  "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
-    "lib": ["ES2022", "DOM"]
+    "lib": ["ES2022", "DOM"],
+    "paths": {
+      "@packages/vanilla-extract-config": [
+        "../vanilla-extract-config/src/index.ts"
+      ]
+    }
   },
-  "include": ["src"],
+
+  "include": ["src", "../../vanilla-extract-config/*"],
   "exclude": ["node_modules", "build"]
 }
