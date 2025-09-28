@@ -5,12 +5,17 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   weekly-release:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set week tag
         id: week
@@ -32,7 +37,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           output: CHANGELOG.md
-          tag: ${{ steps.week.outputs.tag }}
+          future-release: ${{ steps.week.outputs.tag }}
 
       - name: Commit Changelog
         run: |
