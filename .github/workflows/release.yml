@@ -1,0 +1,41 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  weekly-release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set week tag
+        id: week
+        run: |
+          YEAR=$(date +'%Y')
+          WEEK=$(date +'%V') # ISO 주차 (01~53)
+          TAG="v${YEAR}-w${WEEK}"
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
+      - name: Create Git Tag
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git tag ${{ steps.week.outputs.tag }}
+          git push origin ${{ steps.week.outputs.tag }}
+
+      - name: Generate Changelog
+        uses: heinrichreimer/action-github-changelog-generator@v2.3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          output: CHANGELOG.md
+          tag: ${{ steps.week.outputs.tag }}
+
+      - name: Commit Changelog
+        run: |
+          git add CHANGELOG.md
+          git commit -m "docs(changelog): update for ${{ steps.week.outputs.tag }}" || echo "No changes"
+          git push origin main
