@@ -25,19 +25,25 @@ jobs:
           TAG="v${YEAR}-w${WEEK}"
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
-      - name: Create Git Tag
+      - name: Create Git Tag (if not exists)
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git tag ${{ steps.week.outputs.tag }}
-          git push origin ${{ steps.week.outputs.tag }}
+          git fetch --tags
+          if git rev-parse "${{ steps.week.outputs.tag }}" >/dev/null 2>&1; then
+            echo "Tag ${{ steps.week.outputs.tag }} already exists. Skipping tag creation."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git tag ${{ steps.week.outputs.tag }}
+            git push origin ${{ steps.week.outputs.tag }}
+          fi
 
       - name: Generate Changelog
         uses: heinrichreimer/action-github-changelog-generator@v2.3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           output: CHANGELOG.md
-          future-release: ${{ steps.week.outputs.tag }}
+          tag: ${{ steps.week.outputs.tag }}
+          append: true
 
       - name: Commit Changelog
         run: |
