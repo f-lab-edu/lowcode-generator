@@ -265,6 +265,7 @@
       "block": {
         "value": {
           "fontFamily": "{font.family.code}",
+          "fontWeight": "{font.weight.regular}",
           "size": "{font.size.md}",
           "lineHeight": "{font.line-height.relaxed}",
           "letterSpacing": "{font.letter-spacing.normal}",
