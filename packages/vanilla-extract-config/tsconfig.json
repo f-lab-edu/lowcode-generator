@@ -4,6 +4,7 @@
     "outDir": "dist",
     "rootDir": "src",
     "declaration": true,
+    "moduleResolution": "bundler",
     "declarationDir": "dist"
   },
   "include": ["src"]
