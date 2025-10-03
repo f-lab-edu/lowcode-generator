@@ -1,0 +1,12 @@
+{
+  "extends": "@repo/typescript-config/base.json",
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./build",
+    "rootDir": "./build"
+  },
+  "include": ["build/**/*.js"],
+  "exclude": ["node_modules"]
+}
