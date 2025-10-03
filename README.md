@@ -84,13 +84,13 @@
 
 - **Design Foundation 통합**
   - Style Dictionary로 디자인 토큰 관리 (colors, typography, spacing 등)
-  - 커스텀 Tailwind config에 토큰 자동 매핑
+  - Style Dictionary 빌드 시 Vanilla Extract용 타입/JS 모듈 자동 생성
 - **기본 스타일 props**
-  - margin, padding (foundation spacing scale 기반)
-  - width, height
-  - background-color, color (foundation color palette 기반)
-  - border, border-radius (foundation border tokens 기반)
-  - typography (foundation font scale 기반)
+  - margin, padding (foundation spacing scale 기반 → `sprinkles` 단일 속성 매핑)
+  - width, height (foundating sizing 기반 → `sprinkles`)
+  - background-color, color (foundation color palette, semantic color 기반 → `sprinkles`)
+  - border, border-radius (foundation border tokens 기반 → `sprinkles`)
+  - typography (복합 스타일로 `recipe` 제공)
 - **토큰 기반 스타일링**: 모든 스타일 값이 디자인 토큰에서 파생
 
 ### Phase 4: 코드 생성 (우선순위: 높음)
@@ -133,10 +133,72 @@
 - **ESLint + Prettier**: 코드 품질 관리
 - **Turborepo**: 모노레포 환경 관리
 
+---
+
+## 프로젝트 구조
+
+```text
+.
+├── apps/                          # 실제 서비스/애플리케이션
+│   └── code-generator/            # Low-code Generator 프론트엔드 앱
+│
+├── docs/                          # 문서
+│   └── design-tokens.md
+│
+├── packages/                      # 공통 라이브러리/패키지
+│   ├── tokens/                    # 🎨 Design Tokens
+│   │   ├── build/                 # style-dictionary 빌드 결과물
+│   │   │   ├── css/               # CSS 변수
+│   │   │   ├── js/                # JS 모듈
+│   │   │   ├── json/              # JSON 포맷
+│   │   │   ├── ts/                # TypeScript 타입 + 값
+│   │   │   └── vanilla-extract/   # Vanilla Extract용 JS/TS
+│   │   ├── scripts/               # 빌드/워치 스크립트
+│   │   ├── src/                   # Foundation & Semantic Token JSON 정의
+│   │   │   ├── foundation/        # Breakpoints, Colors, Font, Shadow, Shape, Sizing, Spacing, System
+│   │   │   └── semantic/          # Colors, Elevation, Layout, Typography, Viewport
+│   │   └── package.json
+│   │
+│   ├── vanilla-extract-config/    # 🎛 Design System Runtime (theme/sprinkles/typography)
+│   │   ├── src/
+│   │   │   ├── theme.css.ts       # ThemeContract + GlobalTheme 정의
+│   │   │   ├── sprinkles.css.ts   # Sprinkles 아토믹 스타일 유틸
+│   │   │   ├── typography.css.ts  # Typography recipe (복합 스타일)
+│   │   │   └── index.ts           # vars, sprinkles, typography export
+│   │   └── package.json
+│   │
+│   └── ui/                        # 🧩 UI 컴포넌트
+│       ├── src/
+│       │   ├── components/        # Button, Input 등 UI 컴포넌트
+│       │   └── index.ts
+│       └── package.json
+│
+├── repo/                          # 공통 설정
+│   ├── eslint-config/             # eslint 공유 설정
+│   └── typescript-config/         # tsconfig 공유 설정
+│
+├── turbo.json                     # Turborepo 파이프라인 정의
+├── pnpm-workspace.yaml            # pnpm workspace 정의
+└── package.json                   # root config
+
+```
+
 ### 디자인 토큰 워크플로우
 
-- Design Foundation → Style Dictionary → Tailwind Config → React Components
+- Design Foundation → Style Dictionary → Vanilla Extract (theme, sprinkles, recipe for typography) → React Components (recipe for component tokens)
 - Build pipeline: 토큰 변경 시 자동 빌드 및 배포
+
+```mermaid
+graph TD
+  tokens["packages/tokens <br> 🎨 JSON Design Tokens"]
+  config["packages/vanilla-extract-config <br> 🎛 theme + sprinkles + typography"]
+  ui["packages/ui <br> 🧩 UI Components"]
+  app["apps/code-generator <br> 🌐 Application"]
+
+  tokens --> config
+  config --> ui
+  ui --> app
+```
 
 ---
 
@@ -179,12 +241,17 @@ Low-code generator 프로젝트를 진행하면서 얻을 수 있는 경험을 �
 - tokens 폴더 구조 설계 (colors, typography, spacing, borders 등)
 - tokens 패키지 하위에 foundation/semantic JSON 정의
 - Style Dictionary 기본 설정
-- Tailwind config에 토큰 빌드 및 동기화 파이프라인 구축
+  - CSS 변수, JSON, TS 모듈 동시 빌드
+  - Vanilla Extract에서 import 가능한 타입/값 구조 생성
+- Vanilla Extract 연동
+  - `theme.css.ts`: 토큰 반영
+  - `sprinkles.css.ts`: spacing, sizing, color, layout 속성 정의
+  - `typography.css.ts`: typography recipe 정의
 
 ### Week 2: 컴포넌트 시스템 개발
 
 - 기본 Atomic 컴포넌트 개발
-- 토큰 기반 props 연결 (spacing, color, typography)
+- `recipe` 기반 컴포넌트 토큰 정의 및 개발
 - Storybook 환경 설정
 
 ### Week 3: 컴포넌트 시스템 완성
