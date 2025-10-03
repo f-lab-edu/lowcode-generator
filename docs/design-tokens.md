@@ -597,3 +597,33 @@ export const buttonColorVariants = {
 ```
 
 이러한 파이프라인을 통해 개발자는 토큰의 실제 값(`"#3355ff"`)이 아닌, 의미가 담긴 이름(`'brand'`)을 사용하여 UI를 개발할 수 있으며, 전체 시스템의 일관성과 유지보수성을 크게 향상시킬 수 있습니다.
+
+### Typography 토큰이 위치
+
+일반적인 토큰 분류 체계에서 **Typography**는 Foundation(`font.size`, `font.weight`)을 조합한 **Semantic Token**에 해당합니다.
+예: `typography.text.md.regular` → "본문 텍스트(md-scale regular 스타일)"
+
+하지만 본 프로젝트에서는 **Vanilla Extract sprinkles**의 한계로 인해 Typography를 다른 토큰과 동일하게 sprinkles 속성으로 다룰 수 없습니다.
+
+구현 방식
+
+`typography` 토큰은 `recipe` 유틸로 별도로 정의합니다.
+
+이렇게 하면 하나의 토큰이 여러 CSS 속성(fontFamily, fontSize, lineHeight, letterSpacing 등)을 동시에 적용할 수 있습니다.
+
+**예시**
+
+```typescript
+// typography.css.ts
+export const typography = recipe({
+  variants: {
+    role: {
+      headingXxl: { ...vars.typography.heading.xxl },
+      headingXl: { ...vars.typography.heading.xl },
+      ...
+    }
+  }
+})
+```
+
+즉, 문서상으로는 **Semantic Token** 영역에 속하지만, **구현에서는 별도 recipe/utility**로 분리하여 사용합니다.
