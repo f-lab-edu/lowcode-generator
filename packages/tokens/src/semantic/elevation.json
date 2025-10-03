@@ -1,0 +1,38 @@
+{
+  "elevation": {
+    "surface": {
+      "value": "{color.white.100}",
+      "type": "color"
+    },
+    "surface.hovered": {
+      "value": "{color.neutral.200}",
+      "type": "color"
+    },
+    "surface.overlay": {
+      "value": "{color.white.100}",
+      "type": "color"
+    },
+    "surface.overlay.hovered": {
+      "value": "{color.neutral.200}",
+      "type": "color"
+    },
+    "surface.raised": {
+      "value": "{color.white.100}",
+      "type": "color"
+    },
+    "surface.raised.hovered": {
+      "value": "{color.neutral.200}",
+      "type": "color"
+    },
+    "shadow": {
+      "raised": {
+        "value": "{shadow.elevation1}",
+        "type": "boxShadow"
+      },
+      "overlay": {
+        "value": "{shadow.elevation3}",
+        "type": "boxShadow"
+      }
+    }
+  }
+}
