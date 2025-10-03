@@ -1,32 +1,100 @@
-import { style } from "@vanilla-extract/css";
-import { sprinkles } from "@packages/vanilla-extract-config";
+import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
+import { sprinkles, typography } from "@packages/vanilla-extract-config";
 
-/**
- * `sprinkles`로 처리할 수 없는 복잡한 스타일(e.g. transform)을 위한 기본 클래스
- */
-export const baseButton = style({
-  transition: "transform 0.2s ease-in-out",
-  ":hover": {
-    transform: "translateY(-2px)",
+export const button = recipe({
+  base: [
+    typography({ role: "textMdRegular" }),
+    sprinkles({
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      cursor: "pointer",
+      borderStyle: "none",
+      borderRadius: "md",
+    }),
+  ],
+
+  variants: {
+    color: {
+      brand: sprinkles({
+        background: {
+          default: "brand",
+          hover: "brand.bold",
+        },
+        text: "default.inverse",
+      }),
+      info: sprinkles({
+        background: {
+          default: "info",
+          hover: "info.bold",
+        },
+        text: "default.inverse",
+      }),
+      success: sprinkles({
+        background: {
+          default: "success",
+          hover: "success.bold",
+        },
+        text: "default.inverse",
+      }),
+      warning: sprinkles({
+        background: {
+          default: "warning",
+          hover: "warning.bold",
+        },
+        text: "default.inverse",
+      }),
+      danger: sprinkles({
+        background: {
+          default: "danger",
+          hover: "danger.bold",
+        },
+        text: "default.inverse",
+      }),
+    },
+
+    size: {
+      sm: [
+        typography({ role: "textSmRegular" }),
+        sprinkles({ paddingX: "3", paddingY: "1.5" }),
+      ],
+      md: [
+        typography({ role: "textMdRegular" }),
+        sprinkles({ paddingX: "4", paddingY: "2" }),
+      ],
+      lg: [
+        typography({ role: "textLgRegular" }),
+        sprinkles({ paddingX: "6", paddingY: "3" }),
+      ],
+    },
+    fullWidth: {
+      true: sprinkles({ width: "full" }),
+    },
   },
-  ":active": {
-    transform: "translateY(0)",
+
+  defaultVariants: {
+    color: "brand",
+    size: "md",
   },
 });
+
+export type ButtonVariants = RecipeVariants<typeof button>;
 
 /**
  * Sprinkles를 사용한 버튼의 기본 스타일
  * 컴포넌트에서 `baseButton` 클래스와 함께 적용되어야 합니다.
  */
-export const buttonSprinkles = sprinkles({
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  cursor: "pointer",
-  borderStyle: "none",
-  borderRadius: "md",
-  fontWeight: "semibold",
-});
+export const baseButton = [
+  typography({ role: "headingXxl" }),
+  sprinkles({
+    display: "inline-flex",
+    alignItems: "center",
+    justifyContent: "center",
+    cursor: "pointer",
+    borderStyle: "none",
+    borderRadius: "md",
+  }),
+];
 
 /**
  * 버튼 색상 variants
