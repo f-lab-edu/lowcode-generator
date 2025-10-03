@@ -7,6 +7,7 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "build:tokens": "pnpm --filter @packages/tokens build",
+    "build:vanilla-extract": "pnpm --filter @packages/vanilla-extract-config build",
     "storybook": "pnpm --filter @packages/ui storybook"
   },
   "devDependencies": {
@@ -25,9 +26,9 @@
     "eslint-plugin-react-refresh": "^0.4.22"
   },
   "workspaces": [
+    "repo/*",
     "apps/*",
-    "packages/*",
-    "tools/*"
+    "packages/*"
   ],
   "packageManager": "pnpm@8.6.0"
 }
