@@ -10,7 +10,16 @@ function App() {
   return (
     <>
       <div className="bg-slate-50">
-        <Button />
+        <Button color="info" size="sm">
+          Info 버튼
+        </Button>
+        <Button color="brand">Brand 버튼</Button>
+        <Button color="danger" size="lg">
+          Danger 버튼
+        </Button>
+        <Button color="warning" size="md">
+          Warning 버튼
+        </Button>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />
         </a>

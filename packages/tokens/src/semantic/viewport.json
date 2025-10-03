@@ -1,0 +1,10 @@
+{
+  "viewport": {
+    "xs": { "value": "{breakpoints.xs}" },
+    "sm": { "value": "{breakpoints.sm}" },
+    "md": { "value": "{breakpoints.md}" },
+    "lg": { "value": "{breakpoints.lg}" },
+    "xl": { "value": "{breakpoints.xl}" },
+    "2xl": { "value": "{breakpoints.2xl}" }
+  }
+}

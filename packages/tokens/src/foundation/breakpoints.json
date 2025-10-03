@@ -1,0 +1,28 @@
+{
+  "breakpoints": {
+    "xs": {
+      "value": "480px",
+      "type": "breakpoints"
+    },
+    "sm": {
+      "value": "768px",
+      "type": "breakpoints"
+    },
+    "md": {
+      "value": "1024px",
+      "type": "breakpoints"
+    },
+    "lg": {
+      "value": "1280px",
+      "type": "breakpoints"
+    },
+    "xl": {
+      "value": "1536px",
+      "type": "breakpoints"
+    },
+    "2xl": {
+      "value": "1920px",
+      "type": "breakpoints"
+    }
+  }
+}

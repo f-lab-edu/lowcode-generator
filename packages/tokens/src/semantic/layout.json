@@ -1,0 +1,68 @@
+{
+  "layout": {
+    "container": {
+      "xs": {
+        "value": "{breakpoints.xs}",
+        "type": "dimension"
+      },
+      "sm": {
+        "value": "{breakpoints.sm}",
+        "type": "dimension"
+      },
+      "md": {
+        "value": "{breakpoints.md}",
+        "type": "dimension"
+      },
+      "lg": {
+        "value": "{breakpoints.lg}",
+        "type": "dimension"
+      },
+      "xl": {
+        "value": "{breakpoints.xl}",
+        "type": "dimension"
+      },
+      "2xl": {
+        "value": "{breakpoints.2xl}",
+        "type": "dimension"
+      }
+    },
+    "grid": {
+      "gutter": {
+        "value": "{spacing.6}",
+        "type": "spacing"
+      },
+      "gap": {
+        "sm": { "value": "{spacing.4}", "type": "spacing" },
+        "md": { "value": "{spacing.6}", "type": "spacing" },
+        "lg": { "value": "{spacing.8}", "type": "spacing" }
+      }
+    },
+    "flex": {
+      "gap": {
+        "sm": { "value": "{spacing.2}", "type": "spacing" },
+        "md": { "value": "{spacing.4}", "type": "spacing" },
+        "lg": { "value": "{spacing.6}", "type": "spacing" }
+      }
+    },
+    "section": {
+      "padding": {
+        "sm": { "value": "{spacing.6}", "type": "spacing" },
+        "md": { "value": "{spacing.10}", "type": "spacing" },
+        "lg": { "value": "{spacing.16}", "type": "spacing" }
+      },
+      "margin": {
+        "sm": { "value": "{spacing.6}", "type": "spacing" },
+        "md": { "value": "{spacing.10}", "type": "spacing" },
+        "lg": { "value": "{spacing.16}", "type": "spacing" }
+      }
+    },
+    "content": {
+      "maxWidth": {
+        "sm": { "value": "640px", "type": "dimension" },
+        "md": { "value": "768px", "type": "dimension" },
+        "lg": { "value": "1024px", "type": "dimension" },
+        "xl": { "value": "1280px", "type": "dimension" }
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "font": {
+    "family": {
+      "heading": {
+        "value": "'Inter', 'Helvetica Neue', Arial, sans-serif",
+        "type": "fontFamilies"
+      },
+      "text": {
+        "value": "'Noto Sans KR', 'Helvetica Neue', Arial, sans-serif",
+        "type": "fontFamilies"
+      },
+      "code": { "value": "'Fira Code', monospace", "type": "fontFamilies" }
+    },
+    "size": {
+      "xs": { "value": "12px", "type": "fontSizes" },
+      "sm": { "value": "14px", "type": "fontSizes" },
+      "md": { "value": "16px", "type": "fontSizes" },
+      "lg": { "value": "18px", "type": "fontSizes" },
+      "xl": { "value": "20px", "type": "fontSizes" },
+      "2xl": { "value": "24px", "type": "fontSizes" },
+      "3xl": { "value": "30px", "type": "fontSizes" },
+      "4xl": { "value": "36px", "type": "fontSizes" },
+      "5xl": { "value": "48px", "type": "fontSizes" },
+      "6xl": { "value": "60px", "type": "fontSizes" },
+      "7xl": { "value": "72px", "type": "fontSizes" }
+    },
+    "weight": {
+      "light": {
+        "value": "300",
+        "type": "fontWeights"
+      },
+      "regular": {
+        "value": "400",
+        "type": "fontWeights"
+      },
+      "semibold": {
+        "value": "600",
+        "type": "fontWeights"
+      },
+      "bold": {
+        "value": "700",
+        "type": "fontWeights"
+      }
+    },
+    "letter-spacing": {
+      "tight": {
+        "value": "-0.02em",
+        "type": "letterSpacing"
+      },
+      "normal": {
+        "value": "0em",
+        "type": "letterSpacing"
+      },
+      "wide": {
+        "value": "0.02em",
+        "type": "letterSpacing"
+      }
+    },
+    "line-height": {
+      "tight": { "value": "1.2", "type": "lineHeights" },
+      "normal": { "value": "1.5", "type": "lineHeights" },
+      "relaxed": { "value": "1.75", "type": "lineHeights" }
+    },
+    "text-indent": {
+      "none": {
+        "value": "0px",
+        "type": "dimension"
+      },
+      "sm": {
+        "value": "4px",
+        "type": "dimension"
+      },
+      "md": {
+        "value": "8px",
+        "type": "dimension"
+      }
+    },
+    "text-decoration": {
+      "none": {
+        "value": "none",
+        "type": "textDecoration"
+      },
+      "underline": {
+        "value": "underline",
+        "type": "textDecoration"
+      },
+      "line-through": {
+        "value": "line-through",
+        "type": "textDecoration"
+      }
+    },
+    "text-transform": {
+      "none": {
+        "value": "none",
+        "type": "textTransform"
+      },
+      "uppercase": {
+        "value": "uppercase",
+        "type": "textTransform"
+      }
+    }
+  }
+}

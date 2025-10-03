@@ -1,0 +1,43 @@
+{
+  "system": {
+    "flex": {
+      "align": {
+        "start": { "value": "flex-start" },
+        "center": { "value": "center" },
+        "end": { "value": "flex-end" },
+        "stretch": { "value": "stretch" }
+      },
+      "justify": {
+        "start": { "value": "flex-start" },
+        "center": { "value": "center" },
+        "between": { "value": "space-between" },
+        "around": { "value": "space-around" },
+        "end": { "value": "flex-end" },
+        "stretch": { "value": "stretch" }
+      },
+      "direction": {
+        "row": { "value": "row" },
+        "column": { "value": "column" }
+      }
+    },
+    "grid": {
+      "columns": { "value": "12" }
+    },
+    "z-index": {
+      "base": { "value": "0" },
+      "dropdown": { "value": "1000" },
+      "sticky": { "value": "1100" },
+      "overlay": { "value": "1200" },
+      "modal": { "value": "1300" },
+      "popover": { "value": "1400" },
+      "tooltip": { "value": "1500" }
+    },
+    "opacity": {
+      "0": { "value": "0" },
+      "25": { "value": "0.25" },
+      "50": { "value": "0.5" },
+      "75": { "value": "0.75" },
+      "100": { "value": "1" }
+    }
+  }
+}
