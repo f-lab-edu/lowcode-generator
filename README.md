@@ -121,7 +121,11 @@
 - **상태 관리**: Zustand
 - **스타일링**:
   - **Style Dictionary**: 디자인 토큰 관리 및 변환
-  - **Tailwind CSS**: 토큰 기반 유틸리티 클래스 (custom config 생성)
+  - **Vanilla Extract:** Zeroruntime CSS-in-TS 기반 스타일링
+    - `createThemeContract` + `createGlobalTheme` → 전역 CSS 변수 정의
+    - `sprinkles` → spacing, color, layout 등 아토믹 속성 유틸리티
+    - `recipe` → Typography 등 복합 variant 스타일 정의
+      - component 토큰 역시 `recipe`를 통해 정의하여 type-safe 한 varaint 설정 가능
 - **드래그 앤 드롭**: @dnd-kit
 - **코드 프리뷰:** @monaco-editor/react
 - **코드 생성**: 커스텀 AST 파서
