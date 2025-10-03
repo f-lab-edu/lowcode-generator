@@ -61,14 +61,14 @@ Foundation 토큰은 디자인 시스템의 기본 구성 요소입니다.
 
 UI 요소의 입체감을 표현하는 그림자 스타일입니다.
 
-| Token Name | Offset (x/y) | Blur | Spread | Opacity | 사용 맥락                  |
-| ---------- | ------------ | ---- | ------ | ------- | -------------------------- |
-| elevation1 | 0/2px        | 4px  | 0      | 8%      | 카드, 작은 표면            |
-| elevation2 | 0/4px        | 8px  | 0      | 10%     | hover된 카드, 드롭다운     |
-| elevation3 | 0/8px        | 16px | 0      | 10%     | 중간 레이어                |
-| elevation4 | 0/10px       | 20px | 0      | 10%     | 모달, 다이얼로그           |
-| elevation5 | 0/16px       | 32px | 0      | 10%     | 강조된 액션 레이어         |
-| elevation6 | 0/12px       | 24px | 0      | 10%     | 시스템 알림, 최상위 레이어 |
+| Token Name   | Offset (x/y) | Blur | Spread | Opacity | 사용 맥락                  |
+| ------------ | ------------ | ---- | ------ | ------- | -------------------------- |
+| `elevation1` | 0/2px        | 4px  | 0      | 8%      | 카드, 작은 표면            |
+| `elevation2` | 0/4px        | 8px  | 0      | 10%     | hover된 카드, 드롭다운     |
+| `elevation3` | 0/8px        | 16px | 0      | 10%     | 중간 레이어                |
+| `elevation4` | 0/10px       | 20px | 0      | 10%     | 모달, 다이얼로그           |
+| `elevation5` | 0/16px       | 32px | 0      | 10%     | 강조된 액션 레이어         |
+| `elevation6` | 0/12px       | 24px | 0      | 10%     | 시스템 알림, 최상위 레이어 |
 
 ### 3.4. Shape
 
@@ -142,51 +142,51 @@ UI 컴포넌트가 어떻게 배치되고, 어떤 우선순위를 가지는지 �
 **Flexbox**
 Flexbox 관련 토큰은 align, justify, direction 속성을 정의합니다.
 
-| Token Name                   | Value         |
-| :--------------------------- | :------------ |
-| system-flex-align-start      | flex-start    |
-| system-flex-align-center     | center        |
-| system-flex-align-end        | flex-end      |
-| system-flex-justify-start    | flex-start    |
-| system-flex-justify-center   | center        |
-| system-flex-justify-between  | space-between |
-| system-flex-justify-around   | space-around  |
-| system-flex-direction-row    | row           |
-| system-flex-direction-column | column        |
+| Token Name                     | Value         |
+| :----------------------------- | :------------ |
+| `system-flex-align-start`      | flex-start    |
+| `system-flex-align-center`     | center        |
+| `system-flex-align-end`        | flex-end      |
+| `system-flex-justify-start`    | flex-start    |
+| `system-flex-justify-center`   | center        |
+| `system-flex-justify-between`  | space-between |
+| `system-flex-justify-around`   | space-around  |
+| `system-flex-direction-row`    | row           |
+| `system-flex-direction-column` | column        |
 
 **Grid**
 
 Grid 관련 토큰은 컬럼 수와 간격 시스템의 기반이 됩니다.
 
-| Token Name          | Value |
-| :------------------ | :---- |
-| system-grid-columns | 12    |
+| Token Name            | Value |
+| :-------------------- | :---- |
+| `system-grid-columns` | 12    |
 
 **Z-Index**
 
 레이어의 우선순위를 정의합니다. UI 요소가 겹칠 때 어떤 요소가 위에 올지 결정합니다.
 
-| Token Name              | Value       | Description      |
-| :---------------------- | :---------- | :--------------- |
-| system-z-index-base     | 0 기본 레벨 |
-| system-z-index-dropdown | 1000        | 드롭다운 메뉴    |
-| system-z-index-sticky   | 1100        | sticky 헤더/요소 |
-| system-z-index-overlay  | 1200        | 오버레이         |
-| system-z-index-modal    | 1300        | 모달 다이얼로그  |
-| system-z-index-popover  | 1400        | 팝오버           |
-| system-z-index-tooltip  | 1500        | 툴팁             |
+| Token Name                | Value       | Description      |
+| :------------------------ | :---------- | :--------------- |
+| `system-z-index-base`     | 0 기본 레벨 |
+| `system-z-index-dropdown` | 1000        | 드롭다운 메뉴    |
+| `system-z-index-sticky`   | 1100        | sticky 헤더/요소 |
+| `system-z-index-overlay`  | 1200        | 오버레이         |
+| `system-z-index-modal`    | 1300        | 모달 다이얼로그  |
+| `system-z-index-popover`  | 1400        | 팝오버           |
+| `system-z-index-tooltip`  | 1500        | 툴팁             |
 
 **Opacity**
 
 컴포넌트의 투명도를 정의합니다. 상태 전환 시 점진적 표현을 위해 사용됩니다.
 
-| Token Name         | Value |
-| :----------------- | :---- |
-| system-opacity-0   | 0     |
-| system-opacity-25  | 0.25  |
-| system-opacity-50  | 0.5   |
-| system-opacity-75  | 0.75  |
-| system-opacity-100 | 1     |
+| Token Name           | Value |
+| :------------------- | :---- |
+| `system-opacity-0`   | 0     |
+| `system-opacity-25`  | 0.25  |
+| `system-opacity-50`  | 0.5   |
+| `system-opacity-75`  | 0.75  |
+| `system-opacity-100` | 1     |
 
 ## 4. Semantic 토큰
 
@@ -328,12 +328,12 @@ Semantic 토큰은 Foundation 토큰에 의미를 부여하여 실제 UI에 적�
 
 | Semantic Token Name | Referenced Foundation Token | Description       |
 | ------------------- | --------------------------- | ----------------- |
-| viewport-xs         | {breakpoints.xs}            | XS 사이즈 뷰포트  |
-| viewport-sm         | {breakpoints.sm}            | SM 사이즈 뷰포트  |
-| viewport-md         | {breakpoints.md}            | MD 사이즈 뷰포트  |
-| viewport-lg         | {breakpoints.lg}            | LG 사이즈 뷰포트  |
-| viewport-xl         | {breakpoints.xl}            | XL 사이즈 뷰포트  |
-| viewport-2xl        | {breakpoints.2xl}           | 2XL 사이즈 뷰포트 |
+| `viewport-xs`       | `{breakpoints.xs}`          | XS 사이즈 뷰포트  |
+| `viewport-sm`       | `{breakpoints.sm}`          | SM 사이즈 뷰포트  |
+| `viewport-md`       | `{breakpoints.md}`          | MD 사이즈 뷰포트  |
+| `viewport-lg`       | `{breakpoints.lg}`          | LG 사이즈 뷰포트  |
+| `viewport-xl`       | `{breakpoints.xl}`          | XL 사이즈 뷰포트  |
+| `viewport-2xl`      | `{breakpoints.2xl}`         | 2XL 사이즈 뷰포트 |
 
 ## 5. 토큰-UI 파이프라인: Style-Dictionary와 Vanilla-Extract
 
