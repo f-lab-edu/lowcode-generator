@@ -222,7 +222,7 @@ Semantic 토큰은 Foundation 토큰에 의미를 부여하여 실제 UI에 적�
 타이포그래피는 `heading`, `text`, `display`, `caption`, `overline`, `code` 등 역할에 따라 **여러 Foundation 토큰(Font Family, Size, Weight, Line Height 등)**을 참조하여 정의된 복합 스타일입니다.
 
 - 구조: `typography-[role]-[scale]-[variant?]`
-- 역할(Role): heading, text, display, caption, overline, code
+- 역할(Role): `heading`, `text`, `display`, `caption`, `overline`, `code`
 
 | Semantic Token Name          | Description                               |
 | :--------------------------- | :---------------------------------------- |
@@ -342,23 +342,23 @@ Semantic 토큰은 Foundation 토큰에 의미를 부여하여 실제 UI에 적�
 ### 5.1. 전체 흐름도 (Flow Diagram)
 
 ```mermaid
-graph TD
+graph TD;
     subgraph "1. 정의 (@packages/tokens)"
-        A["`/src/**/*.json` <br> Foundation & Semantic 토큰 정의"]
+        A[`/src/**/*.json` <br> Foundation & Semantic 토큰 정의]
     end
 
     subgraph "2. 빌드 (@packages/tokens)"
-        B["`/scripts/style-dictionary.js` <br> Style Dictionary 빌드 <br> (vanilla-extract 포맷 사용)"]
+        B[`/scripts/style-dictionary.js` <br> Style Dictionary 빌드 <br> * vanilla-extract 포맷 사용]
     end
 
     subgraph "3. 소비 (@packages/vanilla-extract-config)"
-        C["`/build/vanilla-extract/theme-tokens.js` <br> (계층 구조를 유지한 JS 객체)"]
-        D["`/src/theme.css.ts` <br> `createThemeContract` & `createGlobalTheme` <br> 👉 CSS 변수 생성 (`vars` 객체)"]
-        E["`/src/sprinkles.css.ts` <br> `createSprinkles` <br> 👉 아토믹 유틸리티 함수 생성 (`sprinkles` 함수)"]
+        C[`/build/vanilla-extract/theme-tokens.js` <br> * 계층 구조를 유지한 JS 객체]
+        D[`/src/theme.css.ts` <br> `createThemeContract` & `createGlobalTheme` <br> 👉 CSS 변수 생성 => `vars` 객체]
+        E[`/src/sprinkles.css.ts` <br> `createSprinkles` <br> 👉 아토믹 유틸리티 함수 생성 `sprinkles` 함수]
     end
 
     subgraph "4. 사용 (@packages/ui)"
-        F["`sprinkles` 함수 <br> (타입-세이프 스타일링)"]
+        F[`sprinkles` 함수 <br> * 타입-세이프 스타일링]
         G["UI 컴포넌트 <br> (e.g., button.css.ts)"]
     end
 
@@ -452,7 +452,7 @@ const colorProperties = defineProperties({
 export const sprinkles = createSprinkles(colorProperties, ...);
 ```
 
-### a) Responsive Properties
+**a) Responsive Properties**
 
 반응형 속성을 지원합니다. breakpoints(`xs` ~ `2xl`)를 기반으로 `@media` 조건이 자동 생성됩니다.  
 주요 속성:
@@ -474,7 +474,7 @@ export const sprinkles = createSprinkles(colorProperties, ...);
 />
 ```
 
-### b) State Properties
+**b) State Properties**
 
 상태 조건(`hover`, `focus`, `active`, `disabled`)을 지원합니다.
 Semantic 토큰(`vars.color`, `vars.shadow`, `vars.system.opacity`)과 매핑됩니다.
@@ -491,7 +491,7 @@ Semantic 토큰(`vars.color`, `vars.shadow`, `vars.system.opacity`)과 매핑됩
 />
 ```
 
-### c) Unconditional Properties
+**c) Unconditional Properties**
 
 상태/반응형과 관계없이 항상 적용되는 속성입니다.
 타이포그래피, border, cursor, transition 등의 속성을 포함합니다.
@@ -517,7 +517,7 @@ Semantic 토큰(`vars.color`, `vars.shadow`, `vars.system.opacity`)과 매핑됩
 />
 ```
 
-### d) Shorthands
+**d) Shorthands**
 
 DX 향상을 위해 여러 속성을 한 번에 지정할 수 있는 축약 속성을 제공합니다.
 | Shorthand | 확장되는 속성들 |
@@ -530,7 +530,7 @@ DX 향상을 위해 여러 속성을 한 번에 지정할 수 있는 축약 속�
 | `marginY` | marginTop, marginBottom |
 | `size` | width, height |
 
-### e) 타입 안정성
+**e) 타입 안정성**
 
 `Sprinkles` 타입과 `ResponsiveValue` 유틸리티를 export하여, consumer 코드에서 props를 안전하게 전달할 수 있습니다. 이를 통해 자동완성과 타입 검증을 모두 지원합니다.
 
@@ -570,7 +570,7 @@ function Button({ size = "md" }: ButtonProps) {
 }
 ```
 
-### f) 확장 가이드
+**f) 확장 가이드**
 
 - 새로운 속성을 추가하려면 `defineProperties`의 `properties` 항목에 토큰을 매핑하면 됩니다.
 - 모든 추가 속성은 자동으로 `sprinkles` 함수와 타입 시스템에 반영됩니다.
