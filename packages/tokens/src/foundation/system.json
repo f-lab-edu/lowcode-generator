@@ -4,13 +4,16 @@
       "align": {
         "start": { "value": "flex-start" },
         "center": { "value": "center" },
-        "end": { "value": "flex-end" }
+        "end": { "value": "flex-end" },
+        "stretch": { "value": "stretch" }
       },
       "justify": {
         "start": { "value": "flex-start" },
         "center": { "value": "center" },
         "between": { "value": "space-between" },
-        "around": { "value": "space-around" }
+        "around": { "value": "space-around" },
+        "end": { "value": "flex-end" },
+        "stretch": { "value": "stretch" }
       },
       "direction": {
         "row": { "value": "row" },

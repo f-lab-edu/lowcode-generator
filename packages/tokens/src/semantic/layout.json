@@ -62,10 +62,6 @@
         "md": { "value": "768px", "type": "dimension" },
         "lg": { "value": "1024px", "type": "dimension" },
         "xl": { "value": "1280px", "type": "dimension" }
-      },
-      "sidebarWidth": {
-        "value": "{sizing.64}",
-        "type": "sizing"
       }
     }
   }

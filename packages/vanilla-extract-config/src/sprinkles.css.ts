@@ -8,13 +8,23 @@ import { vars } from "./theme.css";
 
 const responsiveProperties = defineProperties({
   conditions: {
-    xs: { "@media": `screen and (min-width: ${themeTokens.breakpoints.xs})` },
-    sm: { "@media": `screen and (min-width: ${themeTokens.breakpoints.sm})` },
-    md: { "@media": `screen and (min-width: ${themeTokens.breakpoints.md})` },
-    lg: { "@media": `screen and (min-width: ${themeTokens.breakpoints.lg})` },
-    xl: { "@media": `screen and (min-width: ${themeTokens.breakpoints.xl})` },
+    xs: {
+      "@media": `screen and (min-width: ${themeTokens.layout.container.xs})`,
+    },
+    sm: {
+      "@media": `screen and (min-width: ${themeTokens.layout.container.sm})`,
+    },
+    md: {
+      "@media": `screen and (min-width: ${themeTokens.layout.container.md})`,
+    },
+    lg: {
+      "@media": `screen and (min-width: ${themeTokens.layout.container.lg})`,
+    },
+    xl: {
+      "@media": `screen and (min-width: ${themeTokens.layout.container.xl})`,
+    },
     "2xl": {
-      "@media": `screen and (min-width: ${themeTokens.breakpoints["2xl"]})`,
+      "@media": `screen and (min-width: ${themeTokens.layout.container["2xl"]})`,
     },
   },
   defaultCondition: "xs",
@@ -30,6 +40,12 @@ const responsiveProperties = defineProperties({
       "space-between",
     ],
     alignItems: ["stretch", "flex-start", "center", "flex-end"],
+    padding: vars.layout.section.padding,
+    margin: vars.layout.section.margin,
+    contentMaxWidth: vars.layout.content.maxWidth,
+    rowGap: vars.layout.grid.gap,
+    columnGap: vars.layout.grid.gap,
+    flexGap: vars.layout.flex.gap,
     paddingTop: vars.spacing,
     paddingBottom: vars.spacing,
     paddingLeft: vars.spacing,
@@ -54,6 +70,9 @@ const responsiveProperties = defineProperties({
     marginX: ["marginLeft", "marginRight"],
     marginY: ["marginTop", "marginBottom"],
     size: ["width", "height"],
+    container: ["contentMaxWidth"],
+    gap: ["gap", "rowGap", "columnGap", "flexGap"],
+    sectionSpacing: ["padding", "margin"],
   },
 });
 
