@@ -65,7 +65,7 @@ StyleDictionary.registerFormat({
       return result;
     }
 
-    const cleanTokens = extractValues(dictionary.tokens);
+    const cleanTokens = extractValues(dictionary.properties);
 
     return (
       fileHeader(this) +
@@ -132,7 +132,7 @@ StyleDictionary.registerFormat({
       return result;
     }
 
-    const typeDefinition = generateType(dictionary.tokens);
+    const typeDefinition = generateType(dictionary.properties);
 
     return (
       fileHeader(this) +

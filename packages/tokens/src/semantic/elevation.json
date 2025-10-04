@@ -1,32 +1,26 @@
 {
   "elevation": {
     "surface": {
-      "value": "{color.white.100}",
-      "type": "color"
-    },
-    "surface.hovered": {
-      "value": "{color.neutral.200}",
-      "type": "color"
-    },
-    "surface.overlay": {
-      "value": "{color.white.100}",
-      "type": "color"
-    },
-    "surface.overlay.hovered": {
-      "value": "{color.neutral.200}",
-      "type": "color"
-    },
-    "surface.raised": {
-      "value": "{color.white.100}",
-      "type": "color"
-    },
-    "surface.raised.hovered": {
-      "value": "{color.neutral.200}",
-      "type": "color"
+      "base": {
+        "default": { "value": "{color.white.100}", "type": "color" },
+        "hovered": { "value": "{color.neutral.200}", "type": "color" }
+      },
+      "overlay": {
+        "default": { "value": "{color.white.100}", "type": "color" },
+        "hovered": { "value": "{color.neutral.200}", "type": "color" }
+      },
+      "raised": {
+        "default": { "value": "{color.white.100}", "type": "color" },
+        "hovered": { "value": "{color.neutral.200}", "type": "color" }
+      }
     },
     "shadow": {
-      "raised": {
+      "base": {
         "value": "{shadow.elevation1}",
+        "type": "boxShadow"
+      },
+      "raised": {
+        "value": "{shadow.elevation2}",
         "type": "boxShadow"
       },
       "overlay": {
