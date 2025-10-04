@@ -1,74 +1,102 @@
+import { vars } from "@packages/vanilla-extract-config";
 import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
-import { sprinkles, typography } from "@packages/vanilla-extract-config";
+import { typography } from "@packages/vanilla-extract-config";
+import { style } from "@vanilla-extract/css";
 
 export const button = recipe({
   base: [
     typography({ role: "textMdRegular" }),
-    sprinkles({
+    style({
       display: "inline-flex",
       alignItems: "center",
       justifyContent: "center",
       cursor: "pointer",
-      borderStyle: "none",
-      borderRadius: "md",
+      border: "none",
+      color: vars.color.text.base.inverse,
+      borderRadius: vars.sizing["3"],
     }),
   ],
 
   variants: {
     color: {
-      brand: sprinkles({
-        background: {
-          default: "brand",
-          hover: "brand.bold",
+      brand: style({
+        backgroundColor: vars.color.background.brand.default,
+        ":hover": {
+          backgroundColor: vars.color.background.brand.bold,
         },
-        text: "default.inverse",
+        ":disabled": {
+          backgroundColor: vars.color.background.brand.subtle,
+        },
       }),
-      info: sprinkles({
-        background: {
-          default: "info",
-          hover: "info.bold",
+      info: style({
+        backgroundColor: vars.color.background.info.default,
+        ":hover": {
+          backgroundColor: vars.color.background.info.bold,
         },
-        text: "default.inverse",
+        ":disabled": {
+          backgroundColor: vars.color.background.info.subtle,
+        },
       }),
-      success: sprinkles({
-        background: {
-          default: "success",
-          hover: "success.bold",
+      success: style({
+        backgroundColor: vars.color.background.success.default,
+        ":hover": {
+          backgroundColor: vars.color.background.success.bold,
         },
-        text: "default.inverse",
+        ":disabled": {
+          backgroundColor: vars.color.background.success.subtle,
+        },
       }),
-      warning: sprinkles({
-        background: {
-          default: "warning",
-          hover: "warning.bold",
+      warning: style({
+        backgroundColor: vars.color.background.warning.default,
+        ":hover": {
+          backgroundColor: vars.color.background.warning.bold,
         },
-        text: "default.inverse",
+        ":disabled": {
+          backgroundColor: vars.color.background.warning.subtle,
+        },
       }),
-      danger: sprinkles({
-        background: {
-          default: "danger",
-          hover: "danger.bold",
+      danger: style({
+        backgroundColor: vars.color.background.danger.default,
+        ":hover": {
+          backgroundColor: vars.color.background.danger.bold,
         },
-        text: "default.inverse",
+        ":disabled": {
+          backgroundColor: vars.color.background.danger.subtle,
+        },
       }),
     },
 
     size: {
       sm: [
         typography({ role: "textSmRegular" }),
-        sprinkles({ paddingX: "3", paddingY: "1.5" }),
+        style({
+          paddingLeft: vars.sizing[3],
+          paddingRight: vars.sizing[3],
+          paddingTop: vars.sizing[2],
+          paddingBottom: vars.sizing[2],
+        }),
       ],
       md: [
         typography({ role: "textMdRegular" }),
-        sprinkles({ paddingX: "4", paddingY: "2" }),
+        style({
+          paddingLeft: vars.sizing[4],
+          paddingRight: vars.sizing[4],
+          paddingTop: vars.sizing[2],
+          paddingBottom: vars.sizing[2],
+        }),
       ],
       lg: [
         typography({ role: "textLgRegular" }),
-        sprinkles({ paddingX: "6", paddingY: "3" }),
+        style({
+          paddingLeft: vars.sizing[6],
+          paddingRight: vars.sizing[6],
+          paddingTop: vars.sizing[3],
+          paddingBottom: vars.sizing[3],
+        }),
       ],
     },
     fullWidth: {
-      true: sprinkles({ width: "full" }),
+      true: style({ width: vars.sizing.full }),
     },
   },
 
@@ -77,90 +105,4 @@ export const button = recipe({
     size: "md",
   },
 });
-
 export type ButtonVariants = RecipeVariants<typeof button>;
-
-/**
- * Sprinkles를 사용한 버튼의 기본 스타일
- * 컴포넌트에서 `baseButton` 클래스와 함께 적용되어야 합니다.
- */
-export const baseButton = [
-  typography({ role: "headingXxl" }),
-  sprinkles({
-    display: "inline-flex",
-    alignItems: "center",
-    justifyContent: "center",
-    cursor: "pointer",
-    borderStyle: "none",
-    borderRadius: "md",
-  }),
-];
-
-/**
- * 버튼 색상 variants
- */
-export const buttonColorVariants = {
-  brand: sprinkles({
-    background: {
-      default: "brand",
-      hover: "brand.bold",
-    },
-    text: "default.inverse",
-  }),
-  info: sprinkles({
-    background: {
-      default: "info",
-      hover: "info.bold",
-    },
-    text: "default.inverse",
-  }),
-  success: sprinkles({
-    background: {
-      default: "success",
-      hover: "success.bold",
-    },
-    text: "default.inverse",
-  }),
-  warning: sprinkles({
-    background: {
-      default: "warning",
-      hover: "warning.bold",
-    },
-    text: "default.inverse",
-  }),
-  danger: sprinkles({
-    background: {
-      default: "danger",
-      hover: "danger.bold",
-    },
-    text: "default.inverse",
-  }),
-};
-
-/**
- * 버튼 크기 variants
- */
-export const buttonSizeVariants = {
-  sm: sprinkles({
-    fontSize: "sm",
-    paddingX: "3",
-    paddingY: "1.5",
-  }),
-  md: sprinkles({
-    fontSize: "md",
-    paddingX: "4",
-    paddingY: "2",
-  }),
-  lg: sprinkles({
-    fontSize: "lg",
-    paddingX: "6",
-    paddingY: "3",
-  }),
-};
-
-/**
- * 전체 너비 버튼
- */
-export const fullWidth = sprinkles({
-  width: "full",
-});
