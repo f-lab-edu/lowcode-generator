@@ -1,8 +1,6 @@
-import { createGlobalTheme, createThemeContract } from "@vanilla-extract/css";
-import { themeTokens, type ThemeTokens } from "@packages/tokens/vanilla-extract";
+import { createThemeContract } from "@vanilla-extract/css";
+import { themeTokens } from "@packages/tokens/vanilla-extract";
 
-export const vars = createThemeContract(themeTokens as ThemeTokens);
-
-createGlobalTheme(':root', vars, themeTokens);
-
-export type ThemeVars = typeof vars;
+// Create a contract with the shape of the tokens.
+// This doesn't generate any CSS, just a typed object of variable names.
+export const vars = createThemeContract(themeTokens);
