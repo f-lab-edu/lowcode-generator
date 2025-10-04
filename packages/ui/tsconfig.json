@@ -2,6 +2,7 @@
   "extends": "@repo/typescript-config/base.json",
   "compilerOptions": {
     "lib": ["ES2022", "DOM"],
+    "moduleResolution": "bundler",
     "paths": {
       "@packages/vanilla-extract-config": [
         "../vanilla-extract-config/src/index.ts"
@@ -9,6 +10,6 @@
     }
   },
 
-  "include": ["src", "../../vanilla-extract-config/*"],
-  "exclude": ["node_modules", "build"]
+  "include": ["src", "../../vanilla-extract-config/*", "../tokens/*"],
+  "exclude": ["node_modules"]
 }

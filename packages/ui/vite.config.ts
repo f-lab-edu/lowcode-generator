@@ -17,6 +17,7 @@ export default defineConfig({
       external: [
         "react",
         "react-dom",
+        "@packages/tokens",
         "@packages/vanilla-extract-config",
         "@vanilla-extract/css",
       ],
