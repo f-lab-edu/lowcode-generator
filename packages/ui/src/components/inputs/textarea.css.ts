@@ -8,14 +8,16 @@ export const textarea = recipe({
     typographyRecipe({ role: "textMdRegular" }),
     style({
       background: vars.color.background.input.default,
-      border: `${vars.sizing["px"]} solid ${vars.color.border.input.default}`,
+      border: `${vars.sizing["0.5"]} solid ${vars.color.border.input.default}`,
       borderRadius: vars.sizing["2"],
       ":disabled": {
         background: vars.color.background.input.disabled,
-        border: `${vars.sizing["px"]} solid ${vars.color.border.input.disabled}`,
+        borderColor: vars.color.border.input.disabled,
       },
-      ":focus": {
-        border: `${vars.sizing["px"]} solid ${vars.color.border.input.active}`,
+      ":focus-visible": {
+        outline: "none",
+        borderColor: vars.color.border.input.active,
+        boxShadow: vars.elevation.shadow.raised,
       },
       "::placeholder": {
         color: vars.color.text.subtle.default,
