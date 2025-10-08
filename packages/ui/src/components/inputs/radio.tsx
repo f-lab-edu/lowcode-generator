@@ -24,6 +24,7 @@ const Radio = forwardRef<HTMLInputElement, RadioProps>(
           name={radioName}
           ref={ref}
           type="radio"
+          disabled={disabled}
           className={radio({ inputSize })}
           {...props}
         />
