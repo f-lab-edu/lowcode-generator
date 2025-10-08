@@ -9,7 +9,7 @@ import {
   type TypographyRole,
 } from "@packages/vanilla-extract-config";
 
-type TypographyElement =
+export type TypographyElement =
   | "p"
   | "span"
   | "strong"
@@ -21,7 +21,8 @@ type TypographyElement =
   | "h3"
   | "h4"
   | "h5"
-  | "h6";
+  | "h6"
+  | "pre";
 
 type PolymorphicRef<T extends ElementType> = ComponentPropsWithRef<T>["ref"];
 
