@@ -6,7 +6,7 @@
         "inverse": { "value": "{color.white.100}", "type": "color" }
       },
       "subtle": {
-        "default": { "value": "{color.neutral.800}", "type": "color" },
+        "default": { "value": "{color.neutral.600}", "type": "color" },
         "inverse": { "value": "{color.neutral.400}", "type": "color" }
       },
       "disabled": { "value": "{color.neutral.400}", "type": "color" },
@@ -65,7 +65,7 @@
       "focused": { "value": "{color.blue.500}", "type": "color" },
       "selected": { "value": "{color.blue.700}", "type": "color" },
       "input": {
-        "default": { "value": "{color.neutral.500}", "type": "color" },
+        "default": { "value": "{color.neutral.200}", "type": "color" },
         "disabled": { "value": "{color.neutral.200}", "type": "color" },
         "active": { "value": "{color.blue.200}", "type": "color" },
         "error": { "value": "{color.red.500}", "type": "color" }
