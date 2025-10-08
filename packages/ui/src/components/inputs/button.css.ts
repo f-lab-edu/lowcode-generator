@@ -1,11 +1,11 @@
 import { vars } from "@packages/vanilla-extract-config";
 import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
-import { typography } from "@packages/vanilla-extract-config";
+import { typographyRecipe } from "@packages/vanilla-extract-config";
 import { style } from "@vanilla-extract/css";
 
 export const button = recipe({
   base: [
-    typography({ role: "textMdRegular" }),
+    typographyRecipe({ role: "textMdRegular" }),
     style({
       display: "inline-flex",
       alignItems: "center",
@@ -68,16 +68,16 @@ export const button = recipe({
 
     size: {
       sm: [
-        typography({ role: "textSmRegular" }),
+        typographyRecipe({ role: "textSmRegular" }),
         style({
           paddingLeft: vars.sizing[3],
           paddingRight: vars.sizing[3],
-          paddingTop: vars.sizing[2],
-          paddingBottom: vars.sizing[2],
+          paddingTop: vars.sizing[1],
+          paddingBottom: vars.sizing[1],
         }),
       ],
       md: [
-        typography({ role: "textMdRegular" }),
+        typographyRecipe({ role: "textMdRegular" }),
         style({
           paddingLeft: vars.sizing[4],
           paddingRight: vars.sizing[4],
@@ -86,7 +86,7 @@ export const button = recipe({
         }),
       ],
       lg: [
-        typography({ role: "textLgRegular" }),
+        typographyRecipe({ role: "textLgRegular" }),
         style({
           paddingLeft: vars.sizing[6],
           paddingRight: vars.sizing[6],

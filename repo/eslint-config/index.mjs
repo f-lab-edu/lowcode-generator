@@ -5,7 +5,7 @@ import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import importPlugin from "eslint-plugin-import";
 import jsxA11y from "eslint-plugin-jsx-a11y";
-
+import mdx from "eslint-plugin-mdx";
 export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -86,6 +86,19 @@ export default [
     rules: {
       "@typescript-eslint/no-require-imports": "off",
       "no-undef": "off",
+    },
+  },
+  {
+    files: ["**/*.mdx"],
+    plugins: { mdx },
+    extends: ["plugin:mdx/recommended"],
+    rules: {
+      "react/jsx-no-undef": "off",
+      "react/jsx-filename-extension": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/jsx-fragments": "off",
+      "react/jsx-one-expression-per-line": "off",
+      "react/no-unknown-property": "off",
     },
   },
 ];

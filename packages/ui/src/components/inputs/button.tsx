@@ -1,12 +1,12 @@
 import { forwardRef } from "react";
 import { button, type ButtonVariants } from "./button.css.ts";
 
-export type ButtonProps = {
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   children: React.ReactNode;
   className?: string;
 } & ButtonVariants;
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       color = "brand",
@@ -28,3 +28,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     );
   }
 );
+
+Button.displayName = "Button";
+
+export { Button };
