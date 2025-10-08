@@ -2,7 +2,7 @@ import { style } from "@vanilla-extract/css";
 import { vars } from "@packages/vanilla-extract-config";
 import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
 
-export const container = recipe({
+export const containerRecipe = recipe({
   base: [
     style({
       display: "block",
@@ -38,9 +38,9 @@ export const container = recipe({
   },
 });
 
-export type ContainerVariants = RecipeVariants<typeof container>;
+export type ContainerRecipeVariants = RecipeVariants<typeof containerRecipe>;
 
-export const section = recipe({
+export const sectionRecipe = recipe({
   base: [
     style({
       display: "block",
@@ -67,9 +67,9 @@ export const section = recipe({
   },
 });
 
-export type SectionVariants = RecipeVariants<typeof section>;
+export type SectionRecipeVariants = RecipeVariants<typeof sectionRecipe>;
 
-export const stack = recipe({
+export const stackRecipe = recipe({
   base: { display: "flex" },
   variants: {
     gap: {
@@ -104,9 +104,9 @@ export const stack = recipe({
   },
 });
 
-export type StackVariants = RecipeVariants<typeof stack>;
+export type StackRecipeVariants = RecipeVariants<typeof stackRecipe>;
 
-export const grid = recipe({
+export const gridRecipe = recipe({
   base: {
     display: "grid",
   },
@@ -136,6 +136,7 @@ export const grid = recipe({
       3: { gridTemplateColumns: "repeat(3, 1fr)" },
       4: { gridTemplateColumns: "repeat(4, 1fr)" },
       6: { gridTemplateColumns: "repeat(6, 1fr)" },
+      8: { gridTemplateColumns: "repeat(8, 1fr)" },
       12: { gridTemplateColumns: "repeat(12, 1fr)" },
       auto: { gridTemplateColumns: "auto-fit" },
     },
@@ -173,4 +174,12 @@ export const grid = recipe({
   },
 });
 
-export type GridVariants = RecipeVariants<typeof grid>;
+export type GridRecipeVariants = RecipeVariants<typeof gridRecipe>;
+
+export const GRID_GAP = ["xs", "sm", "md", "lg", "xl"];
+
+export const GRID_PADDING = ["xs", "sm", "md", "lg", "xl"];
+
+export type GridGap = (typeof GRID_GAP)[number];
+
+export type GridPadding = (typeof GRID_PADDING)[number];

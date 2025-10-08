@@ -1,7 +1,7 @@
 import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
 import { vars } from "./theme.css";
 
-export const typography = recipe({
+export const typographyRecipe = recipe({
   variants: {
     role: {
       headingXxl: { ...vars.typography.heading.xxl },
@@ -12,7 +12,7 @@ export const typography = recipe({
       headingXs: { ...vars.typography.heading.xs },
       textSmRegular: { ...vars.typography.text.sm.regular },
       textSmSemibold: { ...vars.typography.text.sm.semibold },
-      textMdRegular: { ...vars.typography.text.md.semibold },
+      textMdRegular: { ...vars.typography.text.md.regular },
       textMdSemibold: { ...vars.typography.text.md.semibold },
       textLgRegular: { ...vars.typography.text.lg.regular },
       textLgSemibold: { ...vars.typography.text.lg.semibold },
@@ -26,6 +26,34 @@ export const typography = recipe({
       codeBlock: { ...vars.typography.code.block },
     },
   },
+  defaultVariants: {
+    role: "textMdRegular",
+  },
 });
 
-export type TypographyVariants = RecipeVariants<typeof typography>;
+export type TypographyRecipeVariants = RecipeVariants<typeof typographyRecipe>;
+
+export const TYPOGRAPHY_ROLES = [
+  "headingXxl",
+  "headingXl",
+  "headingLg",
+  "headingMd",
+  "headingSm",
+  "headingXs",
+  "textSmRegular",
+  "textSmSemibold",
+  "textMdRegular",
+  "textMdSemibold",
+  "textLgRegular",
+  "textLgSemibold",
+  "displaySm",
+  "displayMd",
+  "displayLg",
+  "captionSm",
+  "captionMd",
+  "overline",
+  "codeInline",
+  "codeBlock",
+] as const;
+
+export type TypographyRole = (typeof TYPOGRAPHY_ROLES)[number];
