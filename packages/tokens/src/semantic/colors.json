@@ -68,6 +68,7 @@
         "default": { "value": "{color.neutral.200}", "type": "color" },
         "disabled": { "value": "{color.neutral.200}", "type": "color" },
         "active": { "value": "{color.blue.200}", "type": "color" },
+        "selected": { "value": "{color.blue.500}", "type": "color" },
         "error": { "value": "{color.red.500}", "type": "color" }
       }
     },
@@ -80,7 +81,9 @@
       },
       "input": {
         "default": { "value": "{color.white.100}", "type": "color" },
-        "disabled": { "value": "{color.neutral.100}", "type": "color" }
+        "disabled": { "value": "{color.neutral.100}", "type": "color" },
+        "hovered": { "value": "{color.blue.100}", "type": "color" },
+        "selected": { "value": "{color.blue.500}", "type": "color" }
       },
       "brand": {
         "default": { "value": "{color.brand.500}", "type": "color" },
@@ -106,10 +109,6 @@
         "default": { "value": "{color.red.500}", "type": "color" },
         "subtle": { "value": "{color.red.100}", "type": "color" },
         "bold": { "value": "{color.red.700}", "type": "color" }
-      },
-      "selected": {
-        "default": { "value": "{color.blue.100}", "type": "color" },
-        "bold": { "value": "{color.blue.700}", "type": "color" }
       }
     },
     "overlay": {
