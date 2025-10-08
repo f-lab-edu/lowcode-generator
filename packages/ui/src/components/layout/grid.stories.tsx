@@ -48,6 +48,7 @@ const Item = ({ index }: { index: number }) => (
   </div>
 );
 
+// ✅ 스토리 1: 다양한 columns에 따른 Grid 레이아웃 변경 및 재배치
 export const DynamicColumns: Story = {
   render: (args) => (
     <Grid container {...args}>

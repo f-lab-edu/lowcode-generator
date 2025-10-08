@@ -1,5 +1,5 @@
 import { forwardRef, type CSSProperties, type HTMLAttributes } from "react";
-import { gridRecipe, type GridGap } from "@packages/vanilla-extract-config";
+import { gridRecipe } from "@packages/vanilla-extract-config";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 export type GridVariants = RecipeVariants<typeof gridRecipe>;
@@ -8,7 +8,6 @@ export type GridProps = HTMLAttributes<HTMLDivElement> &
   GridVariants & {
     container?: boolean;
     size?: number;
-    gap?: GridGap;
     children?: React.ReactNode;
   };
 
