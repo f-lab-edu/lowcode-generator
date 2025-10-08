@@ -1,0 +1,34 @@
+import { forwardRef } from "react";
+import { button, type ButtonVariants } from "./button.css.ts";
+
+export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+  children: React.ReactNode;
+  className?: string;
+} & ButtonVariants;
+
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      color = "brand",
+      size = "md",
+      fullWidth = false,
+      className,
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const classNames = [button({ color, size, fullWidth }), className].join(
+      " "
+    );
+    return (
+      <button ref={ref} className={classNames} {...props}>
+        {children}
+      </button>
+    );
+  }
+);
+
+Button.displayName = "Button";
+
+export { Button };
