@@ -4,7 +4,7 @@ import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/components/**/*.stories.@(ts|tsx)"],
-  staticDirs: ["../public"],
+  // staticDirs: ["../public"],
   addons: ["@storybook/addon-docs"],
   framework: {
     name: "@storybook/react-vite",
