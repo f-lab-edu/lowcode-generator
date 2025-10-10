@@ -36,6 +36,7 @@ export const selectControl = recipe({
     style({
       width: "100%",
       appearance: "none",
+      backgroundColor: vars.color.background.input.default,
       backgroundRepeat: "no-repeat",
       backgroundPosition: `right ${vars.sizing[3]} center`,
       backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='${encodeURIComponent(
@@ -46,6 +47,7 @@ export const selectControl = recipe({
       borderRadius: vars.sizing["2"],
       color: vars.color.text.base.default,
       padding: `${vars.sizing[2]} ${vars.sizing[3]}`,
+      textAlign: "left",
       selectors: {
         "&:hover": {
           borderColor: vars.color.border.input.active,
@@ -59,14 +61,6 @@ export const selectControl = recipe({
           background: vars.color.background.input.disabled,
           color: vars.color.text.subtle.default,
           cursor: "not-allowed",
-        },
-        "&:after": {
-          content: "▼",
-          position: "absolute",
-          right: "10px",
-          top: "50%",
-          transform: "translateY(-50%)",
-          pointerEvents: "none",
         },
       },
     }),
@@ -101,18 +95,66 @@ export const selectControl = recipe({
   },
 });
 
-export const selectOption = style({
+export const selectMenu = style({
+  position: "absolute",
+  top: "100%",
+  left: 0,
+  right: 0,
+  zIndex: 10,
+  marginTop: vars.sizing[1],
   backgroundColor: vars.color.background.input.default,
-  color: vars.color.text.base.default,
-  selectors: {
-    "&:checked, &:selected": {
-      backgroundColor: vars.color.background.brand.default,
-      color: vars.color.text.selected,
+  border: `${vars.sizing["0.5"]} solid ${vars.color.border.input.default}`,
+  borderRadius: vars.sizing["2"],
+  boxShadow: vars.elevation.shadow.raised,
+  maxHeight: "200px",
+  overflowY: "auto",
+  listStyle: "none",
+  padding: 0,
+  margin: 0,
+});
+
+export const optionItem = recipe({
+  base: [
+    typographyRecipe({ role: "textMdRegular" }),
+    style({
+      padding: `${vars.sizing[2]} ${vars.sizing[3]}`,
+      cursor: "pointer",
+      color: vars.color.text.base.default,
+      selectors: {
+        "&:hover": {
+          backgroundColor: vars.color.background.input.hovered,
+        },
+      },
+    }),
+  ],
+  variants: {
+    isSelected: {
+      true: {
+        backgroundColor: vars.color.background.input.selected,
+        color: vars.color.text.base.inverse,
+        ":hover": {
+          backgroundColor: vars.color.background.input.selected,
+        },
+      },
     },
-    "&:disabled": {
-      color: vars.color.text.subtle.default,
-      backgroundColor: vars.color.background.input.disabled,
+    disabled: {
+      true: {
+        backgroundColor: vars.color.background.input.disabled,
+        color: vars.color.text.disabled,
+        cursor: "no-drop",
+        ":hover": {
+          backgroundColor: vars.color.background.input.disabled,
+        },
+      },
     },
+    inputSize: {
+      sm: typographyRecipe({ role: "textSmRegular" }),
+      md: typographyRecipe({ role: "textMdRegular" }),
+      lg: typographyRecipe({ role: "textLgRegular" }),
+    },
+  },
+  defaultVariants: {
+    inputSize: "md",
   },
 });
 

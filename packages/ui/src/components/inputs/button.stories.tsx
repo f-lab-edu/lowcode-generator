@@ -55,7 +55,7 @@ export const ColorButtons: Story = {
   render: (args) => (
     <>
       {colorOptions.map((color) => (
-        <Button color={color} size={args.size}>
+        <Button key={color} color={color} size={args.size}>
           {color}
         </Button>
       ))}
@@ -81,7 +81,7 @@ export const SizeButtons: Story = {
   render: (args) => (
     <>
       {sizeOptions.map((size) => (
-        <Button color={args.color} size={size}>
+        <Button key={size} color={args.color} size={size}>
           {size} 버튼
         </Button>
       ))}
@@ -97,7 +97,6 @@ export const SizeButtons: Story = {
   },
   args: {
     color: "info",
-    size: "md",
     fullWidth: false,
     children: "Button",
   },

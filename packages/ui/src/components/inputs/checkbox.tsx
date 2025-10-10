@@ -22,6 +22,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           id={checkboxId}
           ref={ref}
           type="checkbox"
+          disabled={disabled}
           className={checkbox({ inputSize })}
           {...props}
         />

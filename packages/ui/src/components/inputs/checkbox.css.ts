@@ -23,21 +23,39 @@ export const checkboxWrapper = recipe({
 export const checkbox = recipe({
   base: [
     style({
+      appearance: "none",
+      margin: 0,
+      position: "relative",
       display: "inline-block",
       cursor: "pointer",
-      width: vars.sizing[5],
-      height: vars.sizing[5],
       backgroundColor: vars.color.background.input.default,
       border: `${vars.sizing["0.5"]} solid ${vars.color.border.input.default}`,
-      borderRadius: vars.sizing["2"],
+      borderRadius: vars.sizing["1"],
       transition: "background-color 0.15s ease, border-color 0.15s ease",
       selectors: {
+        "&::after": {
+          content: "''",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 14 11' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 5.5L5 9.5L13 1.5' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+          backgroundSize: "80%",
+          opacity: 0,
+          transition: "opacity 0.15s ease",
+        },
         "&:hover": {
           borderColor: vars.color.border.input.active,
         },
         "&:checked": {
-          backgroundColor: vars.color.background.selected.default,
-          borderColor: vars.color.border.input.active,
+          backgroundColor: vars.color.background.input.selected,
+          borderColor: vars.color.border.input.selected,
+        },
+        "&:checked::after": {
+          opacity: 1,
         },
         "&:focus-visible": {
           outline: `2px solid ${vars.color.border.input.active}`,
