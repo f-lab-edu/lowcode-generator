@@ -146,7 +146,7 @@ export const WithContent: Story = {
     docs: {
       description: {
         story:
-          "Divider can be used to separate content, both horizontally and vertically.",
+          "Divider는 예제와 같이 요소들을 가로 또는 세로로 구분할 수 있는 구분선으로 활용될 수 있습니다.",
       },
     },
   },

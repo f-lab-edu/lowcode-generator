@@ -139,7 +139,7 @@ export const HoverEffect: Story = {
   },
 };
 
-export const Sizes: Story = {
+export const Align: Story = {
   render: (args) => (
     <Table {...args}>
       <Thead>
@@ -166,7 +166,7 @@ export const Sizes: Story = {
     docs: {
       description: {
         story:
-          "`Th`와 `Td` 컴포넌트의 `size` prop을 조절하여 셀의 패딩을 변경할 수 있습니다.",
+          "`Th`와 `Td` 컴포넌트의 `align` prop을 조절하여 셀의 정렬을 조절할 수 있습니다.",
       },
     },
   },
