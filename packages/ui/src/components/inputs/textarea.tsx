@@ -1,18 +1,48 @@
-import { forwardRef } from "react";
+import {
+  forwardRef,
+  type CSSProperties,
+  type TextareaHTMLAttributes,
+} from "react";
 import { textarea, type TextareaVariants } from "./textarea.css";
 
-export type TextareaProps = React.InputHTMLAttributes<HTMLTextAreaElement> &
+export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
   TextareaVariants & {
     className?: string;
+    width?: CSSProperties["width"];
   };
 
 const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  ({ id, className, inputSize = "md", ...props }, ref) => {
+  (
+    {
+      id,
+      className,
+      inputSize = "md",
+      width = "100%",
+      rows = 3,
+      style,
+      ...props
+    },
+    ref
+  ) => {
     const classNames = [textarea({ inputSize }), className]
       .filter(Boolean)
       .join(" ");
 
-    return <textarea id={id} ref={ref} className={classNames} {...props} />;
+    const textareaStyle: CSSProperties = {
+      width: typeof width === "number" ? `${width}px` : width,
+      ...style,
+    };
+
+    return (
+      <textarea
+        id={id}
+        ref={ref}
+        rows={rows}
+        className={classNames}
+        style={textareaStyle}
+        {...props}
+      />
+    );
   }
 );
 

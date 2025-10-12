@@ -9,6 +9,7 @@ export const textarea = recipe({
     style({
       background: vars.color.background.input.default,
       border: `${vars.sizing["0.5"]} solid ${vars.color.border.input.default}`,
+      boxSizing: "border-box",
       borderRadius: vars.sizing["2"],
       ":disabled": {
         background: vars.color.background.input.disabled,

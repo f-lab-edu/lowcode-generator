@@ -28,6 +28,33 @@ export const button = recipe({
           backgroundColor: vars.color.background.brand.subtle,
         },
       }),
+      primary: style({
+        backgroundColor: vars.color.background.primary.default,
+        ":hover": {
+          backgroundColor: vars.color.background.primary.bold,
+        },
+        ":disabled": {
+          backgroundColor: vars.color.background.primary.subtle,
+        },
+      }),
+      secondary: style({
+        backgroundColor: vars.color.background.secondary.default,
+        ":hover": {
+          backgroundColor: vars.color.background.secondary.bold,
+        },
+        ":disabled": {
+          backgroundColor: vars.color.background.secondary.subtle,
+        },
+      }),
+      tertiary: style({
+        backgroundColor: vars.color.background.tertiary.default,
+        ":hover": {
+          backgroundColor: vars.color.background.tertiary.bold,
+        },
+        ":disabled": {
+          backgroundColor: vars.color.background.tertiary.subtle,
+        },
+      }),
       info: style({
         backgroundColor: vars.color.background.info.default,
         ":hover": {

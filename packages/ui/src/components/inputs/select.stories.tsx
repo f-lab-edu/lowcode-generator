@@ -2,7 +2,11 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Select, type SelectProps } from "../inputs/select";
 import { Stack } from "../layout/stack";
 
-const sizeOptions = ["sm", "md", "lg"] as const satisfies SelectProps["inputSize"][];
+const sizeOptions = [
+  "sm",
+  "md",
+  "lg",
+] as const satisfies SelectProps["inputSize"][];
 const exampleOptions = [
   { label: "옵션 1", value: "1" },
   { label: "옵션 2", value: "2" },
@@ -22,6 +26,9 @@ const meta = {
       control: "boolean",
     },
     label: {
+      control: "text",
+    },
+    width: {
       control: "text",
     },
   },
@@ -47,14 +54,20 @@ export const SelectSizes: Story = {
   render: (args) => (
     <Stack direction="column" gap="lg">
       {sizeOptions.map((size) => (
-        <Select {...args} key={size} inputSize={size} label={`${size} Select`} />
+        <Select
+          {...args}
+          key={size}
+          inputSize={size}
+          label={`${size} Select`}
+        />
       ))}
     </Stack>
   ),
   parameters: {
     docs: {
       description: {
-        story: "Select의 `inputSize` props를 변경하면 크기를 조절할 수 있습니다.",
+        story:
+          "Select의 `inputSize` props를 변경하면 크기를 조절할 수 있습니다.",
       },
     },
   },

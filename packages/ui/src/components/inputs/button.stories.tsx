@@ -1,8 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button, type ButtonProps } from "./button";
+import { Stack } from "../layout/stack";
 
 const colorOptions = [
   "brand",
+  "primary",
+  "secondary",
+  "tertiary",
   "info",
   "success",
   "warning",
@@ -79,13 +83,17 @@ export const ColorButtons: Story = {
 
 export const SizeButtons: Story = {
   render: (args) => (
-    <>
-      {sizeOptions.map((size) => (
-        <Button key={size} color={args.color} size={size}>
-          {size} 버튼
-        </Button>
-      ))}
-    </>
+    <Stack direction="column" gap="sm">
+      <Button color={args.color} size={"sm"}>
+        SM 버튼
+      </Button>
+      <Button color={args.color} size={"md"}>
+        MD 버튼
+      </Button>
+      <Button color={args.color} size={"lg"}>
+        LG 버튼
+      </Button>
+    </Stack>
   ),
   parameters: {
     docs: {
@@ -97,6 +105,7 @@ export const SizeButtons: Story = {
   },
   args: {
     color: "info",
+    size: "md",
     fullWidth: false,
     children: "Button",
   },

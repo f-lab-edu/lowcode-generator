@@ -8,6 +8,7 @@ export const input = recipe({
     typographyRecipe({ role: "textMdRegular" }),
     style({
       background: vars.color.background.input.default,
+      boxSizing: "border-box",
       border: `${vars.sizing["0.5"]} solid ${vars.color.border.input.default}`,
       borderRadius: vars.sizing["2"],
       ":disabled": {
