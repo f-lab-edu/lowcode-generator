@@ -2,6 +2,20 @@ import { vars } from "@packages/vanilla-extract-config";
 import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
 import { typographyRecipe } from "@packages/vanilla-extract-config";
 import { style } from "@vanilla-extract/css";
+import { COLOR_VARIANTS } from "@packages/vanilla-extract-config";
+
+const makeColorVariant = () => {
+  return Object.fromEntries(
+    COLOR_VARIANTS.map((color) => [
+      color,
+      style({
+        backgroundColor: vars.color.background[color].default,
+        ":hover": { backgroundColor: vars.color.background[color].bold },
+        ":disabled": { backgroundColor: vars.color.background[color].subtle },
+      }),
+    ])
+  );
+};
 
 export const button = recipe({
   base: [
@@ -18,81 +32,7 @@ export const button = recipe({
   ],
 
   variants: {
-    color: {
-      brand: style({
-        backgroundColor: vars.color.background.brand.default,
-        ":hover": {
-          backgroundColor: vars.color.background.brand.bold,
-        },
-        ":disabled": {
-          backgroundColor: vars.color.background.brand.subtle,
-        },
-      }),
-      primary: style({
-        backgroundColor: vars.color.background.primary.default,
-        ":hover": {
-          backgroundColor: vars.color.background.primary.bold,
-        },
-        ":disabled": {
-          backgroundColor: vars.color.background.primary.subtle,
-        },
-      }),
-      secondary: style({
-        backgroundColor: vars.color.background.secondary.default,
-        ":hover": {
-          backgroundColor: vars.color.background.secondary.bold,
-        },
-        ":disabled": {
-          backgroundColor: vars.color.background.secondary.subtle,
-        },
-      }),
-      tertiary: style({
-        backgroundColor: vars.color.background.tertiary.default,
-        ":hover": {
-          backgroundColor: vars.color.background.tertiary.bold,
-        },
-        ":disabled": {
-          backgroundColor: vars.color.background.tertiary.subtle,
-        },
-      }),
-      info: style({
-        backgroundColor: vars.color.background.info.default,
-        ":hover": {
-          backgroundColor: vars.color.background.info.bold,
-        },
-        ":disabled": {
-          backgroundColor: vars.color.background.info.subtle,
-        },
-      }),
-      success: style({
-        backgroundColor: vars.color.background.success.default,
-        ":hover": {
-          backgroundColor: vars.color.background.success.bold,
-        },
-        ":disabled": {
-          backgroundColor: vars.color.background.success.subtle,
-        },
-      }),
-      warning: style({
-        backgroundColor: vars.color.background.warning.default,
-        ":hover": {
-          backgroundColor: vars.color.background.warning.bold,
-        },
-        ":disabled": {
-          backgroundColor: vars.color.background.warning.subtle,
-        },
-      }),
-      danger: style({
-        backgroundColor: vars.color.background.danger.default,
-        ":hover": {
-          backgroundColor: vars.color.background.danger.bold,
-        },
-        ":disabled": {
-          backgroundColor: vars.color.background.danger.subtle,
-        },
-      }),
-    },
-
+    color: { ...makeColorVariant() },
     size: {
       sm: [
         typographyRecipe({ role: "textSmRegular" }),

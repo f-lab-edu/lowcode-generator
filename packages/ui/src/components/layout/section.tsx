@@ -10,8 +10,11 @@ export type SectionProps = HTMLAttributes<HTMLElement> &
   };
 
 const Section = forwardRef<HTMLElement, SectionProps>(
-  ({ size = "md", minHeight, className, style, children, ...props }, ref) => {
-    const classNames = [sectionRecipe({ size }), className]
+  (
+    { spacingScale = "md", minHeight, className, style, children, ...props },
+    ref
+  ) => {
+    const classNames = [sectionRecipe({ spacingScale }), className]
       .filter(Boolean)
       .join(" ");
 

@@ -1,12 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Textarea, type TextareaProps } from "../inputs/textarea";
+import { Textarea } from "../inputs/textarea";
 import { Stack } from "../layout/stack";
-
-const sizeOptions = [
-  "sm",
-  "md",
-  "lg",
-] as const satisfies TextareaProps["inputSize"][];
+import { SIZE_VARIANTS } from "@packages/vanilla-extract-config";
 
 const meta = {
   title: "Form/Textarea",
@@ -14,7 +9,7 @@ const meta = {
   argTypes: {
     inputSize: {
       control: "radio",
-      options: sizeOptions,
+      options: SIZE_VARIANTS,
       description: "Input 요소 사이즈",
     },
     disabled: {
@@ -57,7 +52,7 @@ export const Primary: Story = {
 export const TextareaSizes: Story = {
   render: (args) => (
     <Stack direction="column" gap="lg">
-      {sizeOptions.map((size) => (
+      {SIZE_VARIANTS.map((size) => (
         <Textarea
           {...args}
           key={size}

@@ -9,20 +9,23 @@ import {
   type TypographyRole,
 } from "@packages/vanilla-extract-config";
 
-export type TypographyElement =
-  | "p"
-  | "span"
-  | "strong"
-  | "em"
-  | "label"
-  | "blockquote"
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "h5"
-  | "h6"
-  | "pre";
+export const TYPOGRAPHY_ELEMENT = [
+  "p",
+  "span",
+  "strong",
+  "em",
+  "label",
+  "blockquote",
+  "h1",
+  "h2",
+  "h3",
+  "h4",
+  "h5",
+  "h6",
+  "pre",
+] as const;
+
+export type TypographyElement = (typeof TYPOGRAPHY_ELEMENT)[number];
 
 type PolymorphicRef<T extends ElementType> = ComponentPropsWithRef<T>["ref"];
 

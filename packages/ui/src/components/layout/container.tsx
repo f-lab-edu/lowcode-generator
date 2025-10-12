@@ -10,8 +10,11 @@ export type ContainerProps = HTMLAttributes<HTMLDivElement> &
   };
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  ({ size = "lg", minHeight, className, style, children, ...props }, ref) => {
-    const classNames = [containerRecipe({ size }), className]
+  (
+    { widthScale = "lg", minHeight, className, style, children, ...props },
+    ref
+  ) => {
+    const classNames = [containerRecipe({ widthScale }), className]
       .filter(Boolean)
       .join(" ");
 
