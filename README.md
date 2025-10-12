@@ -204,6 +204,10 @@ graph TD
   ui --> app
 ```
 
+### 컴포넌트 Storybook
+
+- Chromatic Link: https://68e9f38314b1616683e9ecc0-fvjybvzxkh.chromatic.com/
+
 ---
 
 ## 🏁 나만의 성공 지표
