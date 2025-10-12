@@ -33,7 +33,7 @@ jobs:
           restore-keys: |
             turbo-${{ github.ref_name }}-
       - name: Build Storybook
-        workingDir: packages/ui
+        working-directory: packages/ui
         run: pnpm run build:storybook
       - name: Publish to Chromatic
         uses: chromaui/action@latest
