@@ -6,7 +6,7 @@ import {
 
 export type ContainerProps = HTMLAttributes<HTMLDivElement> &
   ContainerRecipeVariants & {
-    minHeight: string | number;
+    minHeight?: string | number;
   };
 
 const Container = forwardRef<HTMLDivElement, ContainerProps>(
