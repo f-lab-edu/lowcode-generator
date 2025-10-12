@@ -36,6 +36,7 @@ export const selectControl = recipe({
     style({
       width: "100%",
       appearance: "none",
+      boxSizing: "border-box",
       backgroundColor: vars.color.background.input.default,
       backgroundRepeat: "no-repeat",
       backgroundPosition: `right ${vars.sizing[3]} center`,

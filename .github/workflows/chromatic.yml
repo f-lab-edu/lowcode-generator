@@ -1,0 +1,46 @@
+name: "Chromatic"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  chromatic:
+    name: Run Chromatic for @packages/ui
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.18.0
+          cache: "pnpm"
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Restore Turbo cache
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ github.ref_name }}-${{ github.sha }}
+          restore-keys: |
+            turbo-${{ github.ref_name }}-
+      - name: Build Storybook
+        workingDir: packages/ui
+        run: pnpm run build:storybook
+      - name: Publish to Chromatic
+        uses: chromaui/action@latest
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
+          workingDir: packages/ui
+          storybookBuildDir: packages/ui/storybook-static
+          autoAcceptChanges: false
+          exitOnceUploaded: true
+          onlyChanged: true

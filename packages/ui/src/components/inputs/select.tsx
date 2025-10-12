@@ -4,6 +4,7 @@ import {
   useRef,
   useEffect,
   type ButtonHTMLAttributes,
+  type CSSProperties
 } from "react";
 import {
   selectWrapper,
@@ -22,7 +23,7 @@ export type SelectProps = Omit<
 > &
   SelectVariants & {
     label?: string;
-    width?: string | number;
+    width?: CSSProperties["width"];
     options?: SelectOption[];
     value?: string;
     onChange?: (value: string) => void;
