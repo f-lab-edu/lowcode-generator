@@ -32,6 +32,8 @@ jobs:
           key: turbo-${{ github.ref_name }}-${{ github.sha }}
           restore-keys: |
             turbo-${{ github.ref_name }}-
+      - name: Build Tokens
+        run: pnpm -w run build:tokens
       - name: Build Storybook
         working-directory: packages/ui
         run: pnpm -w run build:storybook
