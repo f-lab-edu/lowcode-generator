@@ -6,7 +6,7 @@ const meta = {
   component: Section,
   tags: ["autodocs"],
   argTypes: {
-    size: {
+    spacingScale: {
       control: "select",
       options: ["sm", "md", "lg"],
       description: "Section의 padding 및 margin 크기",
@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    size: "md",
+    spacingScale: "md",
     minHeight: 100,
     style: { border: "1px solid black" },
     children: (

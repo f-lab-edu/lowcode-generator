@@ -16,6 +16,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
     {
       id,
       className,
+      disabled = false,
       inputSize = "md",
       width = "100%",
       rows = 3,
@@ -38,6 +39,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         id={id}
         ref={ref}
         rows={rows}
+        disabled={disabled}
         className={classNames}
         style={textareaStyle}
         {...props}

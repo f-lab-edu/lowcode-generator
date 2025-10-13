@@ -6,7 +6,7 @@ const meta = {
   component: Container,
   tags: ["autodocs"],
   argTypes: {
-    size: {
+    widthScale: {
       control: "select",
       options: ["sm", "md", "lg"],
       description: "Container의 넓이",
@@ -22,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    size: "md",
+    widthScale: "md",
     minHeight: 300,
     style: { border: "1px solid black" },
     children: (

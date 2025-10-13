@@ -1,5 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Typography, type TypographyElement } from "./typography";
+import {
+  Typography,
+  TYPOGRAPHY_ELEMENT,
+  type TypographyElement,
+} from "./typography";
 import {
   TYPOGRAPHY_ROLES,
   type TypographyRole,
@@ -16,6 +20,8 @@ const meta = {
     },
     as: {
       control: "select",
+      options: [...TYPOGRAPHY_ELEMENT],
+      description: "타이포그래피 마크업 태그 요소",
     },
   },
   tags: ["autodocs"],

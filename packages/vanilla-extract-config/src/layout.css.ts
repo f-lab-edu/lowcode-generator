@@ -10,7 +10,7 @@ export const containerRecipe = recipe({
     }),
   ],
   variants: {
-    size: {
+    widthScale: {
       sm: {
         maxWidth: vars.layout.container.maxWidth.sm,
         padding: vars.layout.container.padding.sm,
@@ -34,11 +34,15 @@ export const containerRecipe = recipe({
     },
   },
   defaultVariants: {
-    size: "lg",
+    widthScale: "lg",
   },
 });
 
 export type ContainerRecipeVariants = RecipeVariants<typeof containerRecipe>;
+
+export const CONTAINER_WIDTH_SCALE = ["sm", "md", "lg", "xl", "2xl"] as const;
+
+export type ContainerWidthScale = (typeof CONTAINER_WIDTH_SCALE)[number];
 
 export const sectionRecipe = recipe({
   base: [
@@ -47,7 +51,7 @@ export const sectionRecipe = recipe({
     }),
   ],
   variants: {
-    size: {
+    spacingScale: {
       sm: {
         padding: vars.layout.section.padding.sm,
         margin: vars.layout.section.margin.sm,
@@ -63,11 +67,15 @@ export const sectionRecipe = recipe({
     },
   },
   defaultVariants: {
-    size: "md",
+    spacingScale: "md",
   },
 });
 
 export type SectionRecipeVariants = RecipeVariants<typeof sectionRecipe>;
+
+export const SECTION_SPACING_SCALE = ["sm", "md", "lg"] as const;
+
+export type SectionSpacingScale = (typeof SECTION_SPACING_SCALE)[number];
 
 export const stackRecipe = recipe({
   base: { display: "flex" },

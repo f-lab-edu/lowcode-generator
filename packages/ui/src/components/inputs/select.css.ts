@@ -99,6 +99,7 @@ export const selectControl = recipe({
 export const selectMenu = style({
   position: "absolute",
   top: "100%",
+  boxSizing: "border-box",
   left: 0,
   right: 0,
   zIndex: 10,

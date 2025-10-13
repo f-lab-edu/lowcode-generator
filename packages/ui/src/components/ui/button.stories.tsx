@@ -1,19 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button, type ButtonProps } from "./button";
+import { Button } from "./button";
 import { Stack } from "../layout/stack";
-
-const colorOptions = [
-  "brand",
-  "primary",
-  "secondary",
-  "tertiary",
-  "info",
-  "success",
-  "warning",
-  "danger",
-] as const satisfies ButtonProps["color"][];
-
-const sizeOptions = ["sm", "md", "lg"] as const satisfies ButtonProps["size"][];
+import {
+  COLOR_VARIANTS,
+  SIZE_VARIANTS,
+} from "@packages/vanilla-extract-config";
 
 const meta = {
   title: "UI/Button",
@@ -21,11 +12,13 @@ const meta = {
   argTypes: {
     color: {
       control: "select",
-      options: colorOptions,
+      options: COLOR_VARIANTS,
+      description: "버튼 색상",
     },
     size: {
       control: "radio",
-      options: sizeOptions,
+      options: SIZE_VARIANTS,
+      description: "버튼 크기",
     },
   },
   decorators: (stories) => (
@@ -58,7 +51,7 @@ export const Primary: Story = {
 export const ColorButtons: Story = {
   render: (args) => (
     <>
-      {colorOptions.map((color) => (
+      {COLOR_VARIANTS.map((color) => (
         <Button key={color} color={color} size={args.size}>
           {color}
         </Button>
