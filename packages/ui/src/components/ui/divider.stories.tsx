@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Divider, type DividerProps } from "./divider";
 import { Stack } from "../layout/stack";
-import { Typography } from "./typography";
+import { Typography } from "../display/typography";
 
 const orientationOptions = [
   "horizontal",

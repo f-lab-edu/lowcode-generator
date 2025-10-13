@@ -4,29 +4,51 @@ import {
   getComponentMeta,
   type ComponentName,
 } from "@packages/ui";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import "./component-palette.css";
 
 export function ComponentPalette() {
+  const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(
+    {}
+  );
+
+  const toggleCategory = (category: string) => {
+    setOpenCategories((prev) => ({ ...prev, [category]: !prev[category] }));
+  };
+
   return (
     <div className="palette">
       <div className="palette-content">
         {Object.entries(ComponentsByCategory).map(([category, components]) => (
-          <div key={category} className="category">
-            <h4>{category}</h4>
-            <div className="component-grid">
-              {components.map((name) => {
-                const item = ComponentRegistry[name];
-                const Component = item.component;
-                return (
-                  <ComponentCard
-                    key={name}
-                    name={name}
-                    component={Component}
-                    meta={item.meta}
-                  />
-                );
-              })}
+          <div key={category} className="category" data-category={category}>
+            <h4
+              className={`category-title ${
+                openCategories[category] ? "open" : ""
+              }`}
+              onClick={() => toggleCategory(category)}
+            >
+              {category}
+            </h4>
+            <div
+              className={`category-content ${
+                openCategories[category] ? "open" : ""
+              }`}
+            >
+              <div className="component-grid">
+                {components.map((name) => {
+                  const item =
+                    ComponentRegistry[name as keyof typeof ComponentRegistry];
+                  const Component = item.component;
+                  return (
+                    <ComponentCard
+                      key={name}
+                      name={name}
+                      component={Component}
+                      meta={item.meta}
+                    />
+                  );
+                })}
+              </div>
             </div>
           </div>
         ))}

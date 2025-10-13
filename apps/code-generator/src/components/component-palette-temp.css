@@ -1,4 +1,3 @@
-/* 기본 컨테이너 */
 .palette {
   width: 100%;
   height: 100%;
@@ -56,81 +55,44 @@
   min-height: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  /* padding: 16px; */
+  padding: 16px;
 }
 
 /* 커스텀 스크롤바 */
 .palette-content::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
 }
+
 .palette-content::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .palette-content::-webkit-scrollbar-thumb {
   background: #d1d1d1;
   border-radius: 4px;
 }
+
 .palette-content::-webkit-scrollbar-thumb:hover {
   background: #b1b1b1;
 }
 
-/* 카테고리 그룹 */
+/* 카테고리 */
 .category {
-  /* margin-bottom: 28px; */
+  margin-bottom: 28px;
 }
 
 .category:last-child {
   margin-bottom: 0;
 }
 
-/* 카테고리 헤더 */
 .category-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-size: 11px;
-  font-weight: 800;
+  font-weight: 600;
   color: #666;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin: 0;
-  padding: 4px 10px;
-  cursor: pointer;
-  user-select: none;
-  height: 30px;
-  transition: color 0.2s ease;
-}
-
-.category-title::after {
-  content: "▾";
-  font-size: 15px;
-  color: #999;
-  transition: transform 0.25s ease, color 0.2s ease;
-}
-
-.category-title.open::after {
-  transform: rotate(180deg);
-  color: #e0e0e0;
-}
-
-.category-title.open {
-  background-color: #0066ff;
-  color: #e0e0e0;
-}
-
-/* 카테고리 콘텐츠 (아코디언) */
-.category-content {
-  overflow: hidden;
-  transition: max-height 0.3s ease, opacity 0.25s ease;
-  max-height: 0;
-  opacity: 0;
-  will-change: max-height, opacity;
-}
-
-.category-content.open {
-  max-height: 800px;
-  padding: 10px;
-  opacity: 1;
+  margin: 0 0 12px 0;
+  padding: 0 4px;
 }
 
 /* 컴포넌트 그리드 */
@@ -165,7 +127,7 @@
   box-shadow: 0 1px 4px rgba(0, 102, 255, 0.2);
 }
 
-/* 썸네일 */
+/* 썸네일 영역 */
 .thumbnail {
   width: 100%;
   height: 100px;
@@ -181,7 +143,7 @@
 .mini-preview {
   transform: scale(0.6);
   transform-origin: center center;
-  width: 166.67%;
+  width: 166.67%; /* 100 / 0.6 */
   height: 166.67%;
   display: flex;
   align-items: center;
@@ -257,52 +219,62 @@
   color: #999;
 }
 
-/* 반응형 */
+/* 반응형 - 좁은 화면 */
 @media (max-width: 320px) {
   .component-grid {
     grid-template-columns: 1fr;
   }
+
   .thumbnail {
     height: 120px;
   }
 }
 
-/* 다크 모드 */
+/* 다크 모드 (선택사항) */
 @media (prefers-color-scheme: dark) {
   .palette {
     background: #1e1e1e;
   }
+
   .palette-header {
     border-bottom-color: #333;
   }
+
   .search-input {
     background: #2a2a2a;
     border-color: #333;
     color: #fff;
   }
+
   .search-input:focus {
     background: #2a2a2a;
     border-color: #0066ff;
   }
+
   .category-title {
     color: #999;
   }
+
   .component-card {
     background: #2a2a2a;
     border-color: #333;
   }
+
   .component-card:hover {
     border-color: #0066ff;
     background: #2a2a2a;
   }
+
   .thumbnail {
     background: #1e1e1e;
     border-bottom-color: #333;
   }
+
   .component-name {
     background: #2a2a2a;
     color: #e0e0e0;
   }
+
   .component-card:hover .component-name {
     color: #0066ff;
   }

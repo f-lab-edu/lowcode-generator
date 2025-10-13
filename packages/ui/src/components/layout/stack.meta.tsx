@@ -6,10 +6,31 @@ import {
   STACK_JUSTIFICATION,
 } from "@packages/vanilla-extract-config";
 
+const Item = ({ index }: { index: number }) => (
+  <div
+    style={{
+      background: `hsl(${index * 40}, 70%, 70%)`,
+      textAlign: "center",
+      borderRadius: 8,
+      padding: "8px 8px",
+      fontWeight: 500,
+    }}
+  >
+    items {index + 1}
+  </div>
+);
+
 export const StackMeta: ComponentMetaDefinition = {
   component: "Stack",
   category: "Layout",
   description: "스택",
+  renderPreview: (Component, props) => (
+    <Component {...props}>
+      {[...Array(3)].map((_, i) => (
+        <Item index={i} />
+      ))}
+    </Component>
+  ),
   props: {
     direction: {
       control: "select",

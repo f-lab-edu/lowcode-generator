@@ -5,6 +5,22 @@ export const ContainerMeta: ComponentMetaDefinition = {
   component: "Container",
   category: "Layout",
   description: "컨테이너",
+  renderPreview: (Component, props) => (
+    <Component {...props} style={{ border: "1px solid #121212" }}>
+      {" "}
+      <div
+        style={{
+          background: "#eaeaea",
+          boxSizing: "border-box",
+          padding: 20,
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <p>Container Content</p>
+      </div>
+    </Component>
+  ),
   props: {
     widthScale: {
       control: "select",
@@ -14,7 +30,7 @@ export const ContainerMeta: ComponentMetaDefinition = {
     },
     minHeight: {
       control: "text",
-      default: 300,
+      default: 100,
       description: "Container의 최소 높이",
     },
   },
