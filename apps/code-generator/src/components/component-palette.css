@@ -75,10 +75,6 @@
 }
 
 /* 카테고리 그룹 */
-.category {
-  /* margin-bottom: 28px; */
-}
-
 .category:last-child {
   margin-bottom: 0;
 }
