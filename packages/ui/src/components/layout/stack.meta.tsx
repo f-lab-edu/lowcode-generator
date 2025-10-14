@@ -24,10 +24,11 @@ export const StackMeta: ComponentMetaDefinition = {
   component: "Stack",
   category: "Layout",
   description: "스택",
+  hasChildren: true,
   renderPreview: (Component, props) => (
     <Component {...props}>
       {[...Array(3)].map((_, i) => (
-        <Item index={i} />
+        <Item key={`stack_item_${i}`} index={i} />
       ))}
     </Component>
   ),

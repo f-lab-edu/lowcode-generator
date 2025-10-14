@@ -5,6 +5,7 @@ export const TextareaMeta: ComponentMetaDefinition = {
   component: "Textarea",
   category: "Forms",
   description: "텍스트박스",
+  hasChildren: false,
   renderPreview: (Component, props) => <Component {...props} />,
   props: {
     inputSize: {

@@ -5,6 +5,7 @@ export const ContainerMeta: ComponentMetaDefinition = {
   component: "Container",
   category: "Layout",
   description: "컨테이너",
+  hasChildren: true,
   renderPreview: (Component, props) => (
     <Component {...props} style={{ border: "1px solid #121212" }}>
       {" "}

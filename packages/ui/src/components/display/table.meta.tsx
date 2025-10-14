@@ -1,7 +1,5 @@
 import { type ComponentMetaDefinition } from "../../types/meta";
-import {
-  THEME_COLOR_VARIANTS,
-} from "@packages/vanilla-extract-config";
+import { THEME_COLOR_VARIANTS } from "@packages/vanilla-extract-config";
 import { Table, Thead, Tbody, Tr, Th, Td } from "./table";
 
 const tableScaffold = `
@@ -23,6 +21,7 @@ export const TableMeta: ComponentMetaDefinition = {
   component: "Table",
   category: "Display",
   description: "데이터를 행과 열로 정리하여 보여주는 테이블입니다.",
+  hasChildren: true,
   props: {
     variant: {
       control: "radio",

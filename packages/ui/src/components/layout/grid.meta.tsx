@@ -19,6 +19,7 @@ export const GridMeta: ComponentMetaDefinition = {
   component: "Grid",
   category: "Layout",
   description: "그리드",
+  hasChildren: true,
   renderPreview: (Component, props) => (
     <Component {...props} container>
       {[...Array(4)].map((_, i) => (

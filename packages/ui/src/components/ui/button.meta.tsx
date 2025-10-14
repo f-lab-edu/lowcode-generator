@@ -8,6 +8,7 @@ export const ButtonMeta: ComponentMetaDefinition = {
   component: "Button",
   category: "UI",
   description: "버튼",
+  hasChildren: true,
   renderPreview: (Component, props) => (
     <Component {...props}>Click me</Component>
   ),

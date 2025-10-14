@@ -5,6 +5,7 @@ export const SectionMeta: ComponentMetaDefinition = {
   component: "Section",
   category: "Layout",
   description: "섹션",
+  hasChildren: true,
   renderPreview: (Component, props) => (
     <Component {...props} style={{ border: "1px solid #121212" }}>
       {" "}

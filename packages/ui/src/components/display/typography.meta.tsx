@@ -6,6 +6,7 @@ export const TypographyMeta: ComponentMetaDefinition = {
   component: "Typography",
   category: "Display",
   description: "타이포그래피",
+  hasChildren: true,
   renderPreview: (Component, props) => (
     <Component {...props}>Typography</Component>
   ),

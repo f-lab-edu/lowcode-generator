@@ -5,6 +5,7 @@ export const SelectMeta: ComponentMetaDefinition = {
   component: "Select",
   category: "Forms",
   description: "선택 필드",
+  hasChildren: false,
   renderPreview: (Component, props) => <Component {...props} />,
   props: {
     type: {

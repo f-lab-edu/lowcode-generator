@@ -4,6 +4,7 @@ export const DividerMeta: ComponentMetaDefinition = {
   component: "Divider",
   category: "UI",
   description: "Divider (구분선)",
+  hasChildren: false,
   renderPreview: (Component, props) => (
     <div>
       <p>item</p>
