@@ -4,8 +4,9 @@ import {
   getComponentMeta,
   type ComponentName,
 } from "@packages/ui";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import "./component-palette.css";
+import { useDraggable } from "@dnd-kit/core";
 
 export function ComponentPalette() {
   const [openCategories, setOpenCategories] = useState<Record<string, boolean>>(
@@ -58,27 +59,25 @@ export function ComponentPalette() {
 }
 
 function ComponentCard({ name, component: Component, meta }: any) {
-  const cardRef = useRef<HTMLDivElement>(null);
   const defaultProps = getDefaultProps(name);
 
-  const handleDragStart = (e: React.DragEvent) => {
-    e.dataTransfer.setData(
-      "application/json",
-      JSON.stringify({
-        componentName: name,
-        defaultProps: getDefaultProps(name),
-      })
-    );
-
-    e.dataTransfer.effectAllowed = "copy";
-  };
+  const { attributes, listeners, setNodeRef, isDragging } = useDraggable({
+    id: `palette-item-${name}`,
+    data: {
+      type: "palette-item",
+      componentName: name,
+      props: defaultProps,
+      meta,
+    },
+  });
 
   return (
     <div
-      ref={cardRef}
-      className="component-card"
-      draggable
-      onDragStart={handleDragStart}
+      className={`component-card ${isDragging ? "dragging" : ""}`}
+      ref={setNodeRef}
+      style={{ opacity: isDragging ? 0 : 1 }}
+      {...listeners}
+      {...attributes}
     >
       {/* 미니 프리뷰 - 실제로 렌더링 */}
       {/* Layout의 경우에는 실제 렌더링 시 그냥 빈 화면만 나오기 때문에 차후에 보정 필요 */}
@@ -87,9 +86,11 @@ function ComponentCard({ name, component: Component, meta }: any) {
           {meta.renderPreview ? (
             meta.renderPreview(Component, defaultProps)
           ) : meta.hasChildren ? (
-            <Component {...defaultProps}>Preview</Component>
+            <Component {...defaultProps} {...listeners} {...attributes}>
+              Preview
+            </Component>
           ) : (
-            <Component {...defaultProps} />
+            <Component {...defaultProps} {...listeners} {...attributes} />
           )}
         </div>
       </div>

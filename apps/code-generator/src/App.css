@@ -1,3 +1,8 @@
+body {
+  margin: 0 auto;
+  height: 95svh;
+}
+
 :root {
   width: 100%;
   height: 100%;
@@ -9,7 +14,8 @@
 }
 
 .sidebar {
-  width: 300px;
+  min-width: 200px;
+  max-width: 300px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -20,4 +26,26 @@
   padding: 16px;
   border-bottom: 1px solid #e5e5e5;
   flex-shrink: 0;
+}
+
+.main {
+  box-sizing: border-box;
+  width: 100%;
+  background-color: #cccccc;
+  height: 100%;
+  padding: 30px;
+}
+
+.main-section {
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+}
+
+.drag-overlay-component {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  cursor: grabbing;
 }

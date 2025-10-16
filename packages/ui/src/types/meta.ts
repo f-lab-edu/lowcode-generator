@@ -23,6 +23,7 @@ export type ComponentMetaDefinition = {
   category: string;
   description: string;
   props: Record<string, PropsMeta>;
+  hasChildren: boolean;
   scaffold?: string;
   renderPreview?: (Component: React.ElementType, props: any) => React.ReactNode;
 };

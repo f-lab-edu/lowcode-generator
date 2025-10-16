@@ -5,6 +5,7 @@ export const InputMeta: ComponentMetaDefinition = {
   component: "Input",
   category: "Forms",
   description: "입력 필드",
+  hasChildren: false,
   renderPreview: (Component, props) => <Component {...props} />,
   props: {
     type: {

@@ -5,6 +5,7 @@ export const CheckboxMeta: ComponentMetaDefinition = {
   component: "Checkbox",
   category: "Forms",
   description: "체크박스",
+  hasChildren: false,
   props: {
     inputSize: {
       control: "select",

@@ -8,6 +8,7 @@ export const PaginationMeta: ComponentMetaDefinition = {
   component: "Pagination",
   category: "Display",
   description: "페이지네이션",
+  hasChildren: false,
   props: {
     count: {
       control: "number",

@@ -303,3 +303,7 @@
     color: #0066ff;
   }
 }
+
+.component-card.is-dragging {
+  opacity: 0.5;
+}

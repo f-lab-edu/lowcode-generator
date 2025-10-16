@@ -5,6 +5,7 @@ export const RadioMeta: ComponentMetaDefinition = {
   component: "Radio",
   category: "Forms",
   description: "라디오",
+  hasChildren: false,
   renderPreview: (Component, props) => <Component {...props} />,
   props: {
     inputSize: {
