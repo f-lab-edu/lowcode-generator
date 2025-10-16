@@ -34,6 +34,11 @@ import { TextareaMeta } from "./components/inputs/textarea.meta";
 import { Select } from "./components/inputs/select";
 import { SelectMeta } from "./components/inputs/select.meta";
 
+export type Component =
+  | React.ComponentType<any>
+  | React.ForwardRefExoticComponent<any>
+  | React.ExoticComponent<any>;
+
 export interface ComponentRegistryItem {
   component:
     | React.ComponentType<any>

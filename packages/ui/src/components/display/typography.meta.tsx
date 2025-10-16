@@ -8,7 +8,7 @@ export const TypographyMeta: ComponentMetaDefinition = {
   description: "타이포그래피",
   hasChildren: true,
   renderPreview: (Component, props) => (
-    <Component {...props}>Typography</Component>
+    <Component {...props}>{props.children || "Typography"}</Component>
   ),
   props: {
     as: {
@@ -22,6 +22,11 @@ export const TypographyMeta: ComponentMetaDefinition = {
       options: [...TYPOGRAPHY_ROLES],
       default: "headingXxl",
       description: "타이포그래피 역할과 scale",
+    },
+    children: {
+      control: "json",
+      default: "타이포그래피",
+      description: "타이포그래피 내부 요소",
     },
   },
 };

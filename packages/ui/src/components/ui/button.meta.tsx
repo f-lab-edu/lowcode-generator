@@ -10,7 +10,9 @@ export const ButtonMeta: ComponentMetaDefinition = {
   description: "버튼",
   hasChildren: true,
   renderPreview: (Component, props) => (
-    <Component {...props}>Click me</Component>
+    <Component {...props}>
+      {props.children ? props.children : "Click Me"}
+    </Component>
   ),
   props: {
     color: {
@@ -29,6 +31,11 @@ export const ButtonMeta: ComponentMetaDefinition = {
       control: "boolean",
       default: false,
       description: "전체 넓이 여부",
+    },
+    children: {
+      control: "json",
+      default: "Button",
+      description: "버튼 내부 요소",
     },
   },
 };
