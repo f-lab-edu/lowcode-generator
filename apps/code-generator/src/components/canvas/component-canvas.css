@@ -28,10 +28,6 @@
   min-height: 60px;
 }
 
-.droppable-area {
-  position: relative;
-}
-
 .empty-drop-zone {
   padding: 20px;
   text-align: center;
