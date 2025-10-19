@@ -33,8 +33,9 @@ import { Textarea } from "./components/inputs/textarea";
 import { TextareaMeta } from "./components/inputs/textarea.meta";
 import { Select } from "./components/inputs/select";
 import { SelectMeta } from "./components/inputs/select.meta";
+import type { ComponentMetaDefinition } from "./types/meta";
 
-export type Component =
+export type ComponentType =
   | React.ComponentType<any>
   | React.ForwardRefExoticComponent<any>
   | React.ExoticComponent<any>;
@@ -44,12 +45,7 @@ export interface ComponentRegistryItem {
     | React.ComponentType<any>
     | React.ForwardRefExoticComponent<any>
     | React.ExoticComponent<any>;
-  meta: {
-    component: string;
-    category?: string;
-    description?: string;
-    props: Record<string, any>;
-  };
+  meta: ComponentMetaDefinition;
 }
 
 export const DisplayComponentRegistry = {
@@ -137,11 +133,15 @@ export const ComponentsByCategory = {
   Forms: [...Object.keys(FormComponentRegistry)] as const,
 } as const;
 
-export function getComponent(name: ComponentName) {
+export type ComponentCategoryName = keyof typeof ComponentsByCategory;
+export type ComponentItem =
+  (typeof ComponentsByCategory)[ComponentCategoryName][number];
+
+export function getComponent(name: ComponentName): ComponentType {
   return ComponentRegistry[name]?.component;
 }
 
-export function getComponentMeta(name: ComponentName) {
+export function getComponentMeta(name: ComponentName): ComponentMeta {
   return ComponentRegistry[name]?.meta;
 }
 

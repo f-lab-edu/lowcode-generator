@@ -18,5 +18,7 @@ export type {
   ComponentName,
   ComponentMeta,
   ComponentRegistryItem,
-  Component,
+  ComponentType,
+  ComponentCategoryName,
+  ComponentItem,
 } from "./registry";
