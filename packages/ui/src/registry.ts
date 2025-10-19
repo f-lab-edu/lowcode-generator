@@ -13,8 +13,24 @@ import { Typography } from "./components/display/typography";
 import { TypographyMeta } from "./components/display/typography.meta";
 import { Pagination } from "./components/display/pagination";
 import { PaginationMeta } from "./components/display/pagination.meta";
-import { Table } from "./components/display/table";
-import { TableMeta } from "./components/display/table.meta";
+import {
+  Table,
+  Tbody,
+  Thead,
+  TableCaption,
+  Tr,
+  Td,
+  Th,
+} from "./components/display/table";
+import {
+  TableMeta,
+  TbodyMeta,
+  TheadMeta,
+  TableCaptionMeta,
+  TrMeta,
+  TdMeta,
+  ThMeta,
+} from "./components/display/table.meta";
 
 // ui
 import { Button } from "./components/ui/button";
@@ -60,6 +76,30 @@ export const DisplayComponentRegistry = {
   Table: {
     component: Table,
     meta: TableMeta,
+  },
+  Tbody: {
+    component: Tbody,
+    meta: TbodyMeta,
+  },
+  Thead: {
+    component: Thead,
+    meta: TheadMeta,
+  },
+  TableCaption: {
+    component: TableCaption,
+    meta: TableCaptionMeta,
+  },
+  Tr: {
+    component: Tr,
+    meta: TrMeta,
+  },
+  Th: {
+    component: Th,
+    meta: ThMeta,
+  },
+  Td: {
+    component: Td,
+    meta: TdMeta,
   },
 };
 
@@ -116,11 +156,34 @@ export const FormComponentRegistry = {
   },
 };
 
+// 내부 전용 Text 노드 타입 (children으로 텍스트가 들어가는 경우)
+export const InternalComponentRegistry = {
+  Text: {
+    component: (props: { children: string }) => props.children,
+    meta: {
+      component: "Text",
+      category: "Internal",
+      description: "단순 텍스트 노드 (내부 전용)",
+      hasChildren: false,
+      props: {
+        children: {
+          control: "text",
+          default: "",
+          description: "표시할 문자열",
+        },
+      },
+      scaffold: `<Text>텍스트</Text>`, // 직렬화 포맷 상의 표현
+      renderPreview: (_Component, props) => props.children,
+    } satisfies ComponentMetaDefinition,
+  },
+};
+
 export const ComponentRegistry = {
   ...LayoutComponentRegistry,
   ...DisplayComponentRegistry,
   ...UiComponentRegistry,
   ...FormComponentRegistry,
+  ...InternalComponentRegistry,
 } as const;
 
 export type ComponentName = keyof typeof ComponentRegistry;
