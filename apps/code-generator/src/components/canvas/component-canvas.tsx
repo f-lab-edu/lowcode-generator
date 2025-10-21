@@ -12,7 +12,7 @@ export function ComponentCanvas() {
   });
 
   const { tree } = useDragAndDrop();
-  const { zoomRef, scale, zoomIn, zoomOut, resetZoom } = useZoom();
+  const { scale, handleWheel, zoomIn, zoomOut, resetZoom } = useZoom();
 
   const innerCanvasStyle = {
     transform: `scale(${scale})`,
@@ -22,10 +22,8 @@ export function ComponentCanvas() {
 
   return (
     <div
-      ref={(node) => {
-        setNodeRef(node);
-        zoomRef.current = node;
-      }}
+      ref={setNodeRef}
+      onWheel={handleWheel}
       className={`component-canvas ${isOver ? "drag-over" : ""}`}
     >
       <div className="canvas-inner" style={innerCanvasStyle}>
