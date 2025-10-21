@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useCallback } from "react";
 
 export type ZoomProps = {
   min?: number;
@@ -13,25 +13,34 @@ export const useZoom = (options: ZoomProps = {}) => {
   const zoomRef = useRef<HTMLDivElement | null>(null);
   // zoom options
   const { min = 0.3, max = 2.0, step = 0.1 } = options;
+  // 속도
+  const velocity = useRef(0);
 
-  const handleWheel = useCallback((ev: WheelEvent) => {
-    if (!ev.ctrlKey && !ev.metaKey) return;
+  const animationRef = useRef<number | null>(null);
 
-    ev.preventDefault();
-    ev.stopPropagation();
+  const handleWheel = useCallback((e: React.WheelEvent) => {
+    const normalized =
+      Math.sign(e.deltaY) * Math.min(Math.abs(e.deltaY) / 120, 1);
 
-    setScale((prev) => {
-      const delta = ev.deltaY > 0 ? -0.1 : 0.1;
-      const next = Math.min(Math.max(prev + delta, 0.3), 2.0);
-      return Number(next.toFixed(2));
-    });
-  }, []);
+    velocity.current += normalized * -0.08; // 한 스텝당 8% 변화량
 
-  useEffect(() => {
-    const el = zoomRef.current;
-    if (!el) return;
-    el.addEventListener("wheel", handleWheel, { passive: false });
-    return el.removeEventListener("wheel", handleWheel);
+    if (!animationRef.current) {
+      const animate = () => {
+        if (Math.abs(velocity.current) < 0.001) {
+          animationRef.current = null;
+          return;
+        }
+
+        setScale((prev) => {
+          const next = Math.min(Math.max(prev + velocity.current, 0.3), 2);
+          return Number(next.toFixed(2));
+        });
+
+        velocity.current *= 0.8; // 감속
+        animationRef.current = requestAnimationFrame(animate);
+      };
+      animationRef.current = requestAnimationFrame(animate);
+    }
   }, []);
 
   const zoomIn = useCallback(
@@ -50,6 +59,7 @@ export const useZoom = (options: ZoomProps = {}) => {
     zoomRef,
     scale,
     setScale,
+    handleWheel,
     zoomIn,
     zoomOut,
     resetZoom,
