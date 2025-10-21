@@ -1,13 +1,15 @@
 import { useDroppable } from "@dnd-kit/core";
-import { type TreeNode } from "../../types";
 import { TreeRenderer } from "../drag-and-drop/tree-renderer";
+import { useDragAndDrop } from "../../hooks/useDragAndDrop";
 import "./component-canvas.css";
 
-export function ComponentCanvas({ tree }: { tree: TreeNode[] }) {
+export function ComponentCanvas() {
   const { setNodeRef, isOver } = useDroppable({
     id: "canvas-root",
     data: { type: "canvas-root" },
   });
+
+  const { tree } = useDragAndDrop();
 
   return (
     <div

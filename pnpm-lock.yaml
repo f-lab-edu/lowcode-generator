@@ -71,6 +71,9 @@ importers:
       '@packages/vanilla-extract-config':
         specifier: workspace:*
         version: link:../../packages/vanilla-extract-config
+      acorn-jsx:
+        specifier: ^5.3.2
+        version: 5.3.2(acorn@8.15.0)
       react:
         specifier: ^19.1.1
         version: 19.1.1
@@ -2151,7 +2154,6 @@ packages:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
     dependencies:
       acorn: 8.15.0
-    dev: true
 
   /acorn-walk@8.3.4:
     resolution: {integrity: sha512-ueEepnujpqee2o5aIYnvHU6C0A42MNdsIDeqy5BydrkuC5R1ZuUFnm27EeFJGoEHJQgn3uleRvmTXaJgfXbt4g==}
