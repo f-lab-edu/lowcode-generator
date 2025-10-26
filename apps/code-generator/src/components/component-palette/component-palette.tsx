@@ -2,6 +2,7 @@ import {
   ComponentRegistry,
   ComponentsByCategory,
   type ComponentName,
+  type ComponentRegistryItem,
 } from "@packages/ui";
 import { useState } from "react";
 import { DraggableComponentCard } from "../drag-and-drop/draggable-component-card";
@@ -40,18 +41,24 @@ export function ComponentPalette() {
                   }`}
                 >
                   <div className="component-grid">
-                    {(components as ComponentName[]).map((name) => {
-                      const item = ComponentRegistry[name];
-                      const Component = item.component;
-                      return (
-                        <DraggableComponentCard
-                          key={name}
-                          name={name}
-                          component={Component}
-                          meta={item.meta}
-                        />
-                      );
-                    })}
+                    {(components as ComponentName[])
+                      .filter(
+                        (name) =>
+                          !(ComponentRegistry[name] as ComponentRegistryItem)
+                            ?.hidden
+                      )
+                      .map((name) => {
+                        const item = ComponentRegistry[name];
+                        const Component = item.component;
+                        return (
+                          <DraggableComponentCard
+                            key={name}
+                            name={name}
+                            component={Component}
+                            meta={item.meta}
+                          />
+                        );
+                      })}
                   </div>
                 </div>
               </div>
