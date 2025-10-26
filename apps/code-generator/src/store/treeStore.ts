@@ -8,7 +8,9 @@ interface TreeStore {
   setTree: (tree: TreeNode[]) => void;
   insertIntoContainer: (targetId: string, newNode: TreeNode) => void;
   findAndRemoveNode: (id: string) => [TreeNode[], TreeNode | null];
-  findAndInsertNode: (nodeToInsert: TreeNode, targetId: string) => void;
+  findAndInsertNode: (nodeToInsert: TreeNode, targetId: string) => void; // after
+  findAndInsertBefore: (nodeToInsert: TreeNode, targetId: string) => void; // before
+  updateNodeById: (nodeId: string, updateNode: TreeNode) => void;
   reset: () => void;
 }
 
@@ -79,8 +81,8 @@ export const useTreeStore = create<TreeStore>()(
       return [updated, removed];
     },
     /**
-     * 재귀적으로 노드를 탐색하여 다른 노드 옆(위/아래)에 새 노드를 삽입
-     * (순서를 바꾸는 경우)
+     * 재귀적으로 노드를 탐색하여 노드에 새 노드를 삽입
+     * direction이 after인 경우는 노드 뒤에 삽입
      */
     findAndInsertNode: (nodeToInsert: TreeNode, targetId: string) => {
       const { tree } = get();
@@ -89,7 +91,7 @@ export const useTreeStore = create<TreeStore>()(
         const targetIndex = nodes.findIndex((n) => n.id === targetId);
         if (targetIndex !== -1) {
           const newNodes = [...nodes];
-          newNodes.splice(targetIndex, 0, nodeToInsert);
+          newNodes.splice(targetIndex + 1, 0, nodeToInsert); // after
           return newNodes;
         }
 
@@ -108,6 +110,58 @@ export const useTreeStore = create<TreeStore>()(
 
       const updated = insert(tree);
       if (updated) set({ tree: updated });
+    },
+    /**
+     * 재귀적으로 노드를 탐색하여 노드에 새 노드를 삽입
+     * direction이 before인 경우는 노드 앞에 삽입
+     */
+    findAndInsertBefore: (nodeToInsert: TreeNode, targetId: string) => {
+      const { tree } = get();
+
+      function insert(nodes: TreeNode[]): TreeNode[] | null {
+        const targetIndex = nodes.findIndex((n) => n.id === targetId);
+        if (targetIndex !== -1) {
+          const newNodes = [...nodes];
+          newNodes.splice(targetIndex, 0, nodeToInsert); // before
+          return newNodes;
+        }
+
+        for (const node of nodes) {
+          if (node.children) {
+            const newChildren = insert(node.children);
+            if (newChildren) {
+              return nodes.map((n) =>
+                n.id === node.id ? { ...n, children: newChildren } : n
+              );
+            }
+          }
+        }
+        return null;
+      }
+
+      const updated = insert(tree);
+      if (updated) set({ tree: updated });
+    },
+    /**
+     * 노드 아이디 기준으로 찾은 특정 노드를 수정
+     * @param nodeId 수정할 노드 아이디
+     * @param updatedNode 수정될 노드 정보
+     */
+    updateNodeById: (nodeId, updatedNode) => {
+      const { tree } = get();
+
+      function update(nodes: TreeNode[]): TreeNode[] {
+        return nodes.map((n) => {
+          if (n.id === nodeId) return updatedNode;
+          if (n.children && n.children.length > 0) {
+            return { ...n, children: update(n.children) };
+          }
+          return n;
+        });
+      }
+
+      const updatedTree = update(tree);
+      set({ tree: updatedTree });
     },
     reset: () => set({ tree: [] }),
   }))
