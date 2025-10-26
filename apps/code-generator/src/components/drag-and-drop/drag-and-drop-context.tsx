@@ -1,6 +1,12 @@
-import { DndContext } from "@dnd-kit/core";
+import {
+  DndContext,
+  MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
-import { debugCollisionDetection } from "../../utils/collisionDetection";
+import { nestedDroppableCollision } from "../../utils/collisionDetection";
 import { DragComponentOverlay } from "./drag-component-overlay";
 
 /**
@@ -8,11 +14,35 @@ import { DragComponentOverlay } from "./drag-component-overlay";
  */
 const DragAndDropContext = ({ children }: { children: React.ReactNode }) => {
   const { handleDragStart, handleDragEnd, activeDrag } = useDragAndDrop();
+  const mouseSensor = useSensor(MouseSensor, {
+    activationConstraint: {
+      distance: 4, // 최소 이동 거리
+    },
+    eventListenerOptions: { capture: true },
+    onPointerDown(event: React.PointerEvent) {
+      const target = event.target as HTMLElement;
+      if (
+        target.tagName === "INPUT" ||
+        target.tagName === "BUTTON" ||
+        target.tagName === "TEXTAREA" ||
+        target.closest("input") ||
+        target.closest("button") ||
+        target.closest("textarea")
+      ) {
+        event.stopPropagation();
+        return false; // drag candidate 등록 무시
+      }
+      return true;
+    },
+  });
+  const touchSensor = useSensor(TouchSensor);
+
   return (
     <DndContext
+      sensors={useSensors(mouseSensor, touchSensor)}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      collisionDetection={debugCollisionDetection}
+      collisionDetection={nestedDroppableCollision}
     >
       {children}
       <DragComponentOverlay activeDrag={activeDrag} />
