@@ -31,6 +31,9 @@
 }
 
 .empty-drop-zone {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
   padding: 20px;
   text-align: center;
   color: #999;
