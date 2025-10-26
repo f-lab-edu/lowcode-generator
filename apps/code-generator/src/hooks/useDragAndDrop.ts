@@ -12,6 +12,7 @@ export function useDragAndDrop() {
     setTree,
     insertIntoContainer,
     findAndRemoveNode,
+    findAndInsertBefore,
     findAndInsertNode,
   } = useTreeStore();
 
@@ -26,59 +27,61 @@ export function useDragAndDrop() {
     if (!over || active.id === over.id) return;
 
     const activeType = active.data.current?.type;
-    const overType = over.data.current?.type;
+    const overNodeData = over.data.current;
 
-    // ✅ Zustand 상태 직접 접근
-    const currentTree = useTreeStore.getState().tree;
+    if (!overNodeData) return;
 
-    let updatedTree = currentTree;
+    const direction = overNodeData?.direction ?? "after";
+    const targetNodeId = overNodeData.nodeId || over.id;
+
+    // nest 가능한 타입인지 확인
+    const overMeta = getComponentMeta(overNodeData.componentName);
+    const canNest =
+      overNodeData.type === "canvas-root"
+        ? true
+        : overMeta?.hasChildren ?? false;
 
     if (activeType === "palette-item") {
       const data = active.data.current;
       if (!data) return;
 
       const meta = getComponentMeta(data.componentName);
-      const parsedChildren = meta?.scaffold
+      const parsedNode = meta?.scaffold
         ? parseScaffoldToTree(meta.scaffold)
-        : [];
+        : null;
 
-      const newNode: TreeNode = {
-        id: `node-${Date.now()}-${Math.random()}`,
-        componentName: data.componentName,
-        props: data.props,
-        children: parsedChildren,
-      };
+      const newNode: TreeNode = parsedNode
+        ? parsedNode
+        : {
+            id: `node-${Date.now()}-${Math.random()}`,
+            componentName: data.componentName,
+            props: data.props,
+            children: [],
+          };
 
-      const targetNodeId =
-        overType === "drop-area"
-          ? over.data.current?.nodeId || over.id
-          : over.id;
-
-      insertIntoContainer(targetNodeId, newNode);
-      updatedTree = useTreeStore.getState().tree;
+      if (canNest) {
+        insertIntoContainer(targetNodeId, newNode);
+      } else if (direction === "before") {
+        findAndInsertBefore(newNode, targetNodeId);
+      } else {
+        findAndInsertNode(newNode, targetNodeId);
+      }
     }
 
     if (activeType === "tree-node") {
-      const [treeAfterRemove, removedNode] = findAndRemoveNode(
-        active.id as string
-      );
-
+      const [_, removedNode] = findAndRemoveNode(active.id as string);
       if (!removedNode) return;
 
-      if (overType === "canvas-root" || overType === "drop-area") {
-        const targetNodeId =
-          overType === "drop-area"
-            ? over.data.current?.nodeId || over.id
-            : over.id;
+      if (canNest) {
         insertIntoContainer(targetNodeId, removedNode);
+      } else if (direction === "before") {
+        findAndInsertBefore(removedNode, targetNodeId);
       } else {
-        findAndInsertNode(removedNode, over.id as string);
+        findAndInsertNode(removedNode, targetNodeId);
       }
-
-      updatedTree = useTreeStore.getState().tree;
     }
 
-    // ✅ 최종적으로 트리 교체
+    const updatedTree = useTreeStore.getState().tree;
     setTree(updatedTree);
   };
 
