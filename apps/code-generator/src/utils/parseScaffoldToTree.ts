@@ -10,13 +10,11 @@ const Parser = acorn.Parser.extend(jsx());
  * meta에서 scaffold를 제공하는 경우 JSX를 AST로 파싱하여 TreeNode[]로 변환
  * ex) <Thead><Tr><Th>제목</Th></Tr></Thead>
  */
-export function parseScaffoldToTree(scaffold: string): TreeNode[] {
+export function parseScaffoldToTree(scaffold: string): TreeNode | null {
   const ast = Parser.parse(scaffold, {
     ecmaVersion: "latest",
     sourceType: "module",
   });
-
-  const tree: TreeNode[] = [];
 
   function walkJSX(node: any): TreeNode {
     const name = node.openingElement.name.name as ComponentName;
@@ -57,20 +55,19 @@ export function parseScaffoldToTree(scaffold: string): TreeNode[] {
     };
   }
 
-  // 최상위 JSX 노드 추출
-  function traverse(nodes: any[], list: TreeNode[]) {
-    for (const node of nodes) {
-      if (
-        node.type === "ExpressionStatement" &&
-        node.expression.type === "JSXElement"
-      ) {
-        list.push(walkJSX(node.expression));
-      } else if (node.type === "JSXElement") {
-        list.push(walkJSX(node));
-      }
-    }
-  }
+  const topLevel = ast.body.find(
+    (node: any) =>
+      (node.type === "ExpressionStatement" &&
+        node.expression.type === "JSXElement") ||
+      node.type === "JSXElement"
+  );
 
-  traverse(ast.body, tree);
-  return tree;
+  if (!topLevel) return null;
+
+  const rootNode =
+    topLevel.type === "ExpressionStatement"
+      ? walkJSX(topLevel.expression)
+      : walkJSX(topLevel);
+
+  return rootNode;
 }
