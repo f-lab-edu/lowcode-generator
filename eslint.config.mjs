@@ -1,4 +1,3 @@
-// tools/eslint-config/index.js
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import react from "eslint-plugin-react";
@@ -6,6 +5,7 @@ import reactHooks from "eslint-plugin-react-hooks";
 import importPlugin from "eslint-plugin-import";
 import jsxA11y from "eslint-plugin-jsx-a11y";
 import mdx from "eslint-plugin-mdx";
+import reactCompiler from "eslint-plugin-react-compiler";
 export default [
   js.configs.recommended,
   ...tseslint.configs.recommended,
@@ -13,6 +13,7 @@ export default [
     plugins: {
       react,
       "react-hooks": reactHooks,
+      "react-compiler": reactCompiler,
       import: importPlugin,
       "jsx-a11y": jsxA11y,
     },
@@ -26,6 +27,7 @@ export default [
     },
     rules: {
       "react/react-in-jsx-scope": "off",
+      "react-compiler/react-compiler": "error",
       "@typescript-eslint/no-unused-vars": [
         "error",
         { argsIgnorePattern: "^_" },
