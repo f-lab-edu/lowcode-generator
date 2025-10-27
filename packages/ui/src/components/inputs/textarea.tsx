@@ -4,6 +4,7 @@ import {
   type TextareaHTMLAttributes,
 } from "react";
 import { textarea, type TextareaVariants } from "./textarea.css";
+import { cn } from "../../utils/cn";
 
 export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
   TextareaVariants & {
@@ -23,9 +24,7 @@ export function Textarea({
   ref,
   ...props
 }: TextareaProps) {
-  const classNames = [textarea({ inputSize }), className]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = cn(textarea({ inputSize }), className);
 
   const textareaStyle: CSSProperties = {
     width: typeof width === "number" ? `${width}px` : width,

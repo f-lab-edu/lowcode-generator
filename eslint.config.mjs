@@ -4,7 +4,7 @@ import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
 import importPlugin from "eslint-plugin-import";
 import jsxA11y from "eslint-plugin-jsx-a11y";
-import mdx from "eslint-plugin-mdx";
+import * as mdx from "eslint-plugin-mdx";
 import reactCompiler from "eslint-plugin-react-compiler";
 export default [
   js.configs.recommended,
@@ -17,6 +17,9 @@ export default [
       import: importPlugin,
       "jsx-a11y": jsxA11y,
     },
+    settings: {
+      react: { version: "detect" },
+    },
     languageOptions: {
       parser: tseslint.parser,
       parserOptions: {
@@ -26,6 +29,9 @@ export default [
       },
     },
     rules: {
+      ...react.configs.recommended.rules,
+      ...reactHooks.configs.recommended.rules,
+      ...reactCompiler.configs.recommended.rules,
       "react/react-in-jsx-scope": "off",
       "react-compiler/react-compiler": "error",
       "@typescript-eslint/no-unused-vars": [
@@ -69,9 +75,6 @@ export default [
           ],
         },
       ],
-    },
-    settings: {
-      react: { version: "detect" },
     },
   },
   {

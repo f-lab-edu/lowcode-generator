@@ -1,5 +1,6 @@
 import { type Ref, type CSSProperties } from "react";
 import { input, type InputVariants } from "./input.css";
+import { cn } from "../../utils/cn";
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
@@ -17,9 +18,7 @@ export function Input({
   ref,
   ...props
 }: InputProps) {
-  const classNames = [input({ inputSize }), className]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = cn(input({ inputSize }), className);
 
   const inputStyle: CSSProperties = {
     width: typeof width === "number" ? `${width}px` : width,

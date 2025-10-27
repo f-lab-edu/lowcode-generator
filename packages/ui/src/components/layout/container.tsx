@@ -3,6 +3,7 @@ import {
   containerRecipe,
   type ContainerRecipeVariants,
 } from "@packages/vanilla-extract-config";
+import { cn } from "../../utils/cn";
 
 export type ContainerProps = HTMLAttributes<HTMLDivElement> &
   ContainerRecipeVariants & {
@@ -19,9 +20,7 @@ export function Container({
   ref,
   ...props
 }: ContainerProps) {
-  const classNames = [containerRecipe({ widthScale }), className]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = cn(containerRecipe({ widthScale }), className);
 
   const containerStyle: CSSProperties = minHeight
     ? {

@@ -1,5 +1,7 @@
+// Theme css
 import "./styles/theme.css";
 
+// Component Types
 export type {
   ComponentMetaDefinition,
   PropsMeta,
@@ -23,3 +25,6 @@ export type {
   ComponentCategoryName,
   ComponentItem,
 } from "./registry";
+
+// class generating utils
+export { cn } from "./utils/cn";

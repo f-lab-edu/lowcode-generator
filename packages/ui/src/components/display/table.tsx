@@ -20,6 +20,7 @@ import {
   type TableHeaderCellVariants,
   type TableCellVariants,
 } from "./table.css";
+import { cn } from "../../utils/cn";
 
 const TableContext = createContext<TableVariants>({
   variant: "simple",
@@ -39,9 +40,7 @@ export function Table({
   ref,
   ...props
 }: TableProps) {
-  const classNames = [tableStyle({ variant, color }), className]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = cn(tableStyle({ variant, color }), className);
   return (
     <TableContext.Provider value={{ variant, color }}>
       <table ref={ref} className={classNames} {...props} />
@@ -55,7 +54,7 @@ export type TableCaptionProps = HTMLAttributes<HTMLTableCaptionElement> & {
 };
 
 export function TableCaption({ className, ref, ...props }: TableCaptionProps) {
-  const classNames = [tableCaptionStyle(), className].filter(Boolean).join(" ");
+  const classNames = cn(tableCaptionStyle(), className);
   return <caption ref={ref} className={classNames} {...props} />;
 }
 
@@ -76,12 +75,10 @@ export function Thead({
   const finalColor = color || ctxColor;
   const finalVariant = variant || ctxVariant;
 
-  const classNames = [
+  const classNames = cn(
     tableHeadStyle({ variant: finalVariant, color: finalColor }),
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+    className
+  );
 
   return <thead ref={ref} className={classNames} {...props} />;
 }
@@ -91,7 +88,7 @@ export type TableBodyProps = HTMLAttributes<HTMLTableSectionElement> & {
   ref?: Ref<HTMLTableSectionElement>;
 };
 export function Tbody({ className, ref, ...props }: TableBodyProps) {
-  const classNames = [tableBodyStyle, className].filter(Boolean).join(" ");
+  const classNames = cn(tableBodyStyle, className);
   return <tbody ref={ref} className={classNames} {...props} />;
 }
 
@@ -100,7 +97,7 @@ export type TableFootProps = HTMLAttributes<HTMLTableSectionElement> & {
   ref?: Ref<HTMLTableSectionElement>;
 };
 export function Tfoot({ className, ref, ...props }: TableFootProps) {
-  const classNames = [tableFootStyle, className].filter(Boolean).join(" ");
+  const classNames = cn(tableFootStyle, className);
   return <tfoot ref={ref} className={classNames} {...props} />;
 }
 
@@ -121,12 +118,10 @@ export function Tr({
   const finalVariant = variant || ctxVariant;
   const finalColor = color || ctxColor;
 
-  const classNames = [
+  const classNames = cn(
     tableRowStyle({ variant: finalVariant, hover, color: finalColor }),
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+    className
+  );
 
   return <tr ref={ref} className={classNames} {...props} />;
 }
@@ -149,17 +144,15 @@ export function Th({
   const finalColor = color || ctxColor;
   const finalVariant = variant || ctxVariant;
 
-  const classNames = [
+  const classNames = cn(
     tableHeaderCellStyle({
       size,
       align,
       color: finalColor,
       variant: finalVariant,
     }),
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+    className
+  );
 
   return <th ref={ref} className={classNames} {...props} />;
 }
@@ -180,12 +173,10 @@ export function Td({
   const { variant: ctxVariant } = useTableContext();
   const finalVariant = variant || ctxVariant;
 
-  const classNames = [
+  const classNames = cn(
     tableCellStyle({ size, align, variant: finalVariant }),
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+    className
+  );
 
   return <td ref={ref} className={classNames} {...props} />;
 }

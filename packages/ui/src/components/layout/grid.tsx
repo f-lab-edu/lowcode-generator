@@ -1,6 +1,7 @@
 import { type Ref, type CSSProperties, type HTMLAttributes } from "react";
 import { gridRecipe } from "@packages/vanilla-extract-config";
 import type { RecipeVariants } from "@vanilla-extract/recipes";
+import { cn } from "../../utils/cn";
 
 export type GridVariants = RecipeVariants<typeof gridRecipe>;
 
@@ -45,7 +46,7 @@ export function Grid({
   const itemStyle: CSSProperties =
     !isContainer && size ? { gridColumn: `span ${size}` } : {};
 
-  const classNames = [containerClass, className].filter(Boolean).join(" ");
+  const classNames = cn(containerClass, className);
 
   return (
     <div

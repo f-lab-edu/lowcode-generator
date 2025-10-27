@@ -7,6 +7,7 @@ import {
   typographyRecipe,
   type TypographyRole,
 } from "@packages/vanilla-extract-config";
+import { cn } from "../../utils/cn";
 
 export const TYPOGRAPHY_ELEMENT = [
   "p",
@@ -45,9 +46,7 @@ export function Typography<T extends TypographyElement = "p">({
   ...props
 }: TypographyProps<T>) {
   const Component = (as ?? "p") as ElementType;
-  const classNames = [typographyRecipe({ role }), className]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = cn(typographyRecipe({ role }), className);
   return (
     <Component ref={ref} className={classNames} {...props}>
       {children}

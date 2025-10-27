@@ -3,6 +3,7 @@ import {
   sectionRecipe,
   type SectionRecipeVariants,
 } from "@packages/vanilla-extract-config";
+import { cn } from "../../utils/cn";
 
 export type SectionProps = HTMLAttributes<HTMLElement> &
   SectionRecipeVariants & {
@@ -19,9 +20,7 @@ export function Section({
   children,
   ...props
 }: SectionProps) {
-  const classNames = [sectionRecipe({ spacingScale }), className]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = cn(sectionRecipe({ spacingScale }), className);
 
   const sectionStyle = minHeight
     ? {

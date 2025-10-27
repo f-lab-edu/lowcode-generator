@@ -1,6 +1,7 @@
 import { type Ref, type HTMLAttributes } from "react";
 import { stackRecipe } from "@packages/vanilla-extract-config";
 import { type RecipeVariants } from "@vanilla-extract/recipes";
+import { cn } from "../../utils/cn";
 
 export type StackVariants = RecipeVariants<typeof stackRecipe>;
 
@@ -20,12 +21,10 @@ export function Stack({
   children,
   ...props
 }: StackProps) {
-  const classNames = [
+  const classNames = cn(
     stackRecipe({ gap, justify, align, direction }),
-    className,
-  ]
-    .filter(Boolean)
-    .join(" ");
+    className
+  );
 
   return (
     <div ref={ref} className={classNames} {...props}>

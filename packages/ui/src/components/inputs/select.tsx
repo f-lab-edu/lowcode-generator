@@ -15,6 +15,7 @@ import {
   optionItem,
   type SelectVariants,
 } from "./select.css";
+import { cn } from "../../utils/cn";
 
 export type SelectOption = { label: string; value: string; disabled?: boolean };
 
@@ -99,10 +100,7 @@ export function Select({
 
   const selectedOption = options.find((opt) => opt.value === selectedValue);
 
-  const controlClassNames = [selectControl({ inputSize }), className]
-    .filter(Boolean)
-    .join(" ");
-
+  const controlClassNames = cn(selectControl({ inputSize }), className);
   const wrapperStyle = {
     width: typeof width === "number" ? `${width}px` : width,
   };

@@ -5,6 +5,7 @@ import {
   paginationItemStyle,
   type PaginationVariants,
 } from "./pagination.css";
+import { cn } from "../../utils/cn";
 
 const usePagination = ({
   count,
@@ -83,7 +84,7 @@ export type PaginationProps = ComponentProps<"nav"> &
     showLastButton?: boolean;
   };
 
-const Pagination = ({
+export function Pagination({
   count,
   page: controlledPage,
   defaultPage = 1,
@@ -101,7 +102,7 @@ const Pagination = ({
   color = "primary",
   className,
   ...props
-}: PaginationProps) => {
+}: PaginationProps) {
   const [uncontrolledPage, setUncontrolledPage] = useState(defaultPage);
 
   const isControlled = controlledPage !== undefined;
@@ -120,7 +121,7 @@ const Pagination = ({
     boundaryCount,
   });
 
-  const rootClassName = [paginationStyle, className].filter(Boolean).join(" ");
+  const rootClassName = cn(paginationStyle, className);
 
   const renderItem = (type: string, pageNum?: number) => {
     const isSelected = pageNum === currentPage;
@@ -179,8 +180,4 @@ const Pagination = ({
       </ul>
     </nav>
   );
-};
-
-Pagination.displayName = "Pagination";
-
-export { Pagination };
+}

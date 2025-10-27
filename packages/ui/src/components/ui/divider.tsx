@@ -1,5 +1,6 @@
 import { type Ref, type HTMLAttributes } from "react";
 import { divider, type DividerVariants } from "./divider.css";
+import { cn } from "../../utils/cn";
 
 export type DividerProps = HTMLAttributes<HTMLDivElement> &
   DividerVariants & {
@@ -15,9 +16,7 @@ export function Divider({
   className,
   ...props
 }: DividerProps) {
-  const classNames = [divider({ orientation, variant, color }), className]
-    .filter(Boolean)
-    .join(" ");
+  const classNames = cn(divider({ orientation, variant, color }), className);
 
   return (
     <div
