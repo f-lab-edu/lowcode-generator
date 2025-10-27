@@ -30,8 +30,7 @@ export default [
     },
     rules: {
       ...react.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      ...reactCompiler.configs.recommended.rules,
+      ...reactHooks.configs.flat.recommended.rules,
       "react/react-in-jsx-scope": "off",
       "react-compiler/react-compiler": "error",
       "@typescript-eslint/no-unused-vars": [
@@ -95,8 +94,7 @@ export default [
   },
   {
     files: ["**/*.mdx"],
-    plugins: { mdx },
-    extends: ["plugin:mdx/recommended"],
+    ...mdx.flat,
     rules: {
       "react/jsx-no-undef": "off",
       "react/jsx-filename-extension": "off",
