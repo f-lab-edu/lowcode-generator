@@ -54,7 +54,7 @@ StyleDictionary.registerFormat({
     return (
       fileHeader(this) +
       `/**\n` +
-      ` * Vanilla Extract용 디자인 토큰\n` +
+      ` * 디자인 토큰\n` +
       ` * @generated - 자동 생성된 파일입니다. 직접 수정하지 마세요.\n` +
       ` */\n\n` +
       `export const themeTokens = ${JSON.stringify(cleanTokens, null, 2)};\n`
@@ -62,7 +62,7 @@ StyleDictionary.registerFormat({
   },
 });
 
-// ✅ 3. Vanilla Extract용 타입 정의 (숫자/특수문자 키 처리)
+// ✅ 디자인 토큰 타입 정의 (숫자/특수문자 키 처리)
 StyleDictionary.registerFormat({
   name: "typescript/design-tokens-types",
   formatter: function ({ dictionary }) {
@@ -121,7 +121,7 @@ StyleDictionary.registerFormat({
     return (
       fileHeader(this) +
       `/**\n` +
-      ` * Vanilla Extract용 디자인 토큰 타입\n` +
+      ` * 디자인 토큰 타입\n` +
       ` * @generated\n` +
       ` */\n` +
       `export type ThemeTokens = ${typeDefinition};\n\n` +
@@ -161,17 +161,6 @@ function getStyleDictionaryConfig() {
           },
         ],
       },
-      // js: {
-      //   transformGroup: "js",
-      //   buildPath: "build/js/",
-      //   files: [
-      //     {
-      //       destination: "index.js",
-      //       format: "javascript/module",
-      //       options: { outputReferences: true },
-      //     },
-      //   ],
-      // },
     },
   };
 }
