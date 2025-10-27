@@ -1,4 +1,3 @@
 packages:
-  - "repo/*"
   - "packages/*"
   - "apps/*"
