@@ -3,25 +3,9 @@ const { fileHeader } = require("style-dictionary/lib/common/formatHelpers");
 const fs = require("fs");
 const path = require("path");
 
-// ✅ 1. 기본 타입스크립트 포맷 (as const)
+// ✅ JavaScript 포맷
 StyleDictionary.registerFormat({
-  name: "typescript/as-const",
-  formatter: function ({ dictionary }) {
-    return (
-      fileHeader(this) +
-      `const tokens = ${JSON.stringify(
-        dictionary.tokens,
-        null,
-        2
-      )} as const;\n\n` +
-      `export default tokens;\n`
-    );
-  },
-});
-
-// ✅ 2. Vanilla Extract용 JavaScript 포맷
-StyleDictionary.registerFormat({
-  name: "javascript/vanilla-extract",
+  name: "javascript/design-tokens",
   formatter: function ({ dictionary }) {
     function extractValues(obj) {
       const result = {};
@@ -80,7 +64,7 @@ StyleDictionary.registerFormat({
 
 // ✅ 3. Vanilla Extract용 타입 정의 (숫자/특수문자 키 처리)
 StyleDictionary.registerFormat({
-  name: "typescript/vanilla-extract-types",
+  name: "typescript/design-tokens-types",
   formatter: function ({ dictionary }) {
     // 유효한 JavaScript 식별자인지 확인
     function isValidIdentifier(key) {
@@ -146,54 +130,6 @@ StyleDictionary.registerFormat({
   },
 });
 
-// ✅ 4. 기본 tokens.d.ts 타입 정의
-StyleDictionary.registerFormat({
-  name: "typescript/type-definitions",
-  formatter: function ({ dictionary }) {
-    function isValidIdentifier(key) {
-      return /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key);
-    }
-
-    function generateType(obj, depth = 0) {
-      const indent = "  ".repeat(depth);
-      let result = "{\n";
-
-      for (const [key, value] of Object.entries(obj)) {
-        const formattedKey = isValidIdentifier(key) ? key : `"${key}"`;
-
-        if (value && typeof value === "object") {
-          if ("value" in value) {
-            result += `${indent}  readonly ${formattedKey}: {\n`;
-            result += `${indent}    readonly value: string;\n`;
-            if (value.type) {
-              result += `${indent}    readonly type: string;\n`;
-            }
-            result += `${indent}  };\n`;
-          } else {
-            result += `${indent}  readonly ${formattedKey}: ${generateType(
-              value,
-              depth + 1
-            )};\n`;
-          }
-        }
-      }
-
-      result += `${indent}}`;
-      return result;
-    }
-
-    const typeDefinition = generateType(dictionary.tokens);
-
-    return (
-      fileHeader(this) +
-      `type TokenStructure = ${typeDefinition};\n\n` +
-      `declare const tokens: TokenStructure;\n\n` +
-      `export default tokens;\n` +
-      `export type { TokenStructure };\n`
-    );
-  },
-});
-
 function getStyleDictionaryConfig() {
   return {
     source: ["src/**/*.json"],
@@ -210,58 +146,32 @@ function getStyleDictionaryConfig() {
           },
         ],
       },
-      json: {
+      // JavaScript 객체 형태의 디자인 토큰 + 타입 (vanilla extrat의 theme contract 생성 등에 활용)
+      ["design-tokens"]: {
         transformGroup: "js",
-        buildPath: "build/json/",
-        files: [
-          {
-            destination: "index.json",
-            format: "json/nested",
-            options: { outputReferences: true },
-          },
-        ],
-      },
-      // ✅ 기본 타입스크립트 (다른 곳에서 사용)
-      ts: {
-        transformGroup: "js",
-        buildPath: "build/ts/",
-        files: [
-          {
-            destination: "tokens.ts",
-            format: "typescript/as-const",
-          },
-          {
-            destination: "tokens.d.ts",
-            format: "typescript/type-definitions",
-          },
-        ],
-      },
-      // ✅ Vanilla Extract 전용 빌드
-      vanillaExtract: {
-        transformGroup: "js",
-        buildPath: "build/vanilla-extract/",
-        files: [
-          {
-            destination: "theme-tokens.js",
-            format: "javascript/vanilla-extract",
-          },
-          {
-            destination: "theme-tokens.d.ts",
-            format: "typescript/vanilla-extract-types",
-          },
-        ],
-      },
-      js: {
-        transformGroup: "js",
-        buildPath: "build/js/",
+        buildPath: "build/design-tokens/",
         files: [
           {
             destination: "index.js",
-            format: "javascript/module",
-            options: { outputReferences: true },
+            format: "javascript/design-tokens",
+          },
+          {
+            destination: "index.d.ts",
+            format: "typescript/design-tokens-types",
           },
         ],
       },
+      // js: {
+      //   transformGroup: "js",
+      //   buildPath: "build/js/",
+      //   files: [
+      //     {
+      //       destination: "index.js",
+      //       format: "javascript/module",
+      //       options: { outputReferences: true },
+      //     },
+      //   ],
+      // },
     },
   };
 }
