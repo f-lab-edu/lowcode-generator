@@ -1,5 +1,4 @@
 import {
-  forwardRef,
   type ElementType,
   type ComponentPropsWithRef,
   type ComponentPropsWithoutRef,
@@ -34,31 +33,24 @@ export type TypographyProps<T extends TypographyElement = "p"> = {
   role?: TypographyRole;
   children?: React.ReactNode;
   className?: string;
+  ref?: PolymorphicRef<T>;
 } & ComponentPropsWithoutRef<T>;
 
-const Typography = forwardRef(
-  <T extends TypographyElement = "p">(
-    {
-      as,
-      role = "textMdRegular",
-      children,
-      className,
-      ...props
-    }: TypographyProps<T>,
-    ref: PolymorphicRef<T>
-  ) => {
-    const Component = (as ?? "p") as ElementType;
-    const classNames = [typographyRecipe({ role }), className]
-      .filter(Boolean)
-      .join(" ");
-    return (
-      <Component ref={ref} className={classNames} {...props}>
-        {children}
-      </Component>
-    );
-  }
-);
-
-Typography.displayName = "Typography";
-
-export { Typography };
+export function Typography<T extends TypographyElement = "p">({
+  as,
+  role = "textMdRegular",
+  ref,
+  children,
+  className,
+  ...props
+}: TypographyProps<T>) {
+  const Component = (as ?? "p") as ElementType;
+  const classNames = [typographyRecipe({ role }), className]
+    .filter(Boolean)
+    .join(" ");
+  return (
+    <Component ref={ref} className={classNames} {...props}>
+      {children}
+    </Component>
+  );
+}
