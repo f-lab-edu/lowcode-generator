@@ -8,7 +8,7 @@ export const radioWrapper = recipe({
     style({
       display: "inline-flex",
       alignItems: "center",
-      gap: vars.sizing[1],
+      gap: vars.sizing["1"],
       cursor: "pointer",
       userSelect: "none",
     }),
@@ -71,32 +71,32 @@ export const radio = recipe({
   variants: {
     inputSize: {
       sm: style({
-        width: vars.sizing[3],
-        height: vars.sizing[3],
+        width: vars.sizing["3"],
+        height: vars.sizing["3"],
         selectors: {
           "&::after": {
-            width: vars.sizing[1.5],
-            height: vars.sizing[1.5],
+            width: vars.sizing["1.5"],
+            height: vars.sizing["1.5"],
           },
         },
       }),
       md: style({
-        width: vars.sizing[4],
-        height: vars.sizing[4],
+        width: vars.sizing["4"],
+        height: vars.sizing["4"],
         selectors: {
           "&::after": {
-            width: vars.sizing[2],
-            height: vars.sizing[2],
+            width: vars.sizing["2"],
+            height: vars.sizing["2"],
           },
         },
       }),
       lg: style({
-        width: vars.sizing[5],
-        height: vars.sizing[5],
+        width: vars.sizing["5"],
+        height: vars.sizing["5"],
         selectors: {
           "&::after": {
-            width: vars.sizing[3],
-            height: vars.sizing[3],
+            width: vars.sizing["3"],
+            height: vars.sizing["3"],
           },
         },
       }),

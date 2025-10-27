@@ -37,28 +37,19 @@ export const button = recipe({
       sm: [
         typographyRecipe({ role: "textSmRegular" }),
         style({
-          paddingLeft: vars.sizing[3],
-          paddingRight: vars.sizing[3],
-          paddingTop: vars.sizing[1],
-          paddingBottom: vars.sizing[1],
+          padding: `${vars.sizing["1"]} ${vars.sizing["3"]}`,
         }),
       ],
       md: [
         typographyRecipe({ role: "textMdRegular" }),
         style({
-          paddingLeft: vars.sizing[4],
-          paddingRight: vars.sizing[4],
-          paddingTop: vars.sizing[2],
-          paddingBottom: vars.sizing[2],
+          padding: `${vars.sizing["2"]} ${vars.sizing["4"]}`,
         }),
       ],
       lg: [
         typographyRecipe({ role: "textLgRegular" }),
         style({
-          paddingLeft: vars.sizing[6],
-          paddingRight: vars.sizing[6],
-          paddingTop: vars.sizing[3],
-          paddingBottom: vars.sizing[3],
+          padding: `${vars.sizing["3"]} ${vars.sizing["6"]}`,
         }),
       ],
     },

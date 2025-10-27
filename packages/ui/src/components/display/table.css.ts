@@ -38,7 +38,7 @@ export const tableCaption = recipe({
   base: [
     typographyRecipe({ role: "textSmRegular" }),
     {
-      padding: vars.sizing[2],
+      padding: vars.sizing["2"],
       textAlign: "center",
       color: vars.color.text.subtle.default,
     },
@@ -178,7 +178,7 @@ export const tableRow = recipe({
 const cellBase = [
   typographyRecipe({ role: "textSmRegular" }),
   style({
-    padding: `${vars.sizing[2]} ${vars.sizing[3]}`,
+    padding: `${vars.sizing["2"]} ${vars.sizing["3"]}`,
     verticalAlign: "middle",
     borderTop: `1px solid ${vars.color.border.base.default}`,
   }),
@@ -220,9 +220,9 @@ export const tableHeaderCell = recipe({
       },
     },
     size: {
-      sm: { padding: `${vars.sizing[1]} ${vars.sizing[2]}` },
-      md: { padding: `${vars.sizing[2]} ${vars.sizing[3]}` },
-      lg: { padding: `${vars.sizing[3]} ${vars.sizing[4]}` },
+      sm: { padding: `${vars.sizing["1"]} ${vars.sizing["2"]}` },
+      md: { padding: `${vars.sizing["2"]} ${vars.sizing["3"]}` },
+      lg: { padding: `${vars.sizing["3"]} ${vars.sizing["4"]}` },
     },
     align: {
       left: { textAlign: "left" },
@@ -252,9 +252,9 @@ export const tableCell = recipe({
       striped: {},
     },
     size: {
-      sm: { padding: `${vars.sizing[1]} ${vars.sizing[2]}` },
-      md: { padding: `${vars.sizing[2]} ${vars.sizing[3]}` },
-      lg: { padding: `${vars.sizing[3]} ${vars.sizing[4]}` },
+      sm: { padding: `${vars.sizing["1"]} ${vars.sizing["2"]}` },
+      md: { padding: `${vars.sizing["2"]} ${vars.sizing["3"]}` },
+      lg: { padding: `${vars.sizing["3"]} ${vars.sizing["4"]}` },
     },
     align: {
       left: { textAlign: "left" },
