@@ -20,12 +20,9 @@ export function Checkbox({
   ref,
   ...props
 }: CheckboxProps) {
-  const checkboxId = id ?? `checkbox-${Math.random().toString(36).slice(2, 8)}`;
-
   return (
-    <label htmlFor={checkboxId} className={checkboxWrapper({ disabled })}>
+    <label className={checkboxWrapper({ disabled })}>
       <input
-        id={checkboxId}
         ref={ref}
         type="checkbox"
         disabled={disabled}

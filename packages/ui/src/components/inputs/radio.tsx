@@ -22,13 +22,9 @@ export function Radio({
   ...props
 }: RadioProps) {
   const radioName = name ?? `radio`;
-
-  const radioId = id ?? `radio-${Math.random().toString(36).slice(2, 8)}`;
-
   return (
-    <label htmlFor={radioId} className={radioWrapper({ disabled })}>
+    <label className={radioWrapper({ disabled })}>
       <input
-        id={radioId}
         name={radioName}
         ref={ref}
         type="radio"
