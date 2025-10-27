@@ -1,4 +1,4 @@
-import { type Ref } from "react";
+import { useId, type Ref } from "react";
 import {
   radioWrapper,
   radio,
@@ -21,10 +21,12 @@ export function Radio({
   ref,
   ...props
 }: RadioProps) {
-  const radioName = name ?? `radio`;
+  const radioName = name || `radio`;
+  const radioId = id || useId();
   return (
     <label className={radioWrapper({ disabled })}>
       <input
+        id={radioId}
         name={radioName}
         ref={ref}
         type="radio"

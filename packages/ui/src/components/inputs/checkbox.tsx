@@ -1,4 +1,4 @@
-import { type Ref } from "react";
+import { type Ref, useId } from "react";
 import {
   checkboxWrapper,
   checkbox,
@@ -20,9 +20,11 @@ export function Checkbox({
   ref,
   ...props
 }: CheckboxProps) {
+  const checkboxId = id || useId();
   return (
     <label className={checkboxWrapper({ disabled })}>
       <input
+        id={checkboxId}
         ref={ref}
         type="checkbox"
         disabled={disabled}

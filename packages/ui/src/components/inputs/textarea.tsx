@@ -2,6 +2,7 @@ import {
   type Ref,
   type CSSProperties,
   type TextareaHTMLAttributes,
+  useId,
 } from "react";
 import { textarea, type TextareaVariants } from "./textarea.css";
 import { cn } from "../../utils/cn";
@@ -24,6 +25,7 @@ export function Textarea({
   ref,
   ...props
 }: TextareaProps) {
+  const textareaId = id || useId();
   const classNames = cn(textarea({ inputSize }), className);
 
   const textareaStyle: CSSProperties = {
@@ -32,7 +34,7 @@ export function Textarea({
   };
   return (
     <textarea
-      id={id}
+      id={textareaId}
       ref={ref}
       rows={rows}
       disabled={disabled}
