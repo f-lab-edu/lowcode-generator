@@ -5,6 +5,7 @@ import {
   type Ref,
   type ButtonHTMLAttributes,
   type CSSProperties,
+  useId,
 } from "react";
 import { createPortal } from "react-dom";
 import {
@@ -56,7 +57,7 @@ export function Select({
     width: number;
   }>({ top: 0, left: 0, width: 0 });
 
-  const selectId = id ?? `select-${Math.random().toString(36).slice(2, 8)}`;
+  const selectId = id ?? useId();
 
   useEffect(() => {
     if (value !== undefined) {
