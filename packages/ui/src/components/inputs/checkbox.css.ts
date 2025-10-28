@@ -8,7 +8,7 @@ export const checkboxWrapper = recipe({
     style({
       display: "inline-flex",
       alignItems: "center",
-      gap: vars.sizing[1],
+      gap: vars.sizing["1"],
       cursor: "pointer",
       userSelect: "none",
     }),
@@ -73,20 +73,20 @@ export const checkbox = recipe({
     inputSize: {
       sm: [
         style({
-          width: vars.sizing[3],
-          height: vars.sizing[3],
+          width: vars.sizing["3"],
+          height: vars.sizing["3"],
         }),
       ],
       md: [
         style({
-          width: vars.sizing[4],
-          height: vars.sizing[4],
+          width: vars.sizing["4"],
+          height: vars.sizing["4"],
         }),
       ],
       lg: [
         style({
-          width: vars.sizing[5],
-          height: vars.sizing[5],
+          width: vars.sizing["5"],
+          height: vars.sizing["5"],
         }),
       ],
     },

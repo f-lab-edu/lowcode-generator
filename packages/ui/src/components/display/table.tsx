@@ -1,7 +1,7 @@
 import {
   createContext,
   useContext,
-  forwardRef,
+  type Ref,
   type HTMLAttributes,
   type TdHTMLAttributes,
   type ThHTMLAttributes,
@@ -20,6 +20,7 @@ import {
   type TableHeaderCellVariants,
   type TableCellVariants,
 } from "./table.css";
+import { cn } from "../../utils/cn";
 
 const TableContext = createContext<TableVariants>({
   variant: "simple",
@@ -28,139 +29,154 @@ const TableContext = createContext<TableVariants>({
 const useTableContext = () => useContext(TableContext);
 
 // Table
-export type TableProps = HTMLAttributes<HTMLTableElement> & TableVariants;
-const Table = forwardRef<HTMLTableElement, TableProps>(
-  ({ variant = "simple", color = "base", className, ...props }, ref) => {
-    const classNames = [tableStyle({ variant, color }), className]
-      .filter(Boolean)
-      .join(" ");
-    return (
-      <TableContext.Provider value={{ variant, color }}>
-        <table ref={ref} className={classNames} {...props} />
-      </TableContext.Provider>
-    );
-  }
-);
-Table.displayName = "Table";
+export type TableProps = HTMLAttributes<HTMLTableElement> &
+  TableVariants & {
+    ref?: Ref<HTMLTableElement>;
+  };
+export function Table({
+  variant = "simple",
+  color = "base",
+  className,
+  ref,
+  ...props
+}: TableProps) {
+  const classNames = cn(tableStyle({ variant, color }), className);
+  return (
+    <TableContext.Provider value={{ variant, color }}>
+      <table ref={ref} className={classNames} {...props} />
+    </TableContext.Provider>
+  );
+}
 
 // Caption 영역
-export type TableCaptionProps = HTMLAttributes<HTMLTableCaptionElement>;
-const TableCaption = forwardRef<HTMLTableCaptionElement, TableCaptionProps>(
-  ({ className, ...props }, ref) => {
-    const classNames = [tableCaptionStyle(), className]
-      .filter(Boolean)
-      .join(" ");
-    return <caption ref={ref} className={classNames} {...props} />;
-  }
-);
-TableCaption.displayName = "TableCaption";
+export type TableCaptionProps = HTMLAttributes<HTMLTableCaptionElement> & {
+  ref?: Ref<HTMLTableCaptionElement>;
+};
+
+export function TableCaption({ className, ref, ...props }: TableCaptionProps) {
+  const classNames = cn(tableCaptionStyle(), className);
+  return <caption ref={ref} className={classNames} {...props} />;
+}
 
 // Thead (Color 등 varaint 영향 범위)
 export type TableHeadProps = HTMLAttributes<HTMLTableSectionElement> &
-  Parameters<typeof tableHeadStyle>[0];
-const Thead = forwardRef<HTMLTableSectionElement, TableHeadProps>(
-  ({ className, color, variant, ...props }, ref) => {
-    const { variant: ctxVariant, color: ctxColor } = useTableContext();
-    const finalColor = color || ctxColor;
-    const finalVariant = variant || ctxVariant;
+  Parameters<typeof tableHeadStyle>[0] & {
+    ref?: Ref<HTMLTableSectionElement>;
+  };
 
-    const classNames = [
-      tableHeadStyle({ variant: finalVariant, color: finalColor }),
-      className,
-    ]
-      .filter(Boolean)
-      .join(" ");
+export function Thead({
+  className,
+  color,
+  variant,
+  ref,
+  ...props
+}: TableHeadProps) {
+  const { variant: ctxVariant, color: ctxColor } = useTableContext();
+  const finalColor = color || ctxColor;
+  const finalVariant = variant || ctxVariant;
 
-    return <thead ref={ref} className={classNames} {...props} />;
-  }
-);
-Thead.displayName = "Thead";
+  const classNames = cn(
+    tableHeadStyle({ variant: finalVariant, color: finalColor }),
+    className
+  );
+
+  return <thead ref={ref} className={classNames} {...props} />;
+}
 
 // Tbody
-export type TableBodyProps = HTMLAttributes<HTMLTableSectionElement>;
-const Tbody = forwardRef<HTMLTableSectionElement, TableBodyProps>(
-  ({ className, ...props }, ref) => {
-    const classNames = [tableBodyStyle, className].filter(Boolean).join(" ");
-    return <tbody ref={ref} className={classNames} {...props} />;
-  }
-);
-Tbody.displayName = "Tbody";
+export type TableBodyProps = HTMLAttributes<HTMLTableSectionElement> & {
+  ref?: Ref<HTMLTableSectionElement>;
+};
+export function Tbody({ className, ref, ...props }: TableBodyProps) {
+  const classNames = cn(tableBodyStyle, className);
+  return <tbody ref={ref} className={classNames} {...props} />;
+}
 
 // TFoot
-export type TableFootProps = HTMLAttributes<HTMLTableSectionElement>;
-const Tfoot = forwardRef<HTMLTableSectionElement, TableFootProps>(
-  ({ className, ...props }, ref) => {
-    const classNames = [tableFootStyle, className].filter(Boolean).join(" ");
-    return <tfoot ref={ref} className={classNames} {...props} />;
-  }
-);
-Tfoot.displayName = "Tfoot";
+export type TableFootProps = HTMLAttributes<HTMLTableSectionElement> & {
+  ref?: Ref<HTMLTableSectionElement>;
+};
+export function Tfoot({ className, ref, ...props }: TableFootProps) {
+  const classNames = cn(tableFootStyle, className);
+  return <tfoot ref={ref} className={classNames} {...props} />;
+}
 
 // Table Row 영역
 export type TableRowProps = HTMLAttributes<HTMLTableRowElement> &
-  TableRowVariants;
-const Tr = forwardRef<HTMLTableRowElement, TableRowProps>(
-  ({ hover, color, variant, className, ...props }, ref) => {
-    const { variant: ctxVariant, color: ctxColor } = useTableContext();
-    const finalVariant = variant || ctxVariant;
-    const finalColor = color || ctxColor;
+  TableRowVariants & {
+    ref?: Ref<HTMLTableRowElement>;
+  };
+export function Tr({
+  hover,
+  color,
+  variant,
+  className,
+  ref,
+  ...props
+}: TableRowProps) {
+  const { variant: ctxVariant, color: ctxColor } = useTableContext();
+  const finalVariant = variant || ctxVariant;
+  const finalColor = color || ctxColor;
 
-    const classNames = [
-      tableRowStyle({ variant: finalVariant, hover, color: finalColor }),
-      className,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const classNames = cn(
+    tableRowStyle({ variant: finalVariant, hover, color: finalColor }),
+    className
+  );
 
-    return <tr ref={ref} className={classNames} {...props} />;
-  }
-);
-Tr.displayName = "Tr";
+  return <tr ref={ref} className={classNames} {...props} />;
+}
 
 // Table Header Cell
 export type TableHeaderCellProps = ThHTMLAttributes<HTMLTableCellElement> &
-  TableHeaderCellVariants;
-const Th = forwardRef<HTMLTableCellElement, TableHeaderCellProps>(
-  ({ size, align, color, variant, className, ...props }, ref) => {
-    const { variant: ctxVariant, color: ctxColor } = useTableContext();
-    const finalColor = color || ctxColor;
-    const finalVariant = variant || ctxVariant;
+  TableHeaderCellVariants & {
+    ref?: Ref<HTMLTableCellElement>;
+  };
+export function Th({
+  size,
+  align,
+  color,
+  variant,
+  className,
+  ref,
+  ...props
+}: TableHeaderCellProps) {
+  const { variant: ctxVariant, color: ctxColor } = useTableContext();
+  const finalColor = color || ctxColor;
+  const finalVariant = variant || ctxVariant;
 
-    const classNames = [
-      tableHeaderCellStyle({
-        size,
-        align,
-        color: finalColor,
-        variant: finalVariant,
-      }),
-      className,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const classNames = cn(
+    tableHeaderCellStyle({
+      size,
+      align,
+      color: finalColor,
+      variant: finalVariant,
+    }),
+    className
+  );
 
-    return <th ref={ref} className={classNames} {...props} />;
-  }
-);
-Th.displayName = "Th";
+  return <th ref={ref} className={classNames} {...props} />;
+}
 
 // --- TableCell --- //
 export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement> &
-  TableCellVariants;
-const Td = forwardRef<HTMLTableCellElement, TableCellProps>(
-  ({ size, align, variant, className, ...props }, ref) => {
-    const { variant: ctxVariant } = useTableContext();
-    const finalVariant = variant || ctxVariant;
+  TableCellVariants & {
+    ref?: Ref<HTMLTableCellElement>;
+  };
+export function Td({
+  size,
+  align,
+  variant,
+  className,
+  ref,
+  ...props
+}: TableCellProps) {
+  const { variant: ctxVariant } = useTableContext();
+  const finalVariant = variant || ctxVariant;
 
-    const classNames = [
-      tableCellStyle({ size, align, variant: finalVariant }),
-      className,
-    ]
-      .filter(Boolean)
-      .join(" ");
+  const classNames = cn(
+    tableCellStyle({ size, align, variant: finalVariant }),
+    className
+  );
 
-    return <td ref={ref} className={classNames} {...props} />;
-  }
-);
-Td.displayName = "Td";
-
-export { Table, TableCaption, Thead, Tbody, Tfoot, Tr, Th, Td };
+  return <td ref={ref} className={classNames} {...props} />;
+}

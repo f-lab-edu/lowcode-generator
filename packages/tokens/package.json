@@ -1,13 +1,11 @@
 {
   "name": "@packages/tokens",
   "version": "0.1.0",
-  "main": "./build/js/index.js",
-  "types": "./build/ts/tokens.d.ts",
   "exports": {
-    "./vanilla-extract": {
-      "types": "./build/vanilla-extract/theme-tokens.d.ts",
-      "import": "./build/vanilla-extract/theme-tokens.js",
-      "default": "./build/vanilla-extract/theme-tokens.js"
+    "./design-tokens": {
+      "types": "./build/design-tokens/index.d.ts",
+      "import": "./build/design-tokens/index.js",
+      "default": "./build/design-tokens/index.js"
     },
     "./css": "./build/css/variables.css"
   },
@@ -22,9 +20,6 @@
   "devDependencies": {
     "chokidar": "^3.5.3",
     "style-dictionary": "^3.8.0",
-    "@repo/typescript-config": "workspace:*"
-  },
-  "dependencies": {
     "json-to-ts": "^2.1.0"
   }
 }

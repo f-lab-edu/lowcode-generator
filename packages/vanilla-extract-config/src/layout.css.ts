@@ -1,5 +1,5 @@
 import { style } from "@vanilla-extract/css";
-import { vars } from "@packages/vanilla-extract-config";
+import { vars } from "./theme.css";
 import { recipe, type RecipeVariants } from "@vanilla-extract/recipes";
 
 export const containerRecipe = recipe({

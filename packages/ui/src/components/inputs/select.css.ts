@@ -6,7 +6,7 @@ import type { RecipeVariants } from "@vanilla-extract/recipes";
 export const selectWrapper = style({
   display: "flex",
   flexDirection: "column",
-  gap: vars.sizing[2],
+  gap: vars.sizing["2"],
   width: "fit-content",
   position: "relative",
 });
@@ -39,7 +39,7 @@ export const selectControl = recipe({
       boxSizing: "border-box",
       backgroundColor: vars.color.background.input.default,
       backgroundRepeat: "no-repeat",
-      backgroundPosition: `right ${vars.sizing[3]} center`,
+      backgroundPosition: `right ${vars.sizing["3"]} center`,
       backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='${encodeURIComponent(
         vars.color.text.subtle.default
       )}' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E")`,
@@ -47,7 +47,7 @@ export const selectControl = recipe({
       border: `${vars.sizing["0.5"]} solid ${vars.color.border.input.default}`,
       borderRadius: vars.sizing["2"],
       color: vars.color.text.base.default,
-      padding: `${vars.sizing[2]} ${vars.sizing[3]}`,
+      padding: `${vars.sizing["2"]} ${vars.sizing["3"]}`,
       textAlign: "left",
       selectors: {
         "&:hover": {
@@ -71,22 +71,22 @@ export const selectControl = recipe({
       sm: [
         typographyRecipe({ role: "textSmRegular" }),
         style({
-          backgroundSize: `${vars.sizing[3]} ${vars.sizing[3]}`,
-          padding: `${vars.sizing[1]} ${vars.sizing[6]} ${vars.sizing[1]} ${vars.sizing[2]}`,
+          backgroundSize: `${vars.sizing["3"]} ${vars.sizing["3"]}`,
+          padding: `${vars.sizing["1"]} ${vars.sizing["6"]} ${vars.sizing["1"]} ${vars.sizing["2"]}`,
         }),
       ],
       md: [
         typographyRecipe({ role: "textMdRegular" }),
         style({
-          backgroundSize: `${vars.sizing[4]} ${vars.sizing[4]}`,
-          padding: `${vars.sizing[2]} ${vars.sizing[8]} ${vars.sizing[2]} ${vars.sizing[3]}`,
+          backgroundSize: `${vars.sizing["4"]} ${vars.sizing["4"]}`,
+          padding: `${vars.sizing["2"]} ${vars.sizing["8"]} ${vars.sizing["2"]} ${vars.sizing["3"]}`,
         }),
       ],
       lg: [
         typographyRecipe({ role: "textLgRegular" }),
         style({
-          backgroundSize: `${vars.sizing[5]} ${vars.sizing[5]}`,
-          padding: `${vars.sizing[3]} ${vars.sizing[10]} ${vars.sizing[3]} ${vars.sizing[4]}`,
+          backgroundSize: `${vars.sizing["5"]} ${vars.sizing["5"]}`,
+          padding: `${vars.sizing["3"]} ${vars.sizing["10"]} ${vars.sizing["3"]} ${vars.sizing["4"]}`,
         }),
       ],
     },
@@ -103,7 +103,7 @@ export const selectMenu = style({
   left: 0,
   right: 0,
   zIndex: 10,
-  marginTop: vars.sizing[1],
+  marginTop: vars.sizing["1"],
   backgroundColor: vars.color.background.input.default,
   border: `${vars.sizing["0.5"]} solid ${vars.color.border.input.default}`,
   borderRadius: vars.sizing["2"],
@@ -119,7 +119,7 @@ export const optionItem = recipe({
   base: [
     typographyRecipe({ role: "textMdRegular" }),
     style({
-      padding: `${vars.sizing[2]} ${vars.sizing[3]}`,
+      padding: `${vars.sizing["2"]} ${vars.sizing["3"]}`,
       cursor: "pointer",
       color: vars.color.text.base.default,
       selectors: {

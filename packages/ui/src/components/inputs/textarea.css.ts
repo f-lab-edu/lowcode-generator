@@ -30,28 +30,19 @@ export const textarea = recipe({
       sm: [
         typographyRecipe({ role: "textSmRegular" }),
         style({
-          paddingLeft: vars.sizing[2],
-          paddingRight: vars.sizing[2],
-          paddingTop: vars.sizing[1],
-          paddingBottom: vars.sizing[1],
+          padding: `${vars.sizing["1"]} ${vars.sizing["2"]}`,
         }),
       ],
       md: [
         typographyRecipe({ role: "textMdRegular" }),
         style({
-          paddingLeft: vars.sizing[3],
-          paddingRight: vars.sizing[3],
-          paddingTop: vars.sizing[2],
-          paddingBottom: vars.sizing[2],
+          padding: `${vars.sizing["2"]} ${vars.sizing["3"]}`,
         }),
       ],
       lg: [
         typographyRecipe({ role: "textLgRegular" }),
         style({
-          paddingLeft: vars.sizing[3],
-          paddingRight: vars.sizing[3],
-          paddingTop: vars.sizing[3],
-          paddingBottom: vars.sizing[3],
+          padding: `${vars.sizing["3"]}`,
         }),
       ],
     },

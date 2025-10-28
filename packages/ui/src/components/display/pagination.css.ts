@@ -41,22 +41,22 @@ export const paginationItemStyle = recipe({
       sm: [
         typographyRecipe({ role: "textSmRegular" }),
         {
-          height: vars.sizing[6],
-          minWidth: vars.sizing[6],
+          height: vars.sizing["6"],
+          minWidth: vars.sizing["6"],
         },
       ],
       md: [
         typographyRecipe({ role: "textMdRegular" }),
         {
-          height: vars.sizing[8],
-          minWidth: vars.sizing[8],
+          height: vars.sizing["8"],
+          minWidth: vars.sizing["8"],
         },
       ],
       lg: [
         typographyRecipe({ role: "textLgRegular" }),
         {
-          height: vars.sizing[10],
-          minWidth: vars.sizing[10],
+          height: vars.sizing["10"],
+          minWidth: vars.sizing["10"],
         },
       ],
     },

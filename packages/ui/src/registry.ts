@@ -53,15 +53,11 @@ import type { ComponentMetaDefinition } from "./types/meta";
 
 export type ComponentType =
   | React.ComponentType<any>
-  | React.ForwardRefExoticComponent<any>
   | React.ExoticComponent<any>;
 
 export interface ComponentRegistryItem {
   hidden?: boolean;
-  component:
-    | React.ComponentType<any>
-    | React.ForwardRefExoticComponent<any>
-    | React.ExoticComponent<any>;
+  component: React.ComponentType<any> | React.ExoticComponent<any>;
   meta: ComponentMetaDefinition;
 }
 

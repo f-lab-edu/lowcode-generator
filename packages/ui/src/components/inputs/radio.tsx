@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { useId, type Ref } from "react";
 import {
   radioWrapper,
   radio,
@@ -9,31 +9,32 @@ import {
 export type RadioProps = React.InputHTMLAttributes<HTMLInputElement> &
   RadioVariants & {
     label?: string;
+    ref?: Ref<HTMLInputElement>;
   };
 
-const Radio = forwardRef<HTMLInputElement, RadioProps>(
-  ({ id, name, label, disabled = false, inputSize = "md", ...props }, ref) => {
-    const radioName = name ?? `radio`;
-
-    const radioId = id ?? `radio-${Math.random().toString(36).slice(2, 8)}`;
-
-    return (
-      <label htmlFor={radioId} className={radioWrapper({ disabled })}>
-        <input
-          id={radioId}
-          name={radioName}
-          ref={ref}
-          type="radio"
-          disabled={disabled}
-          className={radio({ inputSize })}
-          {...props}
-        />
-        {label && <span className={radioLabel({ inputSize })}>{label}</span>}
-      </label>
-    );
-  }
-);
-
-Radio.displayName = "Radio";
-
-export { Radio };
+export function Radio({
+  id,
+  name,
+  label,
+  disabled = false,
+  inputSize = "md",
+  ref,
+  ...props
+}: RadioProps) {
+  const radioName = name || `radio`;
+  const radioId = id || useId();
+  return (
+    <label className={radioWrapper({ disabled })}>
+      <input
+        id={radioId}
+        name={radioName}
+        ref={ref}
+        type="radio"
+        disabled={disabled}
+        className={radio({ inputSize })}
+        {...props}
+      />
+      {label && <span className={radioLabel({ inputSize })}>{label}</span>}
+    </label>
+  );
+}

@@ -1,43 +1,41 @@
-import { forwardRef, type CSSProperties, type HTMLAttributes } from "react";
+import { type Ref, type CSSProperties, type HTMLAttributes } from "react";
 import {
   containerRecipe,
   type ContainerRecipeVariants,
 } from "@packages/vanilla-extract-config";
+import { cn } from "../../utils/cn";
 
 export type ContainerProps = HTMLAttributes<HTMLDivElement> &
   ContainerRecipeVariants & {
     minHeight?: string | number;
+    ref?: Ref<HTMLDivElement>;
   };
 
-const Container = forwardRef<HTMLDivElement, ContainerProps>(
-  (
-    { widthScale = "lg", minHeight, className, style, children, ...props },
-    ref
-  ) => {
-    const classNames = [containerRecipe({ widthScale }), className]
-      .filter(Boolean)
-      .join(" ");
+export function Container({
+  widthScale = "lg",
+  minHeight,
+  className,
+  style,
+  children,
+  ref,
+  ...props
+}: ContainerProps) {
+  const classNames = cn(containerRecipe({ widthScale }), className);
 
-    const containerStyle: CSSProperties = minHeight
-      ? {
-          minHeight:
-            typeof minHeight === "string" ? minHeight : `${minHeight}px`,
-        }
-      : { minHeight: "100svh" };
+  const containerStyle: CSSProperties = minHeight
+    ? {
+        minHeight: typeof minHeight === "string" ? minHeight : `${minHeight}px`,
+      }
+    : { minHeight: "100svh" };
 
-    return (
-      <div
-        ref={ref}
-        className={classNames}
-        style={{ ...containerStyle, ...style }}
-        {...props}
-      >
-        {children}
-      </div>
-    );
-  }
-);
-
-Container.displayName = "Container";
-
-export { Container };
+  return (
+    <div
+      ref={ref}
+      className={classNames}
+      style={{ ...containerStyle, ...style }}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}

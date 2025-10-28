@@ -1,53 +1,46 @@
 import {
-  forwardRef,
+  type Ref,
   type CSSProperties,
   type TextareaHTMLAttributes,
+  useId,
 } from "react";
 import { textarea, type TextareaVariants } from "./textarea.css";
+import { cn } from "../../utils/cn";
 
 export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
   TextareaVariants & {
     className?: string;
     width?: CSSProperties["width"];
+    ref?: Ref<HTMLTextAreaElement>;
   };
 
-const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
-  (
-    {
-      id,
-      className,
-      disabled = false,
-      inputSize = "md",
-      width = "100%",
-      rows = 3,
-      style,
-      ...props
-    },
-    ref
-  ) => {
-    const classNames = [textarea({ inputSize }), className]
-      .filter(Boolean)
-      .join(" ");
+export function Textarea({
+  id,
+  className,
+  disabled = false,
+  inputSize = "md",
+  width = "100%",
+  rows = 3,
+  style,
+  ref,
+  ...props
+}: TextareaProps) {
+  const textareaId = id || useId();
+  const classNames = cn(textarea({ inputSize }), className);
 
-    const textareaStyle: CSSProperties = {
-      width: typeof width === "number" ? `${width}px` : width,
-      ...style,
-    };
-
-    return (
-      <textarea
-        id={id}
-        ref={ref}
-        rows={rows}
-        disabled={disabled}
-        className={classNames}
-        style={textareaStyle}
-        {...props}
-      />
-    );
-  }
-);
-
-Textarea.displayName = "Textarea";
-
-export { Textarea };
+  const textareaStyle: CSSProperties = {
+    width: typeof width === "number" ? `${width}px` : width,
+    ...style,
+  };
+  return (
+    <textarea
+      id={textareaId}
+      ref={ref}
+      rows={rows}
+      disabled={disabled}
+      className={classNames}
+      style={textareaStyle}
+      {...props}
+    />
+  );
+}
