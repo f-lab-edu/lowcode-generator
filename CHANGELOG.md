@@ -1,4 +1,4 @@
-#  (2025-10-21)
+#  (2025-10-28)
 
 
 ### Features
@@ -19,9 +19,14 @@
 * **atomic components:** 기존 storybook test 컴포넌트 삭제 및 storybook 관련 설정사항 수정 ([89fc112](https://github.com/Tessa1217/lowcode-generator/commit/89fc112a944212961e7ff131a2204a803e122d32))
 * **atomic components:** 레이아웃 컴포넌트(container, section, stack) 생성 ([fff636b](https://github.com/Tessa1217/lowcode-generator/commit/fff636b772826566e0fa24a961ccc9fc02f3dcc2))
 * **atomic components:** 페이지네이션 컴포넌트 생성 및 story 생성 (usePagination 포함) ([b5b6ef3](https://github.com/Tessa1217/lowcode-generator/commit/b5b6ef3ad77d16ebc02f1db4b9bd89147ccc009f))
+* **component canvas:** canvas zoom-in zoom-out 기능 추가(canvas overflow 시 넘치치 않고 전체 화면 볼수 있도록 기능 추가) ([f6327a2](https://github.com/Tessa1217/lowcode-generator/commit/f6327a2f6c684664f35f1ed960e0dc059e860ee2))
 * **component canvas:** Drag and Drop 충돌 탐지 별도 커스텀하게 구현 (중첩한 충돌 영역에 대한 처리 별도로 필요하여 custom detection 사용) ([b8a9942](https://github.com/Tessa1217/lowcode-generator/commit/b8a99425df04aeae1416eb6039c74110a2016a6a))
+* **component canvas:** drag and drop, sortable drag, table node edit에 대한 기능 커스텀 훅으로 분리 ([bf76d6d](https://github.com/Tessa1217/lowcode-generator/commit/bf76d6d6aa760dd6e6ae8f8c17a0304840b449a0))
 * **component canvas:** Tree 스토어 생성 ([1794473](https://github.com/Tessa1217/lowcode-generator/commit/1794473c3596f617e049f5a8f63ba02c2519e81a))
+* **component canvas:** zoom control 버튼 추가 및 scale에 따른 transform 적용 ([36f58f8](https://github.com/Tessa1217/lowcode-generator/commit/36f58f864a84689b8401c45696a3294a1d36f474))
+* **component canvas:** 충돌 detection 알고리즘, 테이블 등과 같은 scaffold 기능에 대한 파싱 기능 유틸리티 추가 ([6100cca](https://github.com/Tessa1217/lowcode-generator/commit/6100ccac6ebd216198a1fe4c079b5bbe18729440))
 * **component canvas:** 컴포넌트 캔버스 영역 ([4e56d46](https://github.com/Tessa1217/lowcode-generator/commit/4e56d46c9be8294b64c9efbab7f86de4adc5ec8f))
+* **component canvas:** 테이블 컴포넌트를 위한 별도 table node renderer 생성 ([cc18acb](https://github.com/Tessa1217/lowcode-generator/commit/cc18acbd0aa2e653ac376684d299cdb9da921f82))
 * **component palette:** Code generator app에 registry 이용하여 컴포넌트 팔레트 1차 생성 ([2de2c0c](https://github.com/Tessa1217/lowcode-generator/commit/2de2c0c8a5c502ae5f04a6a3ead4b7b08df49984))
 * **component palette:** Component, Component meta 레지스트리 파일 생성 ([1488f81](https://github.com/Tessa1217/lowcode-generator/commit/1488f81e483d583777a8c6c22e0cf7a561b10077))
 * **component palette:** drag and drop 시 컴포넌트 보이도록 overlay 생성 ([8a5aa8a](https://github.com/Tessa1217/lowcode-generator/commit/8a5aa8a0f74b8cc8707a8fa1649859b8c277e91a))
