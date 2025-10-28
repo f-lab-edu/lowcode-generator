@@ -1,8 +1,8 @@
 import { useState } from "react";
+import { getComponentMeta } from "@packages/ui";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { type TreeNode } from "../types";
-import { getComponentMeta } from "@packages/ui";
 
 export const useSortableDragAndHover = (rootNode: TreeNode) => {
   const [isHovered, setIsHovered] = useState(false);
