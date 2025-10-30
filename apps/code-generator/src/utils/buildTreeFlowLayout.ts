@@ -38,7 +38,7 @@ export function buildTreeFlowLayout(tree: TreeNode[]) {
         id: `${node.id}-${child.id}`,
         source: node.id,
         target: child.id,
-        type: "straight",
+        type: "component-edge",
       });
 
       traverse(child, depth + 1, currentX);
@@ -54,7 +54,11 @@ export function buildTreeFlowLayout(tree: TreeNode[]) {
         x: centerX * horizontalSpacing,
         y: depth * verticalSpacing,
       },
-      data: { label: node.componentName },
+      data: {
+        label: node.componentName,
+        meta: { ...node.meta },
+        props: { ...node.props },
+      },
     });
   }
 

@@ -56,6 +56,7 @@ export function useDragAndDrop() {
             id: `node-${Date.now()}-${Math.random()}`,
             componentName: data.componentName,
             props: data.props,
+            meta: getComponentMeta(data.componentName),
             children: [],
           };
 

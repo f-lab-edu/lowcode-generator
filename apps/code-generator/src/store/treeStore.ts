@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { devtools } from "zustand/middleware";
-import { type TreeNode } from "../types";
 import { getComponentMeta } from "@packages/ui";
+import { type TreeNode } from "../types";
 
 interface TreeStore {
   tree: TreeNode[];

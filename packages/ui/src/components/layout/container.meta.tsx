@@ -1,5 +1,5 @@
-import { type ComponentMetaDefinition } from "../../types/meta";
 import { CONTAINER_WIDTH_SCALE } from "@packages/vanilla-extract-config";
+import { type ComponentMetaDefinition } from "../../types/meta";
 
 export const ContainerMeta: ComponentMetaDefinition = {
   component: "Container",
