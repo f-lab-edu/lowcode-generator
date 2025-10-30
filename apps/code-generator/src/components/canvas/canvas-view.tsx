@@ -1,18 +1,18 @@
 import { useDroppable } from "@dnd-kit/core";
 import { TreeRenderer } from "../drag-and-drop/tree-renderer";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
-import { useZoom } from "../../hooks/useZoom";
-import { ZoomControl } from "./zoom-control";
-import "./component-canvas.css";
+import { useZoomControl } from "../../hooks/useZoomControl";
+import { ZoomControl } from "../layout/zoom-control";
+import "./canvas-view.css";
 
-export function ComponentCanvas() {
+export function CanvasView() {
   const { setNodeRef, isOver } = useDroppable({
     id: "canvas-root",
     data: { type: "canvas-root", id: "canvas-root" },
   });
 
   const { tree } = useDragAndDrop();
-  const { scale, handleWheel, zoomIn, zoomOut, resetZoom } = useZoom();
+  const { scale, handleWheel, zoomIn, zoomOut, resetZoom } = useZoomControl();
 
   const innerCanvasStyle = {
     transform: `scale(${scale})`,

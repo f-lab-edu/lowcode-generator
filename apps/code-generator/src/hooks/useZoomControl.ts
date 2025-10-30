@@ -6,7 +6,7 @@ export type ZoomProps = {
   step?: number;
 };
 
-export const useZoom = (options: ZoomProps = {}) => {
+export const useZoomControl = (options: ZoomProps = {}) => {
   // zoom scale
   const [scale, setScale] = useState<number>(1);
   // zoom할 대상

@@ -1,8 +1,9 @@
-import type { ComponentName } from "@packages/ui";
+import type { ComponentMeta, ComponentName } from "@packages/ui";
 
 export type TreeNode = {
   id: string;
   componentName: ComponentName;
-  props: Record<string, any>;
+  props: Record<string, unknown>;
+  meta?: ComponentMeta;
   children: TreeNode[];
 };
