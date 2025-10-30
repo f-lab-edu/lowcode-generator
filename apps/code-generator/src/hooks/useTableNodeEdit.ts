@@ -1,5 +1,7 @@
+import { getComponentMeta } from "@packages/ui";
 import { useTreeStore } from "../store/treeStore";
 import { type TreeNode } from "../types";
+import { safeClone } from "../utils/safeClone";
 
 export const useTableNodeEdit = (node: TreeNode) => {
   const { updateNodeById } = useTreeStore.getState();
@@ -15,8 +17,15 @@ export const useTableNodeEdit = (node: TreeNode) => {
     return { thead, tbody, theadRow, tbodyRows, colCount, rowCount };
   };
 
-  const cloneNode = (n: TreeNode): TreeNode =>
-    structuredClone ? structuredClone(n) : JSON.parse(JSON.stringify(n));
+  const cloneNode = (n: TreeNode): TreeNode => {
+    const cloned: TreeNode = safeClone({
+      ...n,
+      meta: undefined,
+      children: n.children.map((child) => cloneNode(child)),
+    });
+    cloned.meta = getComponentMeta(n.componentName);
+    return cloned;
+  };
 
   /** 열 추가 */
   const addColumn = () => {
@@ -29,6 +38,7 @@ export const useTableNodeEdit = (node: TreeNode) => {
       id: `node-${crypto.randomUUID()}`,
       componentName: "Th",
       props: { children: `제목 ${colCount + 1}` },
+      meta: getComponentMeta("Th"),
       children: [],
     });
 
@@ -37,6 +47,7 @@ export const useTableNodeEdit = (node: TreeNode) => {
         id: `node-${crypto.randomUUID()}`,
         componentName: "Td",
         props: { children: "내용" },
+        meta: getComponentMeta("Td"),
         children: [],
       });
     });
@@ -66,10 +77,12 @@ export const useTableNodeEdit = (node: TreeNode) => {
       id: `node-${crypto.randomUUID()}`,
       componentName: "Tr",
       props: {},
+      meta: getComponentMeta("Tr"),
       children: Array.from({ length: colCount }, (_, i) => ({
         id: `node-${crypto.randomUUID()}`,
         componentName: "Td",
         props: { children: `내용 ${i + 1}` },
+        meta: getComponentMeta("Td"),
         children: [],
       })),
     };

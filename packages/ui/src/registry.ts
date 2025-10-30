@@ -1,3 +1,5 @@
+import type { ComponentMetaDefinition } from "./types/meta";
+
 // layout
 import { Container } from "./components/layout/container";
 import { ContainerMeta } from "./components/layout/container.meta";
@@ -49,7 +51,6 @@ import { Textarea } from "./components/inputs/textarea";
 import { TextareaMeta } from "./components/inputs/textarea.meta";
 import { Select } from "./components/inputs/select";
 import { SelectMeta } from "./components/inputs/select.meta";
-import type { ComponentMetaDefinition } from "./types/meta";
 
 export type ComponentType =
   | React.ComponentType<any>

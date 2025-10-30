@@ -1,12 +1,12 @@
 import type { TreeNode } from "../types";
 import { useState } from "react";
 import { getComponentMeta } from "@packages/ui";
-import { type DragEndEvent } from "@dnd-kit/core";
+import { type DragEndEvent, type DragStartEvent } from "@dnd-kit/core";
 import { parseScaffoldToTree } from "../utils/parseScaffoldToTree";
 import { useTreeStore } from "../store/treeStore";
 
 export function useDragAndDrop() {
-  const [activeDrag, setActiveDrag] = useState<any>(null);
+  const [activeDrag, setActiveDrag] = useState<unknown | null>(null);
   const {
     tree,
     setTree,
@@ -16,7 +16,7 @@ export function useDragAndDrop() {
     findAndInsertNode,
   } = useTreeStore();
 
-  const handleDragStart = (event: any) => {
+  const handleDragStart = (event: DragStartEvent) => {
     const { active } = event;
     setActiveDrag(active.data.current);
   };
@@ -70,7 +70,7 @@ export function useDragAndDrop() {
     }
 
     if (activeType === "tree-node") {
-      const [_, removedNode] = findAndRemoveNode(active.id as string);
+      const [, removedNode] = findAndRemoveNode(active.id as string);
       if (!removedNode) return;
 
       if (canNest) {

@@ -1,26 +1,23 @@
-import * as acorn from "acorn";
-import jsx from "acorn-jsx";
 import type { TreeNode } from "../types";
-import type { ComponentName } from "@packages/ui";
-
-// JSX 확장된 파서 생성
-const Parser = acorn.Parser.extend(jsx());
+import { getComponentMeta, type ComponentName } from "@packages/ui";
+import { Parser } from "acorn";
+import jsx from "acorn-jsx";
 
 /**
  * meta에서 scaffold를 제공하는 경우 JSX를 AST로 파싱하여 TreeNode[]로 변환
  * ex) <Thead><Tr><Th>제목</Th></Tr></Thead>
  */
 export function parseScaffoldToTree(scaffold: string): TreeNode | null {
-  const ast = Parser.parse(scaffold, {
+  const ast = Parser.extend(jsx()).parse(scaffold, {
     ecmaVersion: "latest",
     sourceType: "module",
   });
 
-  function walkJSX(node: any): TreeNode {
+  function walkJSX(node): TreeNode {
     const name = node.openingElement.name.name as ComponentName;
 
     // JSX 속성 파싱
-    const props: Record<string, any> = {};
+    const props: Record<string, unknown> = {};
     for (const attr of node.openingElement.attributes || []) {
       const key = attr.name?.name;
       if (!key) continue;
@@ -42,6 +39,7 @@ export function parseScaffoldToTree(scaffold: string): TreeNode | null {
           id: `node-${crypto.randomUUID()}`,
           componentName: "Text",
           props: { children: child.value.trim() },
+          meta: getComponentMeta("Text"),
           children: [],
         });
       }
@@ -51,6 +49,7 @@ export function parseScaffoldToTree(scaffold: string): TreeNode | null {
       id: `node-${crypto.randomUUID()}`,
       componentName: name,
       props,
+      meta: getComponentMeta(name),
       children,
     };
   }

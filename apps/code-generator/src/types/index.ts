@@ -4,6 +4,6 @@ export type TreeNode = {
   id: string;
   componentName: ComponentName;
   props: Record<string, unknown>;
-  meta: ComponentMeta;
+  meta?: ComponentMeta;
   children: TreeNode[];
 };
