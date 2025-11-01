@@ -6,7 +6,7 @@ import {
 } from "@packages/ui";
 import { useDraggable } from "@dnd-kit/core";
 
-function getDefaultProps(name: ComponentName): Record<string, any> {
+function getDefaultProps(name: ComponentName): Record<string, unknown> {
   const meta = getComponentMeta(name);
 
   if (!meta?.props) {
@@ -35,7 +35,7 @@ function getDefaultProps(name: ComponentName): Record<string, any> {
       }
     }
     return acc;
-  }, {} as Record<string, any>);
+  }, {} as Record<string, unknown>);
 }
 
 export type ComponentCardProps = {
@@ -44,11 +44,11 @@ export type ComponentCardProps = {
   meta: ComponentMeta;
 };
 
-const DraggableComponentCard = ({
+export function DraggableComponentCard({
   name,
   component,
   meta,
-}: ComponentCardProps) => {
+}: ComponentCardProps) {
   const defaultProps = getDefaultProps(name);
 
   const Component = component;
@@ -90,8 +90,4 @@ const DraggableComponentCard = ({
       <span className="component-name">{meta.component}</span>
     </div>
   );
-};
-
-DraggableComponentCard.displayName = "DraggableComponentCard";
-
-export { DraggableComponentCard };
+}

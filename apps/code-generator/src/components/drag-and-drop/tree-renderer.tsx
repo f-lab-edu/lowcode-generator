@@ -5,15 +5,15 @@ import {
   type ComponentType,
 } from "@packages/ui";
 import { type TreeNode } from "../../types";
+import { useSortableDragAndHover } from "../../hooks/useSortableDragAndHover";
 import { TableNodeTree } from "./tree-node-table";
 import { DroppableArea } from "./droppable-area";
-import { useSortableDragAndHover } from "../../hooks/useSortableDragAndHover";
 
 interface TreeNodeComponentProps {
   node: TreeNode;
 }
 
-const TreeNodeComponent = ({ node }: TreeNodeComponentProps) => {
+export function TreeNodeComponent({ node }: TreeNodeComponentProps) {
   const meta = getComponentMeta(node.componentName);
   const Component = getComponent(node.componentName) as ComponentType;
   const canHaveChildren = meta?.hasChildren;
@@ -85,20 +85,18 @@ const TreeNodeComponent = ({ node }: TreeNodeComponentProps) => {
       onMouseDownCapture={handleMouseDown}
     />
   );
-};
+}
 
 // 테이블 구조에 맞는 빈 영역 컴포넌트
-const EmptyDropZone = () => {
+export function EmptyDropZone() {
   return <div className="empty-drop-zone">Drop here to nest</div>;
-};
-
-TreeNodeComponent.displayName = "TreeNodeComponent";
+}
 
 interface TreeRendererProps {
   nodes: TreeNode[];
 }
 
-const TreeRenderer = ({ nodes }: TreeRendererProps) => {
+export function TreeRenderer({ nodes }: TreeRendererProps) {
   if (nodes.length === 0) return null;
 
   return (
@@ -111,8 +109,4 @@ const TreeRenderer = ({ nodes }: TreeRendererProps) => {
       ))}
     </SortableContext>
   );
-};
-
-TreeRenderer.displayName = "TreeRenderer";
-
-export { TreeNodeComponent, TreeRenderer };
+}

@@ -1,8 +1,8 @@
-import { useState } from "react";
 import type { TreeNode } from "../types";
+import { useState } from "react";
+import { getComponentMeta } from "@packages/ui";
 import { type DragEndEvent } from "@dnd-kit/core";
 import { parseScaffoldToTree } from "../utils/parseScaffoldToTree";
-import { getComponentMeta } from "@packages/ui";
 import { useTreeStore } from "../store/treeStore";
 
 export function useDragAndDrop() {

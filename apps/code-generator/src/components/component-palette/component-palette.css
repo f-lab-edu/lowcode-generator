@@ -84,7 +84,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 11px;
+  font-size: 1rem;
   font-weight: 800;
   color: #666;
   text-transform: uppercase;
@@ -110,8 +110,7 @@
 }
 
 .category-title.open {
-  background-color: #0066ff;
-  color: #e0e0e0;
+  color: var(--primary);
 }
 
 /* 카테고리 콘텐츠 (아코디언) */
@@ -150,8 +149,11 @@
 }
 
 .component-card:hover {
-  border-color: #0066ff;
+  /* border-color: #0066ff;
   box-shadow: 0 2px 12px rgba(0, 102, 255, 0.12);
+  transform: translateY(-2px); */
+  background: #eefbf9;
+  border-color: var(--primary);
   transform: translateY(-2px);
 }
 

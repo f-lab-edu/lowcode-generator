@@ -1,10 +1,10 @@
 import { DragOverlay } from "@dnd-kit/core";
-import { type TreeNode } from "../../types";
 import {
   ComponentRegistry,
   type ComponentName,
   type ComponentRegistryItem,
 } from "@packages/ui";
+import { type TreeNode } from "../../types";
 const DragComponentOverlay = ({ activeDrag }: { activeDrag: TreeNode }) => {
   return (
     <DragOverlay>
