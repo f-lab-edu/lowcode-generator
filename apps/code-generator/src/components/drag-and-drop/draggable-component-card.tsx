@@ -6,7 +6,7 @@ import {
 } from "@packages/ui";
 import { useDraggable } from "@dnd-kit/core";
 
-function getDefaultProps(name: ComponentName): Record<string, any> {
+function getDefaultProps(name: ComponentName): Record<string, unknown> {
   const meta = getComponentMeta(name);
 
   if (!meta?.props) {
@@ -35,7 +35,7 @@ function getDefaultProps(name: ComponentName): Record<string, any> {
       }
     }
     return acc;
-  }, {} as Record<string, any>);
+  }, {} as Record<string, unknown>);
 }
 
 export type ComponentCardProps = {
@@ -44,11 +44,11 @@ export type ComponentCardProps = {
   meta: ComponentMeta;
 };
 
-const DraggableComponentCard = ({
+export function DraggableComponentCard({
   name,
   component,
   meta,
-}: ComponentCardProps) => {
+}: ComponentCardProps) {
   const defaultProps = getDefaultProps(name);
 
   const Component = component;
@@ -72,7 +72,6 @@ const DraggableComponentCard = ({
       {...attributes}
     >
       {/* 미니 프리뷰 - 실제로 렌더링 */}
-      {/* Layout의 경우에는 실제 렌더링 시 그냥 빈 화면만 나오기 때문에 차후에 보정 필요 => meta.ts 쪽에 renderPreview 함수 활용 */}
       <div className="thumbnail">
         <div className="mini-preview">
           {meta.renderPreview ? (
@@ -90,8 +89,4 @@ const DraggableComponentCard = ({
       <span className="component-name">{meta.component}</span>
     </div>
   );
-};
-
-DraggableComponentCard.displayName = "DraggableComponentCard";
-
-export { DraggableComponentCard };
+}

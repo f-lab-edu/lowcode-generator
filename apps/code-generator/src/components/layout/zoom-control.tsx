@@ -1,19 +1,19 @@
 import "./zoom-control.css";
 import { Eraser, PlusCircle, MinusCircle } from "lucide-react";
 
-type ZoomControlProps = {
+interface ZoomControlProps {
   scale: number;
   onZoomIn: () => void;
   onZoomOut: () => void;
   onReset: () => void;
-};
+}
 
-const ZoomControl = ({
+export function ZoomControl({
   scale,
   onZoomIn,
   onZoomOut,
   onReset,
-}: ZoomControlProps) => {
+}: ZoomControlProps) {
   return (
     <div className="zoom-control">
       <button onClick={onZoomIn}>
@@ -28,8 +28,4 @@ const ZoomControl = ({
       </button>
     </div>
   );
-};
-
-ZoomControl.displayName = "ZoomControl";
-
-export { ZoomControl };
+}

@@ -1,10 +1,10 @@
 import "./tabs-list.css";
 
-type TabListProps = {
+interface TabListProps {
   tabs: string[];
   activeTab: string | undefined;
   changeTab: (nextTab: string) => void;
-};
+}
 
 export function TabList({ tabs, activeTab, changeTab }: TabListProps) {
   return (
