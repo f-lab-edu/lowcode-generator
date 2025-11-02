@@ -1,14 +1,14 @@
-type TableCellInputProps = {
+interface TableCellInputProps {
   value: string;
   onChange: (value: string) => void;
   borderColor?: string;
-};
+}
 
-const TableCellInput = ({
+export function TableCellInput({
   value,
   onChange,
   borderColor = "#4CAF50",
-}: TableCellInputProps) => {
+}: TableCellInputProps) {
   return (
     <input
       type="text"
@@ -30,6 +30,4 @@ const TableCellInput = ({
       }}
     />
   );
-};
-
-export { TableCellInput };
+}

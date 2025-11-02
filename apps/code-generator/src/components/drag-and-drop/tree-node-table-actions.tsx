@@ -1,16 +1,16 @@
 import { Plus, X, Minus } from "lucide-react";
 
-type TableActionButtonsProps = {
+interface TableActionButtonsProps {
   isHovered: boolean;
   onAddColumn: () => void;
   onAddRow: () => void;
-};
+}
 
-const TableActionButtons = ({
+export function TableActionButtons({
   isHovered,
   onAddColumn,
   onAddRow,
-}: TableActionButtonsProps) => {
+}: TableActionButtonsProps) {
   return (
     <>
       <button
@@ -32,7 +32,7 @@ const TableActionButtons = ({
       </button>
     </>
   );
-};
+}
 
 type DeleteColumnButtonProps = {
   isHovered: boolean;
@@ -40,11 +40,11 @@ type DeleteColumnButtonProps = {
   onDelete: () => void;
 };
 
-const DeleteColumnButton = ({
+export function DeleteColumnButton({
   isHovered,
   colCount,
   onDelete,
-}: DeleteColumnButtonProps) => {
+}: DeleteColumnButtonProps) {
   if (!isHovered || colCount <= 1) return null;
 
   return (
@@ -57,7 +57,7 @@ const DeleteColumnButton = ({
       <X />
     </button>
   );
-};
+}
 
 type DeleteRowButtonProps = {
   isHovered: boolean;
@@ -65,11 +65,11 @@ type DeleteRowButtonProps = {
   onDelete: () => void;
 };
 
-const DeleteRowButton = ({
+export function DeleteRowButton({
   isHovered,
   rowCount,
   onDelete,
-}: DeleteRowButtonProps) => {
+}: DeleteRowButtonProps) {
   if (!isHovered || rowCount <= 1) return null;
 
   return (
@@ -82,6 +82,4 @@ const DeleteRowButton = ({
       <Minus />
     </button>
   );
-};
-
-export { TableActionButtons, DeleteColumnButton, DeleteRowButton };
+}

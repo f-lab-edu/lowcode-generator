@@ -4,46 +4,57 @@ import {
   getComponent,
   type ComponentType,
 } from "@packages/ui";
+import { useSortableDragAndHover } from "../../hooks/useSortableDragAndHover";
+import { useTreeStore } from "../../store/treeStore";
 import { type TreeNode } from "../../types";
 import { TableNodeTree } from "./tree-node-table";
-import { DroppableArea } from "./droppable-area";
-import { useSortableDragAndHover } from "../../hooks/useSortableDragAndHover";
+import { TreeNodeContainer } from "./tree-node-container";
+import { TreeNodeInline } from "./tree-node-inline";
+import "./tree-node.css";
+
+export interface BaseNodeProps {
+  node: TreeNode;
+  dragProps: ReturnType<typeof useSortableDragAndHover>["dragProps"];
+  effectiveHover: boolean;
+  handleMouseEnter: (e: React.MouseEvent) => void;
+  handleMouseLeave: () => void;
+  handleMouseDown: (e: React.MouseEvent) => void;
+  handleDelete: () => void;
+  setIsActionsHovered: (hovered: boolean) => void;
+  Component: ComponentType;
+}
 
 interface TreeNodeComponentProps {
   node: TreeNode;
 }
 
-const TreeNodeComponent = ({ node }: TreeNodeComponentProps) => {
+function TreeNode({ node }: TreeNodeComponentProps) {
   const meta = getComponentMeta(node.componentName);
   const Component = getComponent(node.componentName) as ComponentType;
   const canHaveChildren = meta?.hasChildren;
 
-  const { isHovered, setIsHovered, dragProps, handleMouseDown } =
-    useSortableDragAndHover(node);
+  const { findAndRemoveNode } = useTreeStore();
 
-  // Table 컴포넌트는 전용 에디터 사용
-  if (node.componentName === "Table") {
-    return <TableNodeTree rootNode={node} />;
-  }
+  const handleDelete = () => {
+    findAndRemoveNode(node.id);
+  };
 
-  if (node.componentName === "Text") {
-    return node.props.children;
-  }
+  const {
+    effectiveHover,
+    setIsActionsHovered,
+    handleMouseEnter,
+    handleMouseLeave,
+    dragProps,
+    handleMouseDown,
+  } = useSortableDragAndHover(node);
 
   // children 렌더링
   const renderChildren = () => {
     if (node.children.length > 0) {
-      return (
-        <SortableContext
-          items={node.children.map((child) => child.id)}
-          strategy={rectSortingStrategy}
-        >
-          <TreeRenderer nodes={node.children} />
-        </SortableContext>
-      );
+      return <TreeRenderer nodes={node.children} />;
     }
     if (node.props.children) {
-      return node.props.children;
+      return node.props.children as React.ReactNode;
     }
     return <EmptyDropZone />;
   };
@@ -51,54 +62,72 @@ const TreeNodeComponent = ({ node }: TreeNodeComponentProps) => {
   // 일반 컴포넌트 중 children을 가질 수 있는 경우
   if (canHaveChildren) {
     return (
-      <DroppableArea
-        nodeId={node.id}
-        dragRef={dragProps.ref}
-        dragAttributes={dragProps.attributes}
-        dragListeners={dragProps.listeners}
-        dragStyle={dragProps.style}
+      <TreeNodeContainer
+        node={node}
+        dragProps={dragProps}
+        effectiveHover={effectiveHover}
+        handleMouseEnter={handleMouseEnter}
+        handleMouseLeave={handleMouseLeave}
+        handleMouseDown={handleMouseDown}
+        handleDelete={handleDelete}
+        setIsActionsHovered={setIsActionsHovered}
+        Component={Component}
       >
-        <Component
-          {...node.props}
-          data-node-id={node.id}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onMouseDownCapture={handleMouseDown}
-        >
-          {renderChildren()}
-        </Component>
-      </DroppableArea>
+        {renderChildren()}
+      </TreeNodeContainer>
     );
   }
 
   // 일반 요소 (children 없음) - inline 요소들
   return (
-    <Component
-      {...node.props}
-      ref={dragProps.ref}
-      style={{ ...dragProps.style, ...node.props.style }}
-      data-node-id={node.id}
-      {...dragProps.attributes}
-      {...dragProps.listeners}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseDownCapture={handleMouseDown}
+    <TreeNodeInline
+      node={node}
+      dragProps={dragProps}
+      effectiveHover={effectiveHover}
+      handleMouseEnter={handleMouseEnter}
+      handleMouseLeave={handleMouseLeave}
+      handleMouseDown={handleMouseDown}
+      handleDelete={handleDelete}
+      setIsActionsHovered={setIsActionsHovered}
+      Component={Component}
     />
   );
-};
+}
 
-// 테이블 구조에 맞는 빈 영역 컴포넌트
-const EmptyDropZone = () => {
+// 테이블 노드
+function TableNode({ node }: { node: TreeNode }) {
+  return <TableNodeTree rootNode={node} />;
+}
+
+// 일반 텍스트 노드
+function TextNode({ node }: { node: TreeNode }) {
+  return <>{node.props.children}</>;
+}
+
+// 빈 드롭 존
+function EmptyDropZone() {
   return <div className="empty-drop-zone">Drop here to nest</div>;
-};
+}
 
-TreeNodeComponent.displayName = "TreeNodeComponent";
+// 트리 노드 컴포넌트
+function TreeNodeComponent({ node }: TreeNodeComponentProps) {
+  if (node.componentName === "Table") {
+    return <TableNode node={node} />;
+  }
+
+  if (node.componentName === "Text") {
+    return <TextNode node={node} />;
+  }
+
+  return <TreeNode node={node} />;
+}
 
 interface TreeRendererProps {
   nodes: TreeNode[];
 }
 
-const TreeRenderer = ({ nodes }: TreeRendererProps) => {
+// 트리 Renderer
+export function TreeRenderer({ nodes }: TreeRendererProps) {
   if (nodes.length === 0) return null;
 
   return (
@@ -111,8 +140,4 @@ const TreeRenderer = ({ nodes }: TreeRendererProps) => {
       ))}
     </SortableContext>
   );
-};
-
-TreeRenderer.displayName = "TreeRenderer";
-
-export { TreeNodeComponent, TreeRenderer };
+}
