@@ -1,5 +1,5 @@
-import { type ComponentMetaDefinition } from "../../types/meta";
 import { SIZE_VARIANTS } from "@packages/vanilla-extract-config";
+import { type ComponentMetaDefinition } from "../../types/meta";
 
 export const TextareaMeta: ComponentMetaDefinition = {
   component: "Textarea",

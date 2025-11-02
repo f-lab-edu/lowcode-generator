@@ -6,6 +6,7 @@ import {
   type TdHTMLAttributes,
   type ThHTMLAttributes,
 } from "react";
+import { cn } from "../../utils/cn";
 import {
   table as tableStyle,
   tableCaption as tableCaptionStyle,
@@ -20,7 +21,6 @@ import {
   type TableHeaderCellVariants,
   type TableCellVariants,
 } from "./table.css";
-import { cn } from "../../utils/cn";
 
 const TableContext = createContext<TableVariants>({
   variant: "simple",

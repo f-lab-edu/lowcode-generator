@@ -1,11 +1,11 @@
 import { useState, useMemo, type ComponentProps } from "react";
+import { cn } from "../../utils/cn";
 import {
   paginationStyle,
   paginationListStyle,
   paginationItemStyle,
   type PaginationVariants,
 } from "./pagination.css";
-import { cn } from "../../utils/cn";
 
 const usePagination = ({
   count,
@@ -41,19 +41,19 @@ const usePagination = ({
     const lastPageRange = range(count - boundaryCount + 1, count);
 
     if (!shouldShowLeftEllipsis && shouldShowRightEllipsis) {
-      let leftItemCount = 3 + 2 * siblingCount;
-      let leftRange = range(1, leftItemCount);
+      const leftItemCount = 3 + 2 * siblingCount;
+      const leftRange = range(1, leftItemCount);
       return [...leftRange, "ellipsis", ...lastPageRange];
     }
 
     if (shouldShowLeftEllipsis && !shouldShowRightEllipsis) {
-      let rightItemCount = 3 + 2 * siblingCount;
-      let rightRange = range(count - rightItemCount + 1, count);
+      const rightItemCount = 3 + 2 * siblingCount;
+      const rightRange = range(count - rightItemCount + 1, count);
       return [...firstPageRange, "ellipsis", ...rightRange];
     }
 
     if (shouldShowLeftEllipsis && shouldShowRightEllipsis) {
-      let middleRange = range(leftSiblingIndex, rightSiblingIndex);
+      const middleRange = range(leftSiblingIndex, rightSiblingIndex);
       return [
         ...firstPageRange,
         "ellipsis",

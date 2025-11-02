@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Button } from "./button";
-import { Stack } from "../layout/stack";
 import {
   COLOR_VARIANTS,
   SIZE_VARIANTS,
 } from "@packages/vanilla-extract-config";
+import { Stack } from "../layout/stack";
+import { Button } from "./button";
 
 const meta = {
   title: "UI/Button",

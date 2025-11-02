@@ -1,6 +1,6 @@
+import type { RecipeVariants } from "@vanilla-extract/recipes";
 import { type Ref, type CSSProperties, type HTMLAttributes } from "react";
 import { gridRecipe } from "@packages/vanilla-extract-config";
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 import { cn } from "../../utils/cn";
 
 export type GridVariants = RecipeVariants<typeof gridRecipe>;

@@ -1,7 +1,7 @@
+import type { RecipeVariants } from "@vanilla-extract/recipes";
 import { vars, typographyRecipe } from "@packages/vanilla-extract-config";
 import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
-import type { RecipeVariants } from "@vanilla-extract/recipes";
 
 export const selectWrapper = style({
   display: "flex",

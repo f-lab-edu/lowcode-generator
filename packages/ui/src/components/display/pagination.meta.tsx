@@ -1,8 +1,8 @@
-import { type ComponentMetaDefinition } from "../../types/meta";
 import {
   SIZE_VARIANTS,
   THEME_COLOR_VARIANTS,
 } from "@packages/vanilla-extract-config";
+import { type ComponentMetaDefinition } from "../../types/meta";
 
 export const PaginationMeta: ComponentMetaDefinition = {
   component: "Pagination",

@@ -1,6 +1,6 @@
 import { type Ref, type HTMLAttributes } from "react";
-import { divider, type DividerVariants } from "./divider.css";
 import { cn } from "../../utils/cn";
+import { divider, type DividerVariants } from "./divider.css";
 
 export type DividerProps = HTMLAttributes<HTMLDivElement> &
   DividerVariants & {

@@ -8,6 +8,7 @@ import {
   useId,
 } from "react";
 import { createPortal } from "react-dom";
+import { cn } from "../../utils/cn";
 import {
   selectWrapper,
   selectControl,
@@ -16,7 +17,6 @@ import {
   optionItem,
   type SelectVariants,
 } from "./select.css";
-import { cn } from "../../utils/cn";
 
 export type SelectOption = { label: string; value: string; disabled?: boolean };
 
@@ -57,13 +57,8 @@ export function Select({
     width: number;
   }>({ top: 0, left: 0, width: 0 });
 
-  const selectId = id ?? useId();
-
-  useEffect(() => {
-    if (value !== undefined) {
-      setSelectedValue(value);
-    }
-  }, [value]);
+  const generatedId = useId();
+  const selectId = `${id || "select"}_${generatedId}`;
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {

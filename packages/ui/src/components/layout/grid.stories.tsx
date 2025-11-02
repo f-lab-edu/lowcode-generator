@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Grid } from "./grid";
 import { GRID_GAP, GRID_PADDING } from "@packages/vanilla-extract-config";
+import { Grid } from "./grid";
 
 const meta = {
   title: "Layout/Grid",

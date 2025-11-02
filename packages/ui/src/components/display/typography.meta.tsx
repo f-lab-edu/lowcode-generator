@@ -1,5 +1,5 @@
-import { type ComponentMetaDefinition } from "../../types/meta";
 import { TYPOGRAPHY_ROLES } from "@packages/vanilla-extract-config";
+import { type ComponentMetaDefinition } from "../../types/meta";
 import { TYPOGRAPHY_ELEMENT } from "./typography";
 
 export const TypographyMeta: ComponentMetaDefinition = {

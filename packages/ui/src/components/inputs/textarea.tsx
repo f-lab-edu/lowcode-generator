@@ -4,8 +4,8 @@ import {
   type TextareaHTMLAttributes,
   useId,
 } from "react";
-import { textarea, type TextareaVariants } from "./textarea.css";
 import { cn } from "../../utils/cn";
+import { textarea, type TextareaVariants } from "./textarea.css";
 
 export type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> &
   TextareaVariants & {
@@ -25,7 +25,9 @@ export function Textarea({
   ref,
   ...props
 }: TextareaProps) {
-  const textareaId = id || useId();
+  const generatedId = useId();
+  const textareaId = `${id || "textarea"}_${generatedId}`;
+
   const classNames = cn(textarea({ inputSize }), className);
 
   const textareaStyle: CSSProperties = {

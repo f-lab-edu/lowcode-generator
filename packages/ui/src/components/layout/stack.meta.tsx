@@ -1,10 +1,10 @@
-import { type ComponentMetaDefinition } from "../../types/meta";
 import {
   STACK_ALIGNMENT,
   STACK_GAP,
   STACK_DIRECTION,
   STACK_JUSTIFICATION,
 } from "@packages/vanilla-extract-config";
+import { type ComponentMetaDefinition } from "../../types/meta";
 
 const Item = ({ index }: { index: number }) => (
   <div

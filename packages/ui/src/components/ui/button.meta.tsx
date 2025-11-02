@@ -1,8 +1,8 @@
-import { type ComponentMetaDefinition } from "../../types/meta";
 import {
   COLOR_VARIANTS,
   SIZE_VARIANTS,
 } from "@packages/vanilla-extract-config";
+import { type ComponentMetaDefinition } from "../../types/meta";
 
 export const ButtonMeta: ComponentMetaDefinition = {
   component: "Button",
