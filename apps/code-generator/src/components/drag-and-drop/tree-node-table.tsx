@@ -1,20 +1,38 @@
+import { useRef } from "react";
 import { getComponent } from "@packages/ui";
 import { type TreeNode } from "../../types";
 import { useSortableDragAndHover } from "../../hooks/useSortableDragAndHover";
+import { useTreeStore } from "../../store/treeStore";
+import { useTableNodeEdit } from "../../hooks/useTableNodeEdit";
 import { TableActionButtons } from "./tree-node-table-actions";
 import { TableBody } from "./tree-node-table-body";
 import { TableHead } from "./tree-node-table-head";
-import { useTableNodeEdit } from "../../hooks/useTableNodeEdit";
+import { TreeNodeActionsPortal } from "./tree-node-actions-portal";
 import "./tree-node-table.css";
+
 interface TableNodeTreeProps {
   rootNode: TreeNode;
 }
 
-const TableNodeTree = ({ rootNode }: TableNodeTreeProps) => {
-  const { isHovered, setIsHovered, dragProps, handleMouseDown } =
-    useSortableDragAndHover(rootNode);
+const Table = getComponent("Table");
 
-  const Table = getComponent("Table");
+export function TableNodeTree({ rootNode }: TableNodeTreeProps) {
+  const {
+    effectiveHover,
+    handleMouseEnter,
+    handleMouseLeave,
+    setIsActionsHovered,
+    dragProps,
+    handleMouseDown,
+  } = useSortableDragAndHover(rootNode);
+
+  const nodeRef = useRef<HTMLElement>(null);
+
+  const { findAndRemoveNode } = useTreeStore();
+
+  const handleDelete = () => {
+    findAndRemoveNode(rootNode.id);
+  };
 
   const {
     addColumn,
@@ -44,17 +62,18 @@ const TableNodeTree = ({ rootNode }: TableNodeTreeProps) => {
 
   return (
     <div
-      ref={dragProps.ref}
-      {...dragProps.attributes}
-      {...dragProps.listeners}
+      ref={(el: HTMLElement | null) => {
+        if (dragProps.ref) dragProps.ref(el);
+        nodeRef.current = el;
+      }}
       style={dragProps.style}
       className="table-tree-node"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       onMouseDownCapture={handleMouseDown}
     >
       <TableActionButtons
-        isHovered={isHovered}
+        isHovered={effectiveHover}
         onAddColumn={addColumn}
         onAddRow={addRow}
       />
@@ -62,7 +81,7 @@ const TableNodeTree = ({ rootNode }: TableNodeTreeProps) => {
         <TableHead
           thead={thead}
           theadRow={theadRow}
-          isHovered={isHovered}
+          isHovered={effectiveHover}
           colCount={colCount}
           onUpdateCell={handleUpdateHeadCell}
           onRemoveColumn={removeColumn}
@@ -71,16 +90,23 @@ const TableNodeTree = ({ rootNode }: TableNodeTreeProps) => {
         <TableBody
           tbody={tbody}
           tbodyRows={tbodyRows}
-          isHovered={isHovered}
+          isHovered={effectiveHover}
           rowCount={rowCount}
           onUpdateCell={handleUpdateBodyCell}
           onRemoveRow={removeRow}
         />
       </Table>
+      <TreeNodeActionsPortal
+        targetRef={nodeRef}
+        isHovered={effectiveHover}
+        setActivatorNodeRef={dragProps.setActivatorNodeRef}
+        dragAttributes={dragProps.attributes}
+        dragListeners={dragProps.listeners}
+        isDragging={dragProps.isDragging}
+        componentName={rootNode.componentName}
+        onDelete={handleDelete}
+        onHoverChange={setIsActionsHovered}
+      />
     </div>
   );
-};
-
-TableNodeTree.displayName = "TableNodeTree";
-
-export { TableNodeTree };
+}

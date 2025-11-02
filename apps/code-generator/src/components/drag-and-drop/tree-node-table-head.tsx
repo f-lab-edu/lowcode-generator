@@ -12,18 +12,18 @@ interface TableHeadProps {
   onRemoveColumn: (colIndex: number) => void;
 }
 
-const TableHead = ({
+const Thead = getComponent("Thead");
+const Tr = getComponent("Tr");
+const Th = getComponent("Th");
+
+export function TableHead({
   thead,
   theadRow,
   isHovered,
   colCount,
   onUpdateCell,
   onRemoveColumn,
-}: TableHeadProps) => {
-  const Thead = getComponent("Thead");
-  const Tr = getComponent("Tr");
-  const Th = getComponent("Th");
-
+}: TableHeadProps) {
   if (!thead) return null;
 
   return (
@@ -32,7 +32,7 @@ const TableHead = ({
         {theadRow?.children.map((thNode, colIndex) => (
           <Th key={thNode.id} style={{ position: "relative" }}>
             <TableCellInput
-              value={thNode.props.children}
+              value={thNode.props.children as string}
               onChange={(value) => onUpdateCell(colIndex, value)}
               borderColor="#4CAF50"
             />
@@ -46,8 +46,4 @@ const TableHead = ({
       </Tr>
     </Thead>
   );
-};
-
-TableHead.displayName = "TableHead";
-
-export { TableHead };
+}

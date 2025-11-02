@@ -12,18 +12,18 @@ interface TableBodyProps {
   onRemoveRow: (rowIndex: number) => void;
 }
 
-const TableBody = ({
+const Tbody = getComponent("Tbody");
+const Tr = getComponent("Tr");
+const Td = getComponent("Td");
+
+export function TableBody({
   tbody,
   tbodyRows,
   isHovered,
   rowCount,
   onUpdateCell,
   onRemoveRow,
-}: TableBodyProps) => {
-  const Tbody = getComponent("Tbody");
-  const Tr = getComponent("Tr");
-  const Td = getComponent("Td");
-
+}: TableBodyProps) {
   if (!tbody) return null;
 
   return (
@@ -33,7 +33,7 @@ const TableBody = ({
           {trNode.children.map((tdNode, colIndex) => (
             <Td key={tdNode.id}>
               <TableCellInput
-                value={tdNode.props.children}
+                value={tdNode.props.children as string}
                 onChange={(value) => onUpdateCell(rowIndex, colIndex, value)}
                 borderColor="#2196F3"
               />
@@ -57,8 +57,4 @@ const TableBody = ({
       ))}
     </Tbody>
   );
-};
-
-TableBody.displayName = "TableBody";
-
-export { TableBody };
+}

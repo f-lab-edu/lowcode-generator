@@ -1,10 +1,10 @@
 import { CanvasView } from "../canvas/canvas-view";
 import { TreeView } from "../tree/tree-view";
 
-type TabContentProps = {
+interface TabContentProps {
   activeTab: string | undefined;
   isPending: boolean;
-};
+}
 
 export function TabContent({ activeTab, isPending }: TabContentProps) {
   if (isPending) {
