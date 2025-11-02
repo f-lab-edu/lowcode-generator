@@ -21,8 +21,13 @@ export function Radio({
   ref,
   ...props
 }: RadioProps) {
+  // name
   const radioName = name || `radio`;
-  const radioId = id || useId();
+
+  // id (generated using use id hook)
+  const generatedId = useId();
+  const radioId = `${id || "radio"}_${generatedId}`;
+
   return (
     <label className={radioWrapper({ disabled })}>
       <input

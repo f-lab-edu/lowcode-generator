@@ -20,7 +20,8 @@ export function Checkbox({
   ref,
   ...props
 }: CheckboxProps) {
-  const checkboxId = id || useId();
+  const generatedId = useId();
+  const checkboxId = `${id || "checkbox"}_${generatedId}`;
   return (
     <label className={checkboxWrapper({ disabled })}>
       <input

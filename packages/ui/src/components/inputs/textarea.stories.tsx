@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { SIZE_VARIANTS } from "@packages/vanilla-extract-config";
 import { Textarea } from "../inputs/textarea";
 import { Stack } from "../layout/stack";
-import { SIZE_VARIANTS } from "@packages/vanilla-extract-config";
 
 const meta = {
   title: "Form/Textarea",

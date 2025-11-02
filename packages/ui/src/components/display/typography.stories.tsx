@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import {
+  TYPOGRAPHY_ROLES,
+  type TypographyRole,
+} from "@packages/vanilla-extract-config";
+import {
   Typography,
   TYPOGRAPHY_ELEMENT,
   type TypographyElement,
 } from "./typography";
-import {
-  TYPOGRAPHY_ROLES,
-  type TypographyRole,
-} from "@packages/vanilla-extract-config";
 
 const meta = {
   title: "Display/Typography",
@@ -53,7 +53,7 @@ export const HeadingTypography: Story = {
   render: (args) => (
     <>
       {Object.entries(heading).map(([key, value]) => (
-        <Typography role={key as keyof typeof heading} as={value}>
+        <Typography key={value} role={key as keyof typeof heading} as={value}>
           {args.children}
         </Typography>
       ))}
@@ -85,7 +85,7 @@ export const TextTypography: Story = {
   render: (args) => (
     <>
       {Object.entries(text).map(([key, value]) => (
-        <div>
+        <div key={value}>
           <p>Role: {key}</p>
           <Typography role={key as keyof typeof heading} as={value}>
             {args.children}
@@ -118,7 +118,7 @@ export const DisplayTypography: Story = {
   render: (args) => (
     <>
       {Object.entries(display).map(([key, value]) => (
-        <Typography role={key as keyof typeof heading} as={value}>
+        <Typography key={value} role={key as keyof typeof heading} as={value}>
           {args.children}
         </Typography>
       ))}
@@ -147,7 +147,7 @@ export const CaptionTypography: Story = {
   render: (args) => (
     <>
       {Object.entries(caption).map(([key, value]) => (
-        <div>
+        <div key={value}>
           Role : {key} &nbsp;
           <Typography role={key as keyof typeof heading} as={value}>
             {args.children}
@@ -177,7 +177,7 @@ export const OverlineTypography: Story = {
   render: (args) => (
     <>
       {Object.entries(overline).map(([key, value]) => (
-        <Typography role={key as keyof typeof heading} as={value}>
+        <Typography key={value} role={key as keyof typeof heading} as={value}>
           {args.children}
         </Typography>
       ))}
@@ -205,7 +205,7 @@ export const CodeTypography: Story = {
   render: (args) => (
     <>
       {Object.entries(code).map(([key, value]) => (
-        <Typography role={key as keyof typeof heading} as={value}>
+        <Typography key={value} role={key as keyof typeof heading} as={value}>
           {args.children}
         </Typography>
       ))}

@@ -1,5 +1,5 @@
-import { type ComponentMetaDefinition } from "../../types/meta";
 import { GRID_GAP, GRID_PADDING } from "@packages/vanilla-extract-config";
+import { type ComponentMetaDefinition } from "../../types/meta";
 
 const Item = ({ index }: { index: number }) => (
   <div

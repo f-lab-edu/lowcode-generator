@@ -1,6 +1,6 @@
 import { type Ref, type CSSProperties, useId } from "react";
-import { input, type InputVariants } from "./input.css";
 import { cn } from "../../utils/cn";
+import { input, type InputVariants } from "./input.css";
 
 export type InputProps = React.InputHTMLAttributes<HTMLInputElement> & {
   className?: string;
@@ -18,7 +18,9 @@ export function Input({
   ref,
   ...props
 }: InputProps) {
-  const inputId = id || useId();
+  const generatedId = useId();
+  const inputId = `${id || "input"}_${generatedId}`;
+
   const classNames = cn(input({ inputSize }), className);
 
   const inputStyle: CSSProperties = {

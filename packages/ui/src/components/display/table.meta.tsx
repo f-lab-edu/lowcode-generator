@@ -1,5 +1,5 @@
-import { type ComponentMetaDefinition } from "../../types/meta";
 import { THEME_COLOR_VARIANTS } from "@packages/vanilla-extract-config";
+import { type ComponentMetaDefinition } from "../../types/meta";
 import { Table, TableCaption, Thead, Tbody, Tr, Th, Td } from "./table";
 
 const tableScaffold = `
@@ -38,7 +38,7 @@ export const TableMeta: ComponentMetaDefinition = {
       description: "테이블의 강조 색상",
     },
   },
-  renderPreview: (Component, props) => {
+  renderPreview: (_, props) => {
     return (
       <Table {...props}>
         <Thead>
@@ -75,7 +75,7 @@ export const TheadMeta: ComponentMetaDefinition = {
     <Th>Header 2</Th>
   </Tr>
   `,
-  renderPreview: (Component) => (
+  renderPreview: (_) => (
     <Thead>
       <Tr>
         <Th>Header 1</Th>
@@ -97,7 +97,7 @@ export const TbodyMeta: ComponentMetaDefinition = {
     <Td>내용 2</Td>
   </Tr>
   `,
-  renderPreview: (Component) => (
+  renderPreview: (_) => (
     <Tbody>
       <Tr>
         <Td>내용 1</Td>
@@ -117,7 +117,7 @@ export const TrMeta: ComponentMetaDefinition = {
   <Td>셀 1</Td>
   <Td>셀 2</Td>
   `,
-  renderPreview: (Component) => (
+  renderPreview: (_) => (
     <Tr>
       <Td>셀 1</Td>
       <Td>셀 2</Td>
@@ -139,7 +139,7 @@ export const ThMeta: ComponentMetaDefinition = {
     },
   },
   scaffold: `<Th>Header</Th>`,
-  renderPreview: (Component) => <Th>Header</Th>,
+  renderPreview: (_) => <Th>Header</Th>,
 };
 
 export const TdMeta: ComponentMetaDefinition = {
@@ -156,7 +156,7 @@ export const TdMeta: ComponentMetaDefinition = {
     },
   },
   scaffold: `<Td>Data</Td>`,
-  renderPreview: (Component) => <Td>Data</Td>,
+  renderPreview: (_) => <Td>Data</Td>,
 };
 
 export const TableCaptionMeta: ComponentMetaDefinition = {
@@ -166,5 +166,5 @@ export const TableCaptionMeta: ComponentMetaDefinition = {
   hasChildren: false,
   props: {},
   scaffold: `<TableCaption>테이블 설명</TableCaption>`,
-  renderPreview: (Component) => <TableCaption>테이블 설명</TableCaption>,
+  renderPreview: (_) => <TableCaption>테이블 설명</TableCaption>,
 };

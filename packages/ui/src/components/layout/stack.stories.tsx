@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Stack } from "./stack";
 import {
   STACK_ALIGNMENT,
   STACK_GAP,
   STACK_DIRECTION,
   STACK_JUSTIFICATION,
 } from "@packages/vanilla-extract-config";
+import { Stack } from "./stack";
 
 const meta = {
   title: "Layout/Stack",
@@ -62,7 +62,7 @@ export const Primary: Story = {
       align={args.align}
     >
       {[...Array(4)].map((_, i) => (
-        <Item index={i} />
+        <Item key={`item_${i + 1}`} index={i} />
       ))}
     </Stack>
   ),
@@ -87,13 +87,13 @@ export const StackDirections: Story = {
       <p>Row Direction</p>
       <Stack direction="row" gap={args.gap}>
         {[...Array(4)].map((_, i) => (
-          <Item index={i} />
+          <Item key={`row_item_${i + 1}`} index={i} />
         ))}
       </Stack>
       <p>Col Direction</p>
       <Stack direction="column" gap={args.gap}>
         {[...Array(4)].map((_, i) => (
-          <Item index={i} />
+          <Item key={`column_item_${i + 1}`} index={i} />
         ))}
       </Stack>
     </div>
@@ -121,7 +121,7 @@ export const StackJustification: Story = {
           </p>
           <Stack direction="row" gap={args.gap} justify={justify}>
             {[...Array(4)].map((_, i) => (
-              <Item index={i} />
+              <Item key={`justify_item_${i + 1}`} index={i} />
             ))}
           </Stack>
         </>
@@ -151,7 +151,7 @@ export const StackAlignment: Story = {
           </p>
           <Stack direction="column" gap={args.gap} align={align}>
             {[...Array(2)].map((_, i) => (
-              <Item index={i} />
+              <Item key={`align_item_${i + 1}`} index={i} />
             ))}
           </Stack>
         </>
