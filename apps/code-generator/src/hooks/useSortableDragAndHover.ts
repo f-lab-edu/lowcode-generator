@@ -3,14 +3,17 @@ import { getComponentMeta } from "@packages/ui";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { type TreeNode } from "../types";
+import { useTreeStore } from "../store/treeStore";
 
 export const useSortableDragAndHover = (rootNode: TreeNode) => {
-  const [isHovered, setIsHovered] = useState(false);
+  const { hoveredNodeId, setHoveredNode } = useTreeStore();
+
   const meta = getComponentMeta(rootNode.componentName);
   const {
     attributes,
     listeners,
     setNodeRef: setSortableRef,
+    setActivatorNodeRef,
     transform,
     transition,
     isDragging,
@@ -26,6 +29,12 @@ export const useSortableDragAndHover = (rootNode: TreeNode) => {
     },
   });
 
+  // action쪽 hover 시 기존 노드에서 벗어나서 버튼 hover 풀리는 효과로 인해 action hover에 대해서 관리 필요
+  const [isActionsHovered, setIsActionsHovered] = useState(false);
+
+  const isHovered = hoveredNodeId === rootNode.id;
+  const effectiveHover = isHovered || isActionsHovered;
+
   const dragStyle = {
     transform: CSS.Transform.toString(transform),
     transition,
@@ -38,6 +47,12 @@ export const useSortableDragAndHover = (rootNode: TreeNode) => {
    */
   const handleMouseDown = (e: React.MouseEvent) => {
     const el = e.target as HTMLElement;
+
+    // 드래그 핸들이나 그 내부 요소인 경우 통과
+    if (el.closest(".tree-node-drag-handle")) {
+      return; // stopPropagation 하지 않음
+    }
+
     if (
       el.tagName === "INPUT" ||
       el.tagName === "BUTTON" ||
@@ -49,15 +64,28 @@ export const useSortableDragAndHover = (rootNode: TreeNode) => {
     }
   };
 
+  const handleMouseEnter = (e: React.MouseEvent) => {
+    setHoveredNode(rootNode.id);
+    e.stopPropagation();
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredNode(null);
+  };
+
   return {
-    isHovered,
-    setIsHovered,
+    setIsActionsHovered,
+    effectiveHover,
     dragProps: {
       ref: setSortableRef,
+      setActivatorNodeRef,
       attributes,
       listeners,
       style: { position: "relative" as const, ...dragStyle },
+      isDragging,
     },
     handleMouseDown,
+    handleMouseEnter,
+    handleMouseLeave,
   };
 };

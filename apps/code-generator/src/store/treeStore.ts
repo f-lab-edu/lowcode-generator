@@ -5,6 +5,8 @@ import { type TreeNode } from "../types";
 
 interface TreeStore {
   tree: TreeNode[];
+  hoveredNodeId: string | null;
+  setHoveredNode: (id: string | null) => void;
   setTree: (tree: TreeNode[]) => void;
   insertIntoContainer: (targetId: string, newNode: TreeNode) => void;
   findAndRemoveNode: (id: string) => [TreeNode[], TreeNode | null];
@@ -17,6 +19,12 @@ interface TreeStore {
 export const useTreeStore = create<TreeStore>()(
   devtools((set, get) => ({
     tree: [],
+    hoveredNodeId: null,
+    setHoveredNode: (id) => {
+      if (!id) return;
+      console.log(id);
+      set({ hoveredNodeId: id });
+    },
     setTree: (tree) => set({ tree }),
     /**
      * 노드를 특정 컨테이너 내부로 삽입
