@@ -1,3 +1,5 @@
+import "./property-field.css";
+
 interface PropertyFieldProps {
   propName: string;
   propMeta: any;
