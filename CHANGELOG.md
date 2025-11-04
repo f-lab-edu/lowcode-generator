@@ -1,4 +1,4 @@
-#  (2025-10-28)
+#  (2025-11-04)
 
 
 ### Features
@@ -37,6 +37,17 @@
 * **component palette:** 컴포넌트 팔레트 및 속성 에디터에서 활용할 컴포넌트 메타 파일 (*.meta.tsx) 추가 ([598a349](https://github.com/Tessa1217/lowcode-generator/commit/598a34920b1c961773109bb4af0d09f777118f1a))
 * **component palette:** 컴포넌트 팔레트와 요소 드래그 앤 드롭 생성 ([856e80a](https://github.com/Tessa1217/lowcode-generator/commit/856e80a28069a5658fb0aeb4c282d4faf2d5fbc5))
 * **component palette:** 컴포넌트 팔레트와 캔버스 영역 배치 ([3cf2fb9](https://github.com/Tessa1217/lowcode-generator/commit/3cf2fb9021270ab566d70fe450b2ed1d41846307))
+* **component tree:** canvas view, tree view 생성 ([a08d9b7](https://github.com/Tessa1217/lowcode-generator/commit/a08d9b7ab3690261f57764afb234a21b6669846b))
+* **component tree:** tab 전환 시 부드러운 UI 전환을 위한 useTabTransition 훅 생성 (useTransition 활용) ([5719a78](https://github.com/Tessa1217/lowcode-generator/commit/5719a78e196194cd69707665a2195f6477eb7655))
+* **component tree:** tree flow 생성을 위한 유틸리티 함수 및 훅 생성 (store에 저장된 tree 구조를 배치 계산 함수를 통해 react flow에서 배치할 수 있는 배치 레이아웃 생성) ([ae063fa](https://github.com/Tessa1217/lowcode-generator/commit/ae063faca2b256b40915cf42ab5e38420d9ee4ee))
+* **component tree:** Tree UI를 위한 react flow dependency 적용 ([04ad62a](https://github.com/Tessa1217/lowcode-generator/commit/04ad62a92670050d4edded53651899c2a10bcdbe))
+* **component tree:** 트리 UI에서 컴포넌트 선택 시 현재 컴포넌트의 메타데이터, 속성에 대한 패널 나오도록 구성 (현재 어떤 variant, properties 등이 있는지 확인하므로서 해당 속성이 어떤 영향을 미치는지 등 확인 가능) ([f43fbbe](https://github.com/Tessa1217/lowcode-generator/commit/f43fbbe889f3d17ba1dc44e9597f3b233c033a85))
+* **property editor:** drag and drop 컴포넌트 select 시 속성 패널을 통한 속성 변경 action 추가 ([f03419e](https://github.com/Tessa1217/lowcode-generator/commit/f03419eb96b1a4ef8c2e48dcf33f84c4e3618923))
+* **property editor:** 메타 속성 에디터 생성 (우측 패널, 컴포넌트 캔버스 클릭 시 카드 형태의 에디터 구성) ([f684205](https://github.com/Tessa1217/lowcode-generator/commit/f684205392bb11acbba0969d42c135add28b7029))
+* **property editor:** 속성 패널, 컴포넌트 카드 클릭 시 속성 수정 가능한 속성 모달 추가 ([07e9b1d](https://github.com/Tessa1217/lowcode-generator/commit/07e9b1da0fcdeca8badfb3e9c1cb7c288ab0b9f4))
+* **property editor:** 속성 패널을 통한 변경 시 현재 트리 노드에 변경된 속성 적용 기능 추가 ([227911f](https://github.com/Tessa1217/lowcode-generator/commit/227911f9d76e0d7111678fb25cc25a8e3e95df2c))
+* **property editor:** 신규 컴포넌트 추가 기능 커스텀 훅 구현 ([fc6b3d1](https://github.com/Tessa1217/lowcode-generator/commit/fc6b3d1830a951cf573a3891b949a82c87ec085f))
+* **property editor:** 컴포넌트 카드 클릭 시 속성 편집, 컴포넌트 프리뷰 확인, 신규 컴포넌트 추가 가능한 컴포넌트 속성 편집 에디터 추가 ([f1594dc](https://github.com/Tessa1217/lowcode-generator/commit/f1594dcdcc5555a873483e21f0a63265ec4a1080))
 * **storybook:** chromatic ci ([82f1199](https://github.com/Tessa1217/lowcode-generator/commit/82f11997757ad0e4d83a7fad8fd9c613cd723643))
 * **tokens:** add foundation tokens ([95669f0](https://github.com/Tessa1217/lowcode-generator/commit/95669f0faef8d39fd9e13a331b41ce4346824edd))
 * **tokens:** button atom component 생성 및 테스트 진행 ([2049473](https://github.com/Tessa1217/lowcode-generator/commit/20494737707e1edf03fbcca5c3c6ccd37d3ba9b9))
