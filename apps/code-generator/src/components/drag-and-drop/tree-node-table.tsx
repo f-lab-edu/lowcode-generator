@@ -98,6 +98,7 @@ export function TableNodeTree({ rootNode }: TableNodeTreeProps) {
       </Table>
       <TreeNodeActionsPortal
         targetRef={nodeRef}
+        node={rootNode}
         isHovered={effectiveHover}
         setActivatorNodeRef={dragProps.setActivatorNodeRef}
         dragAttributes={dragProps.attributes}

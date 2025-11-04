@@ -43,6 +43,7 @@ export function TreeNodeContainer({
       </DroppableArea>
       <TreeNodeActionsPortal
         targetRef={nodeRef}
+        node={node}
         isHovered={effectiveHover}
         setActivatorNodeRef={dragProps.setActivatorNodeRef}
         dragAttributes={dragProps.attributes}

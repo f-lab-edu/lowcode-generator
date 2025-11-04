@@ -20,6 +20,7 @@
 }
 
 /* 공통 버튼 스타일 */
+.tree-node-select-btn,
 .tree-node-drag-handle,
 .tree-node-delete-btn {
   display: flex;
@@ -36,15 +37,31 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.tree-node-select-btn:hover,
 .tree-node-drag-handle:hover,
 .tree-node-delete-btn:hover {
   transform: scale(1.1);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
+.tree-node-select-btn:active,
 .tree-node-drag-handle:active,
 .tree-node-delete-btn:active {
   transform: scale(0.95);
+}
+
+.tree-node-select-btn.selected {
+  background: #3b82f6;
+  color: white;
+}
+
+.tree-node-select-btn.selected:hover {
+  background: #2563eb;
+}
+
+.tree-node-select-btn svg {
+  width: 15px;
+  height: 15px;
 }
 
 /* 드래그 핸들 스타일 */

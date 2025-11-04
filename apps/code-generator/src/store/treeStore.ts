@@ -7,12 +7,15 @@ interface TreeStore {
   tree: TreeNode[];
   hoveredNodeId: string | null;
   setHoveredNode: (id: string | null) => void;
+  selectedNode: TreeNode | null;
+  setSelectedNode: (node: TreeNode) => void;
   setTree: (tree: TreeNode[]) => void;
   insertIntoContainer: (targetId: string, newNode: TreeNode) => void;
   findAndRemoveNode: (id: string) => [TreeNode[], TreeNode | null];
   findAndInsertNode: (nodeToInsert: TreeNode, targetId: string) => void; // after
   findAndInsertBefore: (nodeToInsert: TreeNode, targetId: string) => void; // before
   updateNodeById: (nodeId: string, updateNode: TreeNode) => void;
+  updateNodeProps: (nodeId: string, props: Record<string, unknown>) => void;
   reset: () => void;
 }
 
@@ -20,10 +23,14 @@ export const useTreeStore = create<TreeStore>()(
   devtools((set, get) => ({
     tree: [],
     hoveredNodeId: null,
+    selectedNode: null,
     setHoveredNode: (id) => {
       if (!id) return;
-      console.log(id);
       set({ hoveredNodeId: id });
+    },
+    setSelectedNode: (node) => {
+      if (!node.id) return;
+      set({ selectedNode: node });
     },
     setTree: (tree) => set({ tree }),
     /**
@@ -165,6 +172,40 @@ export const useTreeStore = create<TreeStore>()(
             return { ...n, children: update(n.children) };
           }
           return n;
+        });
+      }
+
+      const updatedTree = update(tree);
+      set({ tree: updatedTree });
+    },
+    /**
+     * 특정 노드의 props만 업데이트
+     * @param nodeId 업데이트할 노드 아이디
+     * @param props 업데이트할 props 객체
+     */
+    updateNodeProps: (nodeId, props) => {
+      const { tree, selectedNode } = get();
+
+      function update(nodes: TreeNode[]): TreeNode[] {
+        return nodes.map((node) => {
+          if (node.id === nodeId) {
+            const updatedNode = {
+              ...node,
+              props: {
+                ...node.props,
+                ...props,
+              },
+            };
+            // 선택된 노드도 함께 업데이트
+            if (selectedNode?.id === nodeId) {
+              set({ selectedNode: updatedNode });
+            }
+            return updatedNode;
+          }
+          if (node.children && node.children.length > 0) {
+            return { ...node, children: update(node.children) };
+          }
+          return node;
         });
       }
 
