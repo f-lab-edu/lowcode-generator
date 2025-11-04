@@ -6,6 +6,7 @@ import {
 } from "@packages/ui";
 import { useState } from "react";
 import { DraggableComponentCard } from "../drag-and-drop/draggable-component-card";
+import { PropertyCanvasEditor } from "../property/property-canvas-editor";
 import "./component-palette.css";
 
 export function ComponentPalette() {
@@ -13,8 +14,19 @@ export function ComponentPalette() {
     {}
   );
 
+  const [selectedComponent, setSelectedComponent] =
+    useState<ComponentName | null>(null);
+
   const toggleCategory = (category: string) => {
     setOpenCategories((prev) => ({ ...prev, [category]: !prev[category] }));
+  };
+
+  const handleComponentClick = (name: ComponentName) => {
+    setSelectedComponent(name);
+  };
+
+  const handleCloseDetail = () => {
+    setSelectedComponent(null);
   };
 
   return (
@@ -53,8 +65,10 @@ export function ComponentPalette() {
                         return (
                           <DraggableComponentCard
                             key={name}
-                            name={name}
+                            componentName={name}
                             component={Component}
+                            onClick={() => handleComponentClick(name)}
+                            isSelected={selectedComponent === name}
                             meta={item.meta}
                           />
                         );
@@ -66,6 +80,12 @@ export function ComponentPalette() {
           )}
         </div>
       </div>
+      {selectedComponent && (
+        <PropertyCanvasEditor
+          componentName={selectedComponent}
+          onClose={handleCloseDetail}
+        />
+      )}
     </section>
   );
 }

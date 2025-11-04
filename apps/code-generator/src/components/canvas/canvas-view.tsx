@@ -1,8 +1,10 @@
 import { useDroppable } from "@dnd-kit/core";
 import { TreeRenderer } from "../drag-and-drop/tree-renderer";
 import { useDragAndDrop } from "../../hooks/useDragAndDrop";
+import { useTreeStore } from "../../store/treeStore";
 import { useZoomControl } from "../../hooks/useZoomControl";
 import { ZoomControl } from "../layout/zoom-control";
+import { PropertyEditor } from "../property/property-editor";
 import "./canvas-view.css";
 
 export function CanvasView() {
@@ -13,6 +15,7 @@ export function CanvasView() {
 
   const { tree } = useDragAndDrop();
   const { scale, handleWheel, zoomIn, zoomOut, resetZoom } = useZoomControl();
+  const { selectedNode, updateNodeProps } = useTreeStore();
 
   const innerCanvasStyle = {
     transform: `scale(${scale})`,
@@ -21,24 +24,27 @@ export function CanvasView() {
   };
 
   return (
-    <div
-      ref={setNodeRef}
-      onWheel={handleWheel}
-      className={`component-canvas ${isOver ? "drag-over" : ""}`}
-    >
-      <div className="canvas-inner" style={innerCanvasStyle}>
-        {tree.length === 0 ? (
-          <div className="empty-canvas">Drag components from the palette</div>
-        ) : (
-          <TreeRenderer nodes={tree} />
-        )}
+    <div className="canvas-view">
+      <div
+        ref={setNodeRef}
+        onWheel={handleWheel}
+        className={`component-canvas ${isOver ? "drag-over" : ""}`}
+      >
+        <div className="canvas-inner" style={innerCanvasStyle}>
+          {tree.length === 0 ? (
+            <div className="empty-canvas">Drag components from the palette</div>
+          ) : (
+            <TreeRenderer nodes={tree} />
+          )}
+        </div>
+        <ZoomControl
+          scale={scale}
+          onZoomIn={zoomIn}
+          onZoomOut={zoomOut}
+          onReset={resetZoom}
+        />
       </div>
-      <ZoomControl
-        scale={scale}
-        onZoomIn={zoomIn}
-        onZoomOut={zoomOut}
-        onReset={resetZoom}
-      />
+      <PropertyEditor node={selectedNode} onChange={updateNodeProps} />
     </div>
   );
 }

@@ -1,4 +1,11 @@
+.canvas-view {
+  display: flex;
+  position: relative;
+  height: 100vh;
+}
+
 .component-canvas {
+  flex: 1 1 70%;
   height: 100%;
   padding: 20px;
   border: 2px dashed var(--primary-light);
