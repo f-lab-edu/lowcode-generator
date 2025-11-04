@@ -2,7 +2,7 @@ import type { TreeNode } from "../types";
 import { useState } from "react";
 import { getComponentMeta } from "@packages/ui";
 import { type DragEndEvent, type DragStartEvent } from "@dnd-kit/core";
-import { parseScaffoldToTree } from "../utils/parseScaffoldToTree";
+import { createNode } from "../utils/treeNodeFactory";
 import { useTreeStore } from "../store/treeStore";
 
 export function useDragAndDrop() {
@@ -45,20 +45,7 @@ export function useDragAndDrop() {
       const data = active.data.current;
       if (!data) return;
 
-      const meta = getComponentMeta(data.componentName);
-      const parsedNode = meta?.scaffold
-        ? parseScaffoldToTree(meta.scaffold)
-        : null;
-
-      const newNode: TreeNode = parsedNode
-        ? parsedNode
-        : {
-            id: `node-${Date.now()}-${Math.random()}`,
-            componentName: data.componentName,
-            props: data.props,
-            meta: getComponentMeta(data.componentName),
-            children: [],
-          };
+      const newNode = createNode(data.componentName, data.props);
 
       if (canNest) {
         insertIntoContainer(targetNodeId, newNode);

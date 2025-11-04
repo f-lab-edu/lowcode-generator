@@ -1,10 +1,11 @@
+import { type PropsMeta } from "@packages/ui";
 import "./property-field.css";
 
 interface PropertyFieldProps {
   propName: string;
-  propMeta: any;
-  value: any;
-  onChange: (value: any) => void;
+  propMeta: PropsMeta;
+  value: unknown;
+  onChange: (value: unknown) => void;
 }
 
 export function PropertyField({
@@ -39,10 +40,10 @@ export function PropertyField({
         {propMeta.control === "select" && (
           <select
             id={propName}
-            value={currentValue}
+            value={currentValue as string}
             onChange={(e) => onChange(e.target.value)}
           >
-            {propMeta.options?.map((option: string) => (
+            {propMeta.options?.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
@@ -56,7 +57,6 @@ export function PropertyField({
             type="text"
             value={currentValue}
             onChange={(e) => onChange(e.target.value)}
-            placeholder={propMeta.placeholder}
           />
         )}
 
@@ -66,7 +66,6 @@ export function PropertyField({
             type="number"
             value={currentValue}
             onChange={(e) => onChange(Number(e.target.value))}
-            // 키보드로 증감 (Figma 스타일)
             onKeyDown={(e) => {
               if (e.key === "ArrowUp") {
                 e.preventDefault();

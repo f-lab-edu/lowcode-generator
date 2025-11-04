@@ -1,7 +1,7 @@
-import type { TreeNode } from "../types";
 import { useState } from "react";
-import { getComponentMeta, type ComponentName } from "@packages/ui";
+import { type ComponentName } from "@packages/ui";
 import { useTreeStore } from "../store/treeStore";
+import { createNode } from "../utils/treeNodeFactory";
 
 export function useAddNewComponent(defaultProps: Record<string, unknown>) {
   const [componentProps, setComponentProps] =
@@ -18,14 +18,7 @@ export function useAddNewComponent(defaultProps: Record<string, unknown>) {
     componentName: ComponentName,
     props: Record<string, unknown>
   ) => {
-    const meta = getComponentMeta(componentName);
-    const newNode: TreeNode = {
-      id: `node-${Date.now()}-${Math.random()}`,
-      componentName,
-      props,
-      meta,
-      children: [],
-    };
+    const newNode = createNode(componentName, props);
     insertIntoContainer("canvas-root", newNode);
   };
 
