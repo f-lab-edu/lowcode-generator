@@ -1,88 +1,54 @@
-import { getComponentMeta, type ComponentName } from "@packages/ui";
+import { getComponentMeta } from "@packages/ui";
+import { type TreeNode } from "../../types/index";
+import { PropertyField } from "./property-field";
+import "./property-editor.css";
 
 interface PropertyEditorProps {
-  componentName: ComponentName;
-  currentProps: Record<string, any>;
-  onChange: (props: Record<string, any>) => void;
+  node: TreeNode | null;
+  onChange: (id: string, props: Record<string, unknown>) => void;
 }
 
-export function PropertyEditor({
-  componentName,
-  currentProps,
-  onChange,
-}: PropertyEditorProps) {
+export function PropertyEditor({ node, onChange }: PropertyEditorProps) {
+  if (!node) return null;
+
+  const componentName = node.componentName;
+
+  const currentProps = node.props;
+
   const meta = getComponentMeta(componentName);
 
   if (!meta) return null;
 
+  const handlePropChange = (propName: string, value: unknown) => {
+    const nextProps = {
+      ...currentProps,
+      [propName]: value,
+    };
+    onChange(node.id, nextProps);
+  };
+
   return (
     <div className="property-editor">
-      <h3>{meta.component} Properties</h3>
+      {/* 헤더 개선 */}
+      <div className="property-editor-header">
+        <h3>{meta.component}</h3>
+        {meta.description && (
+          <p className="component-description">{meta.description}</p>
+        )}
+      </div>
 
-      {Object.entries(meta.props).map(([propName, propMeta]) => (
-        <div key={propName} className="property-field">
-          <label>{propName}</label>
-
-          {propMeta.control === "select" && (
-            <select
-              value={currentProps[propName] ?? propMeta.default}
-              onChange={(e) => {
-                onChange({
-                  ...currentProps,
-                  [propName]: e.target.value,
-                });
-              }}
-            >
-              {propMeta.options?.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
-            </select>
-          )}
-
-          {propMeta.control === "text" && (
-            <input
-              type="text"
-              value={currentProps[propName] ?? propMeta.default ?? ""}
-              onChange={(e) => {
-                onChange({
-                  ...currentProps,
-                  [propName]: e.target.value,
-                });
-              }}
-            />
-          )}
-
-          {propMeta.control === "number" && (
-            <input
-              type="number"
-              value={currentProps[propName] ?? propMeta.default ?? 0}
-              onChange={(e) => {
-                onChange({
-                  ...currentProps,
-                  [propName]: Number(e.target.value),
-                });
-              }}
-            />
-          )}
-
-          {propMeta.control === "boolean" && (
-            <input
-              type="checkbox"
-              checked={currentProps[propName] ?? propMeta.default ?? false}
-              onChange={(e) => {
-                onChange({
-                  ...currentProps,
-                  [propName]: e.target.checked,
-                });
-              }}
-            />
-          )}
-
-          {propMeta.description && <small>{propMeta.description}</small>}
-        </div>
-      ))}
+      {/* 속성 필드들 */}
+      <div className="property-fields">
+        {Object.entries(meta.props).map(([propName, propMeta]) => (
+          <PropertyField
+            key={propName}
+            propName={propName}
+            propMeta={propMeta}
+            value={currentProps[propName]}
+            onChange={(value) => handlePropChange(propName, value)}
+          />
+        ))}
+      </div>
     </div>
   );
 }
