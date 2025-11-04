@@ -16,7 +16,7 @@
     "build": "vite build",
     "dev": "vite build --watch",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build --output-dir ./packages/ui/storybook-static",
+    "build-storybook": "storybook build --output-dir ./packages/ui/storybook-static --stats-json",
     "clean": "rm -rf dist"
   },
   "dependencies": {
