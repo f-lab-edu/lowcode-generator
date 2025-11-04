@@ -33,6 +33,7 @@ export function TreeNodeInline({
       />
       <TreeNodeActionsPortal
         targetRef={nodeRef}
+        node={node}
         isHovered={effectiveHover}
         componentName={node.componentName}
         setActivatorNodeRef={dragProps.setActivatorNodeRef}

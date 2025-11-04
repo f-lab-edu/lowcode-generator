@@ -4,10 +4,13 @@ import {
   type DraggableAttributes,
   type DraggableSyntheticListeners,
 } from "@dnd-kit/core";
-import { GripVertical, Trash2 } from "lucide-react";
+import { GripVertical, Trash2, MousePointer2 } from "lucide-react";
+import { type TreeNode } from "../../types";
+import { useTreeStore } from "../../store/treeStore";
 
 interface TreeNodeActionsPortalProps {
   targetRef: React.RefObject<HTMLElement | null>;
+  node: TreeNode;
   isHovered: boolean;
   componentName: string;
   setActivatorNodeRef?: (element: HTMLElement | null) => void;
@@ -20,6 +23,7 @@ interface TreeNodeActionsPortalProps {
 
 export function TreeNodeActionsPortal({
   targetRef,
+  node,
   setActivatorNodeRef,
   isHovered,
   componentName,
@@ -33,8 +37,15 @@ export function TreeNodeActionsPortal({
   const [isPortalHovered, setIsPortalHovered] = useState(false);
   const animationFrameRef = useRef<number>(0);
 
+  const { selectedNode, setSelectedNode } = useTreeStore();
+
   // 실제로 보여야 하는지 판단 (원본 또는 Portal이 hover 상태)
   const shouldShow = isHovered || isPortalHovered;
+
+  // 선택 여부
+  const isSelected = selectedNode?.id === node.id;
+
+  const onSelect = () => setSelectedNode(node);
 
   useEffect(() => {
     const updatePosition = () => {
@@ -92,6 +103,14 @@ export function TreeNodeActionsPortal({
       onMouseEnter={() => setIsPortalHovered(true)}
       onMouseLeave={() => setIsPortalHovered(false)}
     >
+      <button
+        className={`tree-node-select-btn ${isSelected ? "selected" : ""}`}
+        onClick={onSelect}
+        aria-label={`${componentName}선택`}
+        title="선택"
+      >
+        <MousePointer2 />
+      </button>
       {/* 드래그 핸들 */}
       <button
         ref={setActivatorNodeRef}
@@ -103,7 +122,6 @@ export function TreeNodeActionsPortal({
       >
         <GripVertical />
       </button>
-
       {/* 삭제 버튼 */}
       {onDelete && (
         <button
