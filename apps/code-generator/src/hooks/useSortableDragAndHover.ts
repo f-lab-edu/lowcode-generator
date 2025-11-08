@@ -17,6 +17,8 @@ export const useSortableDragAndHover = (rootNode: TreeNode) => {
     transform,
     transition,
     isDragging,
+    isOver,
+    active,
   } = useSortable({
     id: rootNode.id,
     data: {
@@ -38,8 +40,10 @@ export const useSortableDragAndHover = (rootNode: TreeNode) => {
   const dragStyle = {
     transform: CSS.Transform.toString(transform),
     transition,
-    opacity: isDragging ? 0.5 : 1,
+    opacity: isDragging ? 0 : 1,
   };
+
+  const showDropIndicator = isOver && active && active.id !== rootNode.id;
 
   /**
    * Mouse Down시 바로 drag and drop 모드가 되지 않도록 stop propagation
@@ -64,9 +68,8 @@ export const useSortableDragAndHover = (rootNode: TreeNode) => {
     }
   };
 
-  const handleMouseEnter = (e: React.MouseEvent) => {
+  const handleMouseEnter = () => {
     setHoveredNode(rootNode.id);
-    e.stopPropagation();
   };
 
   const handleMouseLeave = () => {
@@ -83,6 +86,7 @@ export const useSortableDragAndHover = (rootNode: TreeNode) => {
       listeners,
       style: { position: "relative" as const, ...dragStyle },
       isDragging,
+      showDropIndicator,
     },
     handleMouseDown,
     handleMouseEnter,

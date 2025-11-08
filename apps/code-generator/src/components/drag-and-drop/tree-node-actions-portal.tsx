@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import {
   type DraggableAttributes,
@@ -35,7 +35,6 @@ export function TreeNodeActionsPortal({
 }: TreeNodeActionsPortalProps) {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [isPortalHovered, setIsPortalHovered] = useState(false);
-  const animationFrameRef = useRef<number>(0);
 
   const { selectedNode, setSelectedNode } = useTreeStore();
 
@@ -58,24 +57,48 @@ export function TreeNodeActionsPortal({
       }
     };
 
-    if (shouldShow) {
+    if (shouldShow && targetRef.current) {
       updatePosition();
-      const handleUpdate = () => {
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-        }
-        animationFrameRef.current = requestAnimationFrame(updatePosition);
-      };
 
-      window.addEventListener("scroll", handleUpdate, true);
-      window.addEventListener("resize", handleUpdate);
+      // ResizeObserver로 요소 크기 변화 감지
+      const resizeObserver = new ResizeObserver(() => {
+        requestAnimationFrame(updatePosition);
+      });
+      resizeObserver.observe(targetRef.current);
+
+      // MutationObserver로 DOM 변화 감지
+      const mutationObserver = new MutationObserver(() => {
+        requestAnimationFrame(updatePosition);
+      });
+
+      // 부모 요소의 변화도 감지
+      const parentElement = targetRef.current.parentElement;
+      if (parentElement) {
+        mutationObserver.observe(parentElement, {
+          attributes: true,
+          childList: true,
+          subtree: false,
+        });
+      }
+
+      // RAF로 지속적 업데이트 (드래그나 애니메이션 대응)
+      let rafId: number;
+      const continuousUpdate = () => {
+        updatePosition();
+        rafId = requestAnimationFrame(continuousUpdate);
+      };
+      rafId = requestAnimationFrame(continuousUpdate);
+
+      const handleScroll = () => requestAnimationFrame(updatePosition);
+      window.addEventListener("scroll", handleScroll, true);
+      window.addEventListener("resize", handleScroll);
 
       return () => {
-        window.removeEventListener("scroll", handleUpdate, true);
-        window.removeEventListener("resize", handleUpdate);
-        if (animationFrameRef.current) {
-          cancelAnimationFrame(animationFrameRef.current);
-        }
+        resizeObserver.disconnect();
+        mutationObserver.disconnect();
+        cancelAnimationFrame(rafId);
+        window.removeEventListener("scroll", handleScroll, true);
+        window.removeEventListener("resize", handleScroll);
       };
     }
   }, [targetRef, shouldShow]);
