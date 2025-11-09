@@ -2,7 +2,10 @@ import type { editor } from "monaco-editor";
 import Editor, { type OnMount } from "@monaco-editor/react";
 import { useState, useEffect, useRef } from "react";
 import { cn } from "@packages/ui";
+import { Download, Clipboard, Palette, PencilLine, Check } from "lucide-react";
 import { type TreeNode } from "../../types";
+import { useToggle } from "../../hooks/useToggle";
+import { useTooltip } from "../../hooks/useTooltip";
 import { useCodeGeneration } from "../../hooks/useCodeGeneration";
 
 interface CodeViewerProps {
@@ -24,6 +27,9 @@ export function CodeViewer({
   const editorRef = useRef<editor.IStandaloneCodeEditor | null>(null);
   const [theme, setTheme] = useState<EditorTheme>("vs-dark");
   const [fileName, setFileName] = useState<string>("GeneratedComponent");
+  const { on, toggle } = useToggle(false);
+  const copyTooltip = useTooltip(1000);
+  const downloadTooltip = useTooltip(1000);
 
   const { generatedCode, generateCode } = useCodeGeneration({
     indent: 2,
@@ -63,17 +69,20 @@ export function CodeViewer({
     setTheme(theme === "vs-dark" ? "light" : "vs-dark");
 
   // 코드 복사
-  const handleCopy = () => navigator.clipboard.writeText(generatedCode);
+  const handleCopy = () =>
+    copyTooltip.trigger(() => navigator.clipboard.writeText(generatedCode));
 
   // 코드 다운로드
   const handleDownload = () => {
-    const blob = new Blob([generatedCode], { type: "text/typescript" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `${fileName}.tsx`;
-    a.click();
-    URL.revokeObjectURL(url);
+    downloadTooltip.trigger(async () => {
+      const blob = new Blob([generatedCode], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${fileName}.tsx`;
+      a.click();
+      URL.revokeObjectURL(url);
+    });
   };
 
   return (
@@ -85,9 +94,68 @@ export function CodeViewer({
           theme === "vs-dark" ? "theme-dark" : "theme-light"
         )}
       >
-        <button onClick={handleThemeChange}>Theme Change</button>
-        <button onClick={handleCopy}>Copy</button>
-        <button onClick={handleDownload}>Download</button>
+        <div className="code-editor-filename-wrapper">
+          <button onClick={toggle}>
+            <PencilLine />
+            파일명 변경
+          </button>
+          {on && (
+            <div
+              className={cn(
+                "code-editor-filename-popup",
+                theme === "vs-dark" ? "theme-dark" : "theme-light"
+              )}
+            >
+              <div className="filename-popup-header">
+                <span>파일명 변경</span>
+              </div>
+              <input
+                id="fileName"
+                name="fileName"
+                placeholder="파일명을 변경해주세요."
+                className="code-editor-input"
+                value={fileName}
+                onChange={(e) => setFileName(e.target.value)}
+                autoFocus
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") toggle();
+                  if (e.key === "Escape") toggle();
+                }}
+              />
+              <button onClick={toggle} className="filename-confirm-btn">
+                확인
+              </button>
+            </div>
+          )}
+        </div>
+        <button onClick={handleThemeChange}>
+          <Palette />
+          테마 변경
+        </button>
+        <div className="toolbar-button-wrapper">
+          <button onClick={handleCopy}>
+            <Clipboard />
+            복사
+          </button>
+          {copyTooltip.show && (
+            <div className="toolbar-tooltip success">
+              <Check className="tooltip-icon" />
+              복사 완료!
+            </div>
+          )}
+        </div>
+        <div className="toolbar-button-wrapper">
+          <button onClick={handleDownload}>
+            <Download />
+            다운로드
+          </button>
+          {downloadTooltip.show && (
+            <div className="toolbar-tooltip success">
+              <Check className="tooltip-icon" />
+              다운로드 완료!
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Monaco Editor */}
