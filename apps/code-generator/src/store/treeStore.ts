@@ -42,6 +42,7 @@ export const useTreeStore = create<TreeStore>()(
     insertIntoContainer: (targetId, newNode) => {
       const { tree } = get();
 
+      console.log(tree);
       function insert(nodes: TreeNode[]): TreeNode[] {
         if (targetId === "canvas-root") {
           return [...nodes, newNode];
